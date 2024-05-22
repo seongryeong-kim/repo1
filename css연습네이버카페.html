@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .inline {
+            border: 1px solid black;
+            width: 250px;
+            height: 35px;
+            position: absolute;
+            left: 900px;
+        }
+
+        /* .top{
+            text-align:right; 
+        display:inline-block;;} */
+        .green {
+            border: 1px solid #32ac32;
+            background-color: #32ac32;
+            color: white;
+            width: 50px;
+            height: 35px;
+            position:relative;
+            left:1144px;
+            text-align: center;
+            line-height: 35px;
+        }
+
+.분석{border:1px solid black;
+width:100px;
+height:35px;
+text-align:center;
+line-height:35px;
+position:absolute;
+top:60px;
+left:1095px;}
+        .right {
+            text-align: right;
+        }
+
+        table {
+            
+            border-top: 1px solid black;
+            text-align: center;
+            width: 100%;
+            height: 300px;
+        }
+
+        .box{
+            border:1px solid;
+            display:inline-block;
+            vertical-align:right;
+            width:60px;
+            height:30px;
+            line-height:30px;
+        }
+        td {
+            border-bottom: 1px dotted grey;
+        }
+
+        .left{text-align: left;}
+
+        .number {
+            text-align: center;
+            height:60px;
+        }
+        a{border:1px solid grey;
+            display:inline-block;
+        width:20px;}
+
+        .bottom {
+            text-align: center;
+        }
+        .맨아래{
+            border: 1px solid grey;
+            width: 150px;
+            height: 35px;
+            display:inline-block;
+            line-height:35px;
+            text-align: left;
+        }
+        .검색어{
+            border: 1px solid grey;
+            color:grey;
+            width: 200px;
+            height: 35px;
+            display:inline-block;
+            line-height:35px;
+            text-align:left;
+        }
+        .검색{
+            background-color: #32ac32;
+            color: white;
+            width: 50px;
+            height: 35px;
+            text-align: center;
+            display:inline-block;
+            line-height: 35px;
+        }
+
+        /* .number:hover{border:1px solid grey;
+    color:green;} */
+    </style>
+</head>
+
+<body>
+    <div class="inline"></div>
+    <div class="green">검색</div>
+    <div class="분석">게시판 분석</div>
+    <h1>09. 생산관리 프로그래밍기초C#(과제제출)</h1>
+    <div class="right">새글 구독 <input type="checkbox">공지 숨기기 
+    <img src="c:\Users\admin\Desktop\제목 없음.png">
+    </div>
+    <table>
+
+        <!-- <tr>
+            <td colsapn="7"><strong>09. 생산관리 프로그래밍기초C#(과제제출)</strong></td>
+          
+            <td>게시판분석</td>
+        </tr> -->
+
+        <tr>
+            <td colspan="3"><strong>제목</strong></td>
+            <td><strong>작성자</strong></td>
+            <td><strong>작성일</strong></td>
+            <td><strong>조회</strong></td>
+            <td><strong>좋아요</strong></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>392</td>
+            <td class="left">09. 생산관리 프로그래밍기초C#(과제제출)-유상준</td>
+            <td>유상준</td>
+            <td>2024.04.16.</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>391</td>
+            <td class="left">생산관리 프로그래밍기초C#(과제제출) - 임우혁</td>
+            <td>임우혁</td>
+            <td>2024.04.16.</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>388</td>
+            <td class="left">생산관리 프로그래밍기초C#(과제제출) - 송우석</td>
+            <td>송우석</td>
+            <td>2024.04.16.</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>386</td>
+            <td class="left">생산관리 프로그래밍기초C#(과제제출) - 이민영</td>
+            <td>이민영</td>
+            <td>2024.04.15.</td>
+            <td>2</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>377</td>
+            <td class="left">생산관리 프로그래밍기초C#(과제제출) - 허재영</td>
+            <td>허재영</td>
+            <td>2024.04.09.</td>
+            <td>2</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="checkbox">전체선택</td>
+
+           
+            <td >
+                <!-- <div class="box">이동</div>  <div class="box">삭제</div> <div class="box">글쓰기</div> -->
+                <!-- <input type="button" value="이동">
+                <input type="button" value="삭제">
+                <input type="button" value="글쓰기"> -->
+            </td>
+             
+            <td colspan="3">
+                <div class="box">이동</div>  <div class="box">삭제</div> <div class="box">글쓰기</div>
+            </td> 
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="number">
+        <a href="naver.com">1</a>
+        <a href="naver.com">2</a>
+        <a href="naver.com">3</a>
+        <a href="naver.com">4</a>
+    </div>
+
+    <div class="bottom"><span class="맨아래">전체기간</span> <span class="맨아래">게시글+댓글</span> <span class="검색어">검색어를 입력해주세요</span><span class="검색">검색</span></div>
+</body>
+
+</html>
