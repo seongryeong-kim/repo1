@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 550px; 
+            margin-right: 30px;
+        }
+        div#p{
+            display: inline-block;
+            /* display:inline-block 만 했을 때는 텍스트가 이미지 옆으로 배치되지 않음 
+                → div가 자리를 다 차지하는 것이라서. 그래서 width너비 값을 설정 */
+            vertical-align: top;
+            /* 텍스트를 이미지 윗부분과 맞추기 위해서 */
+            box-sizing: border-box;
+            width:550px;
+            height:825px;
+            padding:100px 50px; 
+        }
+
+        span{
+         border: 1px solid black;
+        padding:10px 20px;
+    display:inline-block;} 
+
+    .wrap{
+        /* width: 1200px; px로 설정해 창을 확대할 경우 이미지가 같이 안내려가서 %를 사용해봄*/
+        width:90%;
+        margin:0 auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+    <img
+        src="https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/80f9d9d02af9527ab358c361/pexels-photo-3335367.jpeg">
+    <!-- 텍스트를 이미지 옆으로 배치하는 방법
+          1. table 표를 이용
+          2. display 이용 -->
+          <div id="p">
+       
+         <!--<div> Podcasting operational change management inside of workflows to establish a framework. Taking seamless key
+    performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive
+    on the start-up mentality to derive convergence on cross-platform integration. Objectively innovate empowered
+    manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable
+    supply chains. Dramatically engage top-line web services vis-a-vis cutting-edge deliverables.
+    <input type="button" value="read more"> </div>  -->
+
+    Podcasting operational change management inside of workflows to establish a framework. Taking seamless key
+        performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive
+        on the start-up mentality to derive convergence on cross-platform integration. Objectively innovate empowered
+        manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable
+        supply chains. Dramatically engage top-line web services vis-a-vis cutting-edge deliverables.
+    <br><br> 
+    <span>read more </span>
+    <!-- 홈페이지처럼 read more 만들고싶다면 a 태그를 이용 -->
+</div>
+</div>
+
+</body>
+
+</html>

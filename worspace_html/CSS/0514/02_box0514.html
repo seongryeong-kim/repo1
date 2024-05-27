@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .gray {
+            color: gray;
+        }
+
+        .thumb {
+            width: 100px;
+            border-radius: 10px;
+            border: 1px groove gray;
+        }
+
+        .thumb:hover{width:110px;}
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table, td {
+            border-right: 1px solid red;
+        }
+
+        .up {
+            margin: 0 5px;
+            border: 1px solid red;
+            padding: 0 5px;
+            color:red;
+        }
+
+        strong.up2::before{
+            content:"UP";
+            margin: 0 5px;
+            border: 1px solid red;
+            padding: 0 5px;
+            color:red;}
+
+        td.title{height:20px;}
+        /* .name{height:40px;} */
+
+        .blank{height:20px;}
+        .right{padding-left:50px;}
+        /* padding은 -값 안됨, border 밖으로 벗어날 수 없어서 
+        padding-left:-500px;*/
+
+    </style>
+</head>
+
+<body>
+    <!-- 방법1: table이고 세줄에 두칸 만든 후 왼쪽칸 병합 -->
+    <table>
+        <tr>
+            <td rowspan="4">
+                <!-- 장애인들을 위해 이미지 안에 alt(이미지에 대한 설명) 작성해주면 좋음 -->
+                <img class="thumb" alt="여성캐릭터가 뒤를 돌아보며 엄지척"
+                    src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2023/06/27/332092/upload_7090134976656716596_202x164.jpeg">
+            </td>
+            <td class="title">
+                <span class="up">UP</span> <strong class="up2">육아의 계절 </strong>
+            </td>
+            <td rowspan="4">
+                <img class="thumb right"
+                    src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2020/02/03/312881/thumbnail_202x1644a1ff785_5bae_4dfe_a1ae_53e3528d0836_00003656.JPEG">
+            </td>
+            <td class="title"><span class="up">UP</span> <strong>아빠는 N살</strong></td>
+        </tr>
+        <tr>
+            <!-- <td>21</td> -->
+            <td class="name">십짱생</td>
+            <!-- <td>23</td> -->
+            <td class="name">유영근</td>
+        </tr>
+<tr>
+    <!-- <td></td> -->
+    <td class="blank">&nbsp;</td>
+    <!-- <td></td> -->
+    <td>&nbsp;</td>
+</tr>
+        <tr>
+            <!-- <td>31</td> -->
+            <td class="gray">★9.68</td>
+            <!-- <td>33</td> -->
+            <td class="gray">★9.90 5,231만</td>
+        </tr>
+        <tr>
+            <td rowspan="3">
+                <img class="thumb"
+                    src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2022/05/18/303129/thumbnail_202x164dfee8ef3_6719_4892_8662_07d1a02bedb6_00004208.JPEG">
+            </td>
+            <td><strong>제목</strong></td>
+            <td rowspan="3">
+                <img class="thumb"
+                    src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2021/05/16/233067/thumbnail_202x164d0bd834f_ab57_4772_8457_ccadc2b72505_00005203.JPEG">
+            </td>
+            <td>14</td>
+        </tr>
+        <tr>
+            <!-- <td>21</td> -->
+            <td>22</td>
+            <!-- <td>23</td> -->
+            <td>24</td>
+        </tr>
+
+        <tr>
+            <!-- <td>31</td> -->
+            <td class="gray">★9.68</td>
+            <!-- <td>33</td> -->
+            <td class="gray">★9.90 5,231만</td>
+        </tr>
+    </table>
+
+    <!-- 방법2: table이고 한줄에 두칸, 오른쪽 칸에 table (세줄에 한칸) -->
+    <table border="1">
+        <tr>
+            <td>11</td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td>2-1</td>
+                    </tr>
+                    <tr>
+                        <td>2-2</td>
+                    </tr>
+                    <tr>
+                        <td>2-3</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

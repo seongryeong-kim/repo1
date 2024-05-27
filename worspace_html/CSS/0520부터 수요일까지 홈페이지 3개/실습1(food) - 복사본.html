@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .top {
+            background-image: url("https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/9b22e6f1444b5ae785f3a267/pexelsphoto3326103.jpeg");
+            background-size:cover;
+            width:100%;
+            height:700px;
+        }
+
+        .icon{text-align:right;}
+
+        /* .top{display:inline-block;  */
+        /* z-index: 99; }  */
+
+        /* .wine {
+            width: 100%;
+            height: 700px;
+        } */
+
+        .food {
+            background-color: white;
+            font-size: 2em;
+            font-weight: bold;
+            width: 400px;
+            height: 55px;
+            position: relative;
+            top: -200px;
+            z-index: 1;
+
+        }
+
+        .good {
+            background-color: yellow;
+            font-size: 2em;
+            font-weight: bold;
+            width: 300px;
+            height: 55px;
+            position: relative;
+            top: -215px;
+            z-index: 2;
+        }
+
+        .yellow {
+            background-color: yellow;
+            width: 500px;
+            height: 650px;
+            position: relative;
+            left: 400px;
+        }
+
+        .pie {
+            width: 400px;
+            height: 550px;
+            position: relative;
+            top: -600px;
+            left: 700px;
+        }
+
+        .menu {
+            border: solid black;
+            background-color: white;
+            width: 400px;
+            height: 250px;
+            padding: 20px;
+            line-height: 30px;
+
+            position: relative;
+            top: -1000px;
+            left: 100px;
+        }
+
+        /* div h1 {
+            font-size: 30px;
+            font-weight: lighter;
+        }
+
+        .right {
+            width: 300px;
+            position: relative;
+            top: -750px;
+        }
+
+        .left {
+            width: 300px;
+            position: relative;
+            top: -1250px;
+        }
+
+        .third {
+            border: solid black;
+            width: 300px;
+            height: 283px;
+            line-height: 30px;
+            position: relative;
+            top: -750px;
+        } */
+
+        .title {
+            font-size: 25px;
+        }
+
+        .inlineblock {
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+            top: -800px;
+            width: 23%;
+            height: 283px;
+        }
+
+        .text {
+            border: solid black;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        .back {
+            background-image: url(https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/992eb4a786e9521ea39ea995/pexelsphoto940302.jpeg);
+            width: 100%;
+            height: 800px;
+            background-size: cover;
+            position: relative;
+            top: -800px;
+        }
+
+        .back section {
+            position: relative;
+            top: 300px;
+            width: 700px;
+        }
+
+        .band {
+            background-color: yellow;
+            width:100%;
+            /* width: 1250px; */
+            height: 250px;
+            position: relative;
+            top: -600px;
+        }
+
+        .plate {
+           
+            width: 518px;
+            height: 468px;
+            position: relative;
+            top: -1000px;
+            left: 70px;
+        }
+
+        .toast {
+            /* background-image:url("https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/89f0b40da8d05b4088f24d63/pexelsphoto704569.jpeg");
+            background-size:cover; */
+            width: 518px;
+            height: 468px;
+           
+            position: relative;
+            top: -1000px;
+            left: 140px;
+        }
+
+        .tasty {
+            text-align: center;
+            position: relative;
+            top: -1000px;
+        }
+
+        .tasty p {
+            width: 700px;
+            display: inline-block;
+        }
+
+        .black {
+            background-color: black;
+            color: white;
+            display: inline-block;
+            width: 150px;
+            height: 40px;
+            font-weight: bold;
+            line-height: 40px;
+        }
+
+        /* ○○○○☆ 이미지 크롭-백그라운드 이미지-백그라운드 사이즈:cover  */
+        .salad {
+            /* width: 400px; */
+            height: 450px;
+            /* display: inline-block; */
+            background-image: url("https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/e5a2d57a68bc5de4b52746a3/pexelsphoto3756523.jpeg");
+            background-size: cover;
+            width:35%;
+            margin:10px;
+
+        }
+
+        .three {
+            border: 5px solid black;
+            width:30%;
+          
+            /* width: 400px;
+           height: 450px;  */
+            /* display: inline-block;
+            vertical-align: top;*/
+            box-sizing: border-box; 
+            padding: 20px;
+            margin:10px;
+            text-align: center;
+        }
+
+        .cheese {
+            width:35%;
+            /* width: 400px; */
+            height: 450px; 
+            background-image: url("https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/fcee991985085d4093370a3d/pexelsphoto3756525.jpeg");
+            background-size: cover;
+            /* display: inline-block; */
+            margin:10px;
+        }
+
+        .loo {
+            position: relative;
+            top: -800px;
+            width: 100%;
+            display:flex;
+        }
+
+        .morning {
+            background-image: url("https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/3cb19967a4645debbcf2c90a/pexelsphoto3831823.jpeg");
+            background-size: cover;
+            /* background-repeat: no-repeat;  */
+            width: 100%;
+            height: 800px;
+            position: absolute;
+            top: 4300px;
+        }
+
+        .time {
+            font-size: 2em;
+            position: absolute;
+            top: 650px;
+            left: 500px;
+        }
+        .sns{position:relative;
+        top:650px;
+        left: 600px;}
+    </style>
+</head>
+
+<body>
+    <div class="top"> <input type="search" placeholder="search"> 
+        <div class="icon"><a href="https://website70258.nicepage.io/Page-2.html?version=aef584c8-e0cd-4f73-9be1-4175a32f499c"><img src="https://cdn-icons-png.flaticon.com/512/2976/2976215.png" width="20"></a></div>
+    <hr>  </div>
+    
+    <!-- <div class="wine"> </div> -->
+    <!-- <img class="wine"
+        src="https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/9b22e6f1444b5ae785f3a267/pexelsphoto3326103.jpeg"> -->
+    <div>
+        <div class="food">YOUR FAVORITE FOOD</div>
+        <div class="good">MAKE IT GOOD</div>
+    </div>
+
+    <div class="yellow"></div>
+    <img class="pie"
+        src="https://images03.nicepage.com/c461c07a441a5d220e8feb1a/e07fd7349a87546e950fb324/photo1564305564045c62d40dd0123.jpg"
+        width="300" height="283">
+    <div class="menu">
+        <h1>Cafe Food Menu</h1>
+        <p> All of our food is prepared by our team of trained kitchen staff from the sealed glass kitchen where you can
+            see your food being made, without risk of little paws getting involved.</p>
+    </div>
+
+
+    <img class="inlineblock" src="https://images01.nicepage.com/a2/fc/a2fc4ef890f44fa0a9bb7787ce17008d.jpeg">
+    <div class="inlineblock text">
+        <p class="title">Have a healthy afternoon snack</p>
+        <p>The majority of people in the working world are likely familiar with the mid-afternoon slump.</p>
+    </div>
+    <img class="inlineblock" src="	https://images01.nicepage.com/62/43/6243854162c536333ab218a58996077f.jpeg">
+    <div class="inlineblock text">
+        <p class="title">Include lots of fibre in your diet</p>
+        Fibre is known to help aid with digestion. However, that’s not its only benefit.</p>
+    </div>
+
+    <div class="back">
+        <section>
+            <h1> Time to Make a Difference</h1>
+            <p>Phasellus scelerisque arcu vestibulum tempor tempor. Donec vulputate leo et metus hendrerit bibendum.
+                Interdum et malesuada fames ac ante ipsum primis in faucibus. In scelerisque nisl nec ornare euismod.
+            </p>
+        </section>
+    </div>
+
+    <div class="band"></div>
+   
+    <img class="plate"
+        src="https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/b997f5453a025796b7e011f6/pexelsphoto3659862.jpeg">
+    <img class="toast"
+        src="https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/89f0b40da8d05b4088f24d63/pexelsphoto704569.jpeg">
+    <div class="tasty">
+        <h1>Which is the tastiest food?</h1>
+        <p>The world's most delicious food is not Massaman curry, as we suggested, but a meaty, spicy, gingery dish from
+            west Sumatra. "There is no love sincerer than the love of food," George Bernard Shaw said. Judging by the
+            number of amazing dishes out there, he was right.</p>
+        <br>
+        <div CLASS="black">READ MORE</div>
+    </div>
+
+    <div class="loo">
+        <div class="salad"> </div>
+        <!-- <img class="three"
+            src="https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/e5a2d57a68bc5de4b52746a3/pexelsphoto3756523.jpeg"> -->
+        <div class="three">
+            <p>
+            <div style="font-size: 32px;">Restaurant</div>
+            ORGANIC FARM</p>
+
+            <br>
+            We bring the season’s best mix of organic produce and hand-crafted farm products conveniently to your door
+            by growing and partnering with local farms and artisans in your area.
+            <br>
+            – LOO HUDSON
+        </div>
+        <div class="cheese"></div>
+
+        <!-- <img class="cheese"
+            src="https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/fcee991985085d4093370a3d/pexelsphoto3756525.jpeg">
+   -->
+    </div>
+
+    <div class="morning">
+       <span class="sns"> <a href="https://website70258.nicepage.io/Page-2.html?version=aef584c8-e0cd-4f73-9be1-4175a32f499c"
+            target="_blank"><img 
+                src="https://cdn3.iconfinder.com/data/icons/picons-social/57/06-facebook-512.png" width="30px"></a>
+        <a href="https://website70258.nicepage.io/Page-2.html?version=aef584c8-e0cd-4f73-9be1-4175a32f499c"
+            target="_blank"><img  src="https://cdn-icons-png.flaticon.com/512/733/733635.png" width="30px"></a>
+        <a href="https://website70258.nicepage.io/Page-2.html?version=aef584c8-e0cd-4f73-9be1-4175a32f499c"
+            target="_blank"><img  src="https://cdn-icons-png.flaticon.com/512/87/87390.png" width="30px"></a>
+        </span>
+        <p class="time">Enjoy Morning Time</p>
+    </div>
+</body>
+
+</html>

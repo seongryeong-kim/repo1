@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--
+        td나 th에 표현할 내용을 적는다
+        td나 th는 tr의 자식요소여야 한다
+        tr은 table의 자식요소여야 한다
+    -->
+    <table border="1">
+        <tr>
+            <th>제목1</th>
+            <td>제목2</td>
+            <th>제목3</th>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 1</td>
+            <td>제목보다 긴 글씨 2</td>
+            <td>제목보다 긴 글씨 3</td>
+        </tr>
+        <tr>
+            <td>내용 1</td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td>내용없음</td>
+        </tr>
+    </table>
+    <br>
+    <table border="" 1">
+        <tr>
+            <th> 찬성</th>
+            <th> 반대</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td><mark>11</mark></td>
+        </tr>
+    </table>
+
+    <table border="1">
+        <tr>
+            <th>제목1</th>
+            <th>제목2</th>
+            <th>제목3</th>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 1</td>
+            <td>제목보다 긴 글씨 2</td>
+            <td>제목보다 긴 글씨 3</td>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 1</td>
+            <td>제목보다 긴 글씨 2</td>
+            <td>제목보다 긴 글씨 3</td>
+        </tr>
+    </table>
+    <br>
+
+    <!-- 
+        colspan, rowspan할 때 
+        원본을 먼저 코딩하고
+        합쳐질 것들 중 첫번째 칸에 속성을 넣고 
+        필요 없어진 코드를 지운다.
+       -->
+    <table border="1">
+        <tr>
+            <th>제목1</th>
+            <th colspan="2">제목2</th>
+        </tr>
+        <tr>
+            <td rowspan="2">제목보다 긴 글씨 1</td>
+            <td>제목보다 긴 글씨 2</td>
+            <td>제목보다 긴 글씨 3</td>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 2</td>
+            <td>제목보다 긴 글씨 3</td>
+        </tr>
+    </table>
+
+    <!-- 5/9 -->
+    <table border="1">
+        <caption>caption 테이블의 설명</caption>
+        <!--summary 어떤 제목들로 이루어져 있는가-->
+        <summary>제목1, 제목2 </summary>
+        <thead>
+            <tr>
+                <td>제목1</td>
+                <td>제목2</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>내용1</td>
+                <td>내용2</td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+
+</html>

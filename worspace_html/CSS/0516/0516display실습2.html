@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .item {
+            border: 1px solid black;
+            width: 300px;
+            display: inline-block;
+        }
+
+        .item img {
+            width: 100%;
+        }
+
+        .item div:not(.image) {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 전체를 감싸는 div -->
+    <div class="wrapper">
+        <!-- title영역 -->
+        <div>
+            <h1>Extraordinary rooms with elegant, yet a rustic atmosphere </h1>
+        </div>
+
+        <!-- main 컨텐츠 
+        큰 div 하나 만들고 그 안에 이미지,텍스트들 각각 div작성하여 총 4개-->
+        <div>
+            <div class="item">
+                <div class="image">
+                    <img src="https://assets.nicepagecdn.com/d2cc3eaa/88834/images/34.jpg">
+                </div>
+                <div>Apartment with Amazing Park View</div>
+                <div>$45</div>
+                <div>VIEW</div>
+            </div>
+            <div class="item">
+                <div class="image">
+                    <img src="https://assets.nicepagecdn.com/d2cc3eaa/88834/images/34.jpg">
+                </div>
+                <div>Apartment with Amazing Park View</div>
+                <div>$45</div>
+                <div>VIEW</div>
+            </div>
+            <div class="item">
+                <div class="image">
+                    <img src="https://assets.nicepagecdn.com/d2cc3eaa/88834/images/34.jpg">
+                </div>
+                <div>Apartment with Amazing Park View</div>
+                <div>$45</div>
+                <div>VIEW</div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div>images from</div>
+    </div>
+</body>
+
+</html>
+
+
+
+<!-- ??/이미지 부분이랑 세로로 내려가는 내용들이 가로로 올라올 수 있도록??? 
+해결 <div> 열고 닫고를 이상하게 해서 그런듯 -->

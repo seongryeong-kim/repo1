@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            border: 1px solid red;
+        }
+
+        .parents {
+            width: 100px;
+            margin: 20px;
+            background: green;
+            color: white;
+        }
+
+        .child {
+            background: rgb(0, 0, 255, 0.5);
+        }
+
+        .relative {
+            /* 
+            원래 위치를 기준으로 이동
+            이동 전 원래의 내 공간은 남아있음 
+            내가 원하는 대로 이동할 수 있다
+            top는 position과 함께 가야함 */
+            position: relative;
+            top: 10px;
+            left: -20px;
+        }
+
+        .absolute {
+            /* body를 기준으로 0,0(좌상단)으로 계산한 위치에 표시됨
+            실제로는 조상 요소 중에 position이 static(기본값)이 아닌 것 기준, 없으면 body기준
+            원래 공간이 사라짐 
+            새로운 층(layer, 투명한 비닐) 에 그려진다  
+            즉, 브라우저가 표시할 계획단계에서는 빠지고 그리는 단계(rangdering)에서 표시됨*/
+            position: absolute;
+            top: 250px;
+            left: 150px;
+            /* 
+            top위나 left왼쪽 안보이는 곳에 숨겨두기도 한다
+            (이렇게하면 화면에서 사라지게 됨 하지만 리더기로는 읽힘)
+            left:-15000px; */
+        }
+
+        .absolute-bottom {
+            /* 위로가기 버튼으로는 적합하지 않음 */
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        .fixed {
+            width: 60px;
+            height: 60px;
+            /* 텍스트가 가운데로 올 수 있도록 */
+            line-height: 60px;
+
+            /* 브라우저의 해당 위치에 고정됨
+            스크롤바 관계없음
+            위로가기 버튼 만들기에 적합 */
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+        }
+
+        .sticky {
+            /* 부교재 사이트 스크롤했을 때 맨위로 메뉴같은거 나타내는 표현
+            스크롤을 내려서 내가 안보이게 될 떄  fixed처럼 동작  */
+            position: sticky;
+            top: 20px;
+            background: red;
+        }
+
+        .z1 {
+            background-color: hotpink;
+            /* 지금은 position이 없지만 위에 relative에서 작성한
+            position이 적용돼서 그 기준으로 변함 ??  */
+            top: 20px;
+            left: 20px;
+            /* 
+            기본은 늦게 나온 tag가 앞에 보이게 됨
+            z-index의 기본값은 0
+            높은 값이 앞에 보이게 됨 */
+            z-index: 1;
+        }
+
+        .z2 {
+            background-color: pink;
+            color:#000;
+            top: -10px;
+            left: -20px;
+            z-index:2;
+        }
+
+        .z3 {
+            background-color: #000;
+            color: #fff;
+            top: -20px;
+            left: -20px;
+            /* 9999 같이 작성할 경우 강력하게 위로 오기를 원할 때 */
+            z-index: 9999;
+        }
+
+        .hidden{height: 100px;
+            overflow: hidden;
+            /* overflow 사용하지 않으면 상자안에 들어가지 않는 텍스트는 상자밖으로 표시됨
+            overflow:hidden 을 사용하여 넘치는 텍스트를 숨김처리*/
+        }
+
+        .scroll{height: 100px;
+        overflow:scroll;
+    }
+    .auto {height: 100px;
+    overflow:auto; 
+    /* scroll 과 비슷하게 보이지만 텍스트 내용이 변경되면 스크롤이 사라지기도 함  */
+}
+    </style>
+</head>
+
+<body id="top">
+    <div class="parents">
+        부모
+        <div class="child">
+            자식 <br>
+            다음줄
+        </div>
+        <div>
+            글씨 몇개
+        </div>
+    </div>
+
+    <div class="sticky">
+        스티키 : 메뉴1 메뉴2
+    </div>
+
+    <div class="parents">
+        부모
+        <div class="child relative">
+            자식 <br>
+            relative
+        </div>
+        <div>
+            글씨 몇개
+        </div>
+    </div>
+
+    <div class="parents">
+        부모
+        <div class="child absolute">
+            자식 <br>
+            absolute
+        </div>
+        <div>
+            글씨 몇개
+        </div>
+    </div>
+
+    <div class="parents">
+        부모
+        <div class="child absolute">
+            자식 <br>
+            absolute2 겹치게
+        </div>
+        <div>
+            글씨 몇개
+        </div>
+    </div>
+
+    <div class="parents relative">
+        부모 relative
+        <div class="child absolute">
+            자식 <br>
+            다음줄
+        </div>
+        <div>
+            글씨 몇개
+        </div>
+    </div>
+
+    <div class="parents">
+        부모
+        <div class="child absolute-bottom">
+            자식 <br>
+            absolute
+        </div>
+        <div>
+            글씨 몇개
+        </div>
+    </div>
+
+    <div class="fixed">
+        <a href="#top">맨 위로</a>
+    </div>
+
+    <div class="parents">
+        <div class="relative z1">
+            1번
+        </div>
+        <div class="relative z2">
+            2번
+        </div>
+        <div class="relative z3">
+            3번
+        </div>
+    </div>
+    <div class="parents hidden">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio qui nesciunt aspernatur culpa nisi sit deleniti dolorem ipsum aliquid. Illo magnam expedita aperiam nihil impedit quia exercitationem quo itaque tenetur!
+
+    </div>
+    <div class="parents scroll">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio qui nesciunt aspernatur culpa nisi sit deleniti dolorem ipsum aliquid. Illo magnam expedita aperiam nihil impedit quia exercitationem quo itaque tenetur!
+
+    </div>
+    <div class="parents auto">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio qui nesciunt aspernatur culpa nisi sit deleniti dolorem ipsum aliquid. Illo magnam expedita aperiam nihil impedit quia exercitationem quo itaque tenetur!
+
+    </div>
+</body>
+
+</html>
+
+class 두개일경우 큰따옴표 안에 띄어쓰기 하고 두번쨰 클래스 작성 

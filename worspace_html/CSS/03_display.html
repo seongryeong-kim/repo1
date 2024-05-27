@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* block 좌우 전체 너비를 가진다
+        그래서 새로운줄에 표시된다
+        너비가 전체 크기보다 작은 경우 나머지 공간에 정렬할 수 있다 
+        예를들어 한 줄이 모두 내 땅이고 너비만큼의 건물이 있는 것처럼(그래서 다른 것들이 못들어옴
+        */
+    .block {
+        width:200px;
+        border:1px solid red;
+        margin:0 auto;
+    }
+/* inline 딱 내 컨텐츠만큼의 너비를 가진다 
+    inline은 width, height 적용 안됨 
+    margin과 padding좌우는 가능하지만 위아래는 적용 불가능. 단, border는 밀림*/
+    .inline{
+        border:1px solid red;
+        width:200px;
+        height:200px;
+        margin:50px;
+        /* padding:30px; */
+    }
+
+    .bg_blue{background-color:blue;
+    color:white;}
+
+    .parents > div {
+        border:1px dotted rgb(0,0,255);
+        width:400px;
+        height:200px;
+        /* inline에 block의 장점인 부피감을 더한 것 */
+        display:inline-block;
+        /* vertical 수직의 align 정렬
+        inline 또는 inline-block 에만 적용됨 */
+        vertical-align: top;
+    }
+    #bigger{
+    height:400px;}
+
+   .parents{width:500px; 
+   border:1px dotted #ff00ff;}
+
+   #c1{
+    /* 화면에 안보임 display:none;*/
+    /* 내용은 화면에 안보이지만 공간은 비어있는 visibility:hidden; */
+    opacity:1 }
+    #c1:hover{background-color:aquamarine;
+    opacity:0;}
+
+    .fake_div{border:1px dotted #ff00ff;
+    display:inline;}
+</style>
+
+<body>
+    <p class="block">
+        첫번째 p
+    </p>
+    <p class="block">
+        두번째 p
+    </p>
+    <a href="#a" class="inline">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa mollitia delectus vel eum fugiat illum neque eveniet perspiciatis. Illum, quibusdam dolore? Dolores eius maiores facere! Labore dolorum itaque dolore beatae.
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa mollitia delectus vel eum fugiat illum neque eveniet perspiciatis. Illum, quibusdam dolore? Dolores eius maiores facere! Labore dolorum itaque dolore beatae.
+    </a>
+    <a href="#a" class="inline">두번째 a</a>
+    <br>
+    <span class="bg_blue">첫번째 span</span>
+    <span class="bg_blue">두번째 span</span>
+    <br>
+    <span class="bg_blue">첫번째 span</span><span class="bg_blue">두번째 span</span>
+    <br>
+<hr>
+<div class="parents">
+    <div id="c1">목록1</div>
+    <div id="bigger">
+        목록2  <br>
+        목록2에 대한 설명
+    </div>
+</div>
+
+<div class="fake_div">div이었던 것</div>
+<div class="fake_div">div이었던 것</div>
+</body>
+
+</html>

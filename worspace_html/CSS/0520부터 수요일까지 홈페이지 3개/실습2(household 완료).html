@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* chat gpt도움- 질문 sticky적용이 안됨-부모요소 설정 필요 */
+            position: relative;
+            margin: 0;
+        }
+
+        .stick {
+            position: sticky;
+            background-color: #362e2e;
+            color: white;
+            /* position: absolute; */
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 50px;
+            display: inline-block;
+        }
+
+        .offer {
+            background-color: #8dd421;
+            float: left;
+            width: 300px;
+            height: 50px;
+            /* display:inline-block; */
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+        }
+
+        .black {
+            display: inline-block;
+        }
+
+        .red {
+            background-color: red;
+           float:right;
+            width: 200px;
+            height: 50px;
+            font-weight: bold;
+            text-align: center;
+            font-size: larger;
+            line-height:50px;
+        }
+
+        .cate {
+            /* border: 1px solid red; */
+            font-size: 20px;
+            height: 150px;
+            /* position: relative;
+          top: 10px;   */
+        }
+
+
+        .로고 {
+            /* border: 1px solid blue; */
+            font-size: 50px;
+            font-weight: bold;
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+
+            /* position: relative;
+            top: 40px; */
+        }
+
+        .line {
+            background-color: hwb(84 5% 37%);
+            height: 50px;
+            color: white;
+            position: relative;
+            top: 20px;
+            line-height: 50px;
+        }
+
+        table {
+            width: 200px;
+            height: 400px;
+            position:absolute;
+            top:275px;
+            float:left;
+
+
+            /* position:flex;
+            top:20px; */
+            /* position: fixed; */
+            /* top: 270px; */
+           
+        }
+
+        td {
+            border-bottom: 1px dotted grey;
+        }
+
+
+        .back {
+            background-image: url("https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/16.jpg");
+            background-size: cover;
+            width: 85%;
+            /* width:1000px; */
+            height: 300px;
+            position: relative;
+            top: 20px;
+            left: 140px;
+            display:inline-block;
+        } 
+
+        .back>p {
+            background-color: white;
+            color: red;
+            font-size: 30px;
+            text-align: center;
+            line-height: 70px;
+            width: 450px;
+            height: 70px;
+            /* position: flex;
+            align-content: center; 질문 */
+            position: relative;
+            top: 120px;
+            left: 120px;
+        }
+
+        .house {
+            /* border:solid aqua; */
+            width:70%;
+            height:100px;
+            font-weight: bold;
+            position: relative;
+            font-size: 30px;
+            top: 50px;
+            left: 200px;
+            text-align: center;
+        }
+
+        .cleaning {
+            /* border: solid purple; */
+            width:1000px;
+            position:relative;
+            left:200px;
+            
+        }
+        .bold {
+            /* border:solid blue; */
+            font-size:20px;
+        font-weight:bold;
+    height:40px;}
+
+        .가로 {
+            display: inline-block;
+            border: double grey;
+            margin:5px;
+        }
+
+        .add {
+            color: white;
+            background-color: red;
+            text-align: center;
+            width: 150px;
+            height: 30px;
+            transition: all 1s;
+            margin: auto;
+        }
+
+        .add:hover {
+            background-color: hwb(84 5% 37%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stick">
+        <div class="offer">Today's special Offers!</div>
+        <div class="black"><input type="search" placeholder="Search a product..."> View Your Cart</div>
+        <div class="red">Contact Us</div>
+    </div>
+
+    <section class="cate">
+        <div class="로고">
+            <div style="font-size:20px; color:red;">GROCERY</div> STORE
+        </div>
+        Events/ About Us/ Best Deals/ Services 
+        <img src="https://cdn-icons-png.freepik.com/256/597/597177.png" width="20">
+        (+0123) 234 567
+        <img src="https://static-00.iconduck.com/assets.00/mail-icon-512x447-l480ubio.png" width="20">
+        store@grocery.com </section>
+
+    </div>
+
+    <div class="line"><img
+            src=https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/red_repicthousebase_1484336386-1.png
+            width="20">Home | Households
+    </div>
+
+    <table>
+        <tr>
+            <td>Branded Foods</td>
+        </tr>
+        <tr>
+            <td>Households</td>
+        </tr>
+        <tr>
+            <td>Veggies&Fruits</td>
+        </tr>
+        <tr>
+            <td>Kitchen</td>
+        </tr>
+        <tr>
+            <td>Short Codes</td>
+        </tr>
+        <tr>
+            <td>Beverages</td>
+        </tr>
+        <tr>
+            <td>Pet Food</td>
+        </tr>
+        <tr>
+            <td>Frozen Foods</td>
+        </tr>
+        <tr>
+            <td>Bread&Bakery</td>
+        </tr>
+
+        <div class="back">
+            <p>Best Deals For New Products</p>
+        </div>
+
+        <div class="house">Household Products</div>
+
+        <div class="cleaning">
+            <div class="bold">CLEANING</div>
+            <!-- <div>
+                <table border="1">
+                    <tr>
+                        <td><img src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/17.png"></td>
+                    </tr>
+                    <tr>
+                        <td>Dishwash Gel, Lemon (1.5 Ltr)</td>
+                    </tr>
+                    <tr>
+                        <td>$8.00 <SPAN style="text-decoration:line-through;">$10.00</SPAN>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ADD TO CART</td>
+                    </tr>
+                </table>
+            </div> -->
+            <div class="가로">
+                <img src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/17.png"
+                    width="140">
+                <div>Dishwash Gel, Lemon (1.5 Ltr)</div>
+                <div><b>$8.00</b> <SPAN style="text-decoration:line-through;">$10.00</SPAN></div>
+                <DIV class="add">ADD TO CART</DIV>
+            </div>
+            <div class="가로">
+                <img src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/18.png"
+                    width="140">
+                <div>Dishwash Gel, Lemon (1.5 Ltr)</div>
+                <div><b>$8.00 </b><SPAN style="text-decoration:line-through;">$10.00</SPAN></div>
+                <DIV class="add">ADD TO CART</DIV>
+            </div>
+            <div class="가로">
+                <img src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/19.png"
+                    width="140">
+                <div>Dishwash Gel, Lemon (1.5 Ltr)</div>
+                <div><b>$8.00</b> <SPAN style="text-decoration:line-through;">$10.00</SPAN></div>
+                <DIV class="add">ADD TO CART</DIV>
+            </div>
+            <div class="가로">
+                <img src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/20.png"
+                    width="140">
+                <div>Dishwash Gel, Lemon (1.5 Ltr)</div>
+                <div><b>$8.00 </b><SPAN style="text-decoration:line-through;">$10.00</SPAN></div>
+                <DIV class="add">ADD TO CART</DIV>
+            </div>
+
+     
+
+
+
+
+</body>
+
+</html>
+https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/household.html
+
+
+
+<!-- question
+1. 왜 판매품목 이미지들 가운데 정렬이 안되나
+2. 맨 위에 있는 이미지를 어떻게 설정해야 하나 전체화면일때 그만큼만 보이다가 화면이 커지면
+    안보이던 부분들도 다 보이게
+3. 왼쪽 카테고리를 table로 해도 괜찮은가 아니면 다른 걸 사용하는 게 나은가
+4. 로고 옆에 연락처 있는 부분 일정간격을 두고 알아서 퍼지게(?) -->

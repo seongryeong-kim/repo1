@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height:100px;
+            background-color:red;
+
+            /* transition:all 1s 모든 것을 바꾸고 싶을 때
+                transition: width 1s하면 넓이만 천천히 바꾸기 */
+                transition: all 1s;
+        }
+        div:hover{
+            width:150px;
+            background-color:blue;
+            /* div 에 써도 되고 hover에 써도 되는데 
+            hover에 쓰면 바뀌고 제자리로 돌아올 때 갑자기 확 바뀜
+            필요에 따라 선택하여 사용
+            transition: all 1s; */
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
