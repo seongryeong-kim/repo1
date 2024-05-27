@@ -11,7 +11,7 @@ public class ForExam {
 		sum = sum + 1;
 		sum = sum + 1;
 		sum = sum + 1;
-		System.out.println(sum);
+		System.out.println(sum); 
 		//하지만 숫자가 커지면 시간이 너무 오래걸림 그래서 반복문을 사용
 
 		//1+2+3+4+5
@@ -26,6 +26,8 @@ public class ForExam {
 		//1, 2, 3..에 해당하는 걸 변수안에 넣어보자
 		sum = 0;
 		int i = 0;
+		
+		i++; // i == 1
 		sum = sum + i;		//+1
 		//sum = sum + i+1;	//+2
 		i++; // i == 2
@@ -33,9 +35,7 @@ public class ForExam {
 		
 		i++; // i == 3
 		sum = sum + i;		//+2
-		
-		
-		
+				
 	}
 
 }
