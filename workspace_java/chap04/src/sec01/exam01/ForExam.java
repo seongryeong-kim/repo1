@@ -11,7 +11,7 @@ public class ForExam {
 		sum = sum + 1;
 		sum = sum + 1;
 		sum = sum + 1;
-		System.out.println(sum); 
+		System.out.println(sum);   
 		//하지만 숫자가 커지면 시간이 너무 오래걸림 그래서 반복문을 사용
 
 		//1+2+3+4+5
