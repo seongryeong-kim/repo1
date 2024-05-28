@@ -126,8 +126,12 @@ public class Operator연산자Exam {
 //		String right = String.valueOf("수박");
 //		System.out.println("right : "+right);
 		
-		//String left = "수박";
-		//String right= "멜론";
+		String left1 = "수박";
+		String right= "수박";
+		System.out.println(right);
+		String right1="멜론";
+		String left="멜론";
+		System.out.println(left);
 		//boolean 수박 = Boolean.parseBoolean("left");
 //		String left = String.valueOf("수박");
 		//System.out.println(!left);
