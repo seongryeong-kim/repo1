@@ -20,11 +20,16 @@ public class BankExam {
 	//switch문을 사용해도 좋다 - 하지만 내가 쓸 줄을 모른다
 		
 		Scanner scan =new Scanner(System.in);
-		System.out.println("원하는 서비스를 선택하세요");
-		System.out.println("1.입금 2.출금 3.조회 4.종료");
-		int service = scan.nextInt();
-		
+//		System.out.println("원하는 서비스를 선택하세요");
+//		System.out.println("1.입금 2.출금 3.조회 4.종료");
+		//int service = scan.nextInt();
+		int service= 1;
+		//1~3 true
+		//1일때 while 들어옴
 		while(service>=1 && service<=3) {
+			System.out.println("원하는 서비스를 선택하세요");
+			System.out.println("1.입금 2.출금 3.조회 4.종료");
+			service = scan.nextInt();
 			//1~3이 나오면 true 4가 나오면 false니까 종료되도록
 			if(service ==1) {
 				System.out.println("얼마를 입금하시겠습니까?");
@@ -35,8 +40,8 @@ public class BankExam {
 			if(service ==3) {
 				System.out.println("잔액은"+"변수"+"원 입니다.");
 			}
-		
-		if(false)System.out.println("서비스가 종료되었습니다.");}
+		}
+		System.out.println("서비스가 종료되었습니다.");
 			
 			
 			
