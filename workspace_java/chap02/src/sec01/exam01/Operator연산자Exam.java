@@ -119,43 +119,16 @@ public class Operator연산자Exam {
 		 * 출력 값이 반대가 되어야함 left=멜론, right=수박
 .		 */
 		
-//		String left = "수박";
-//		boolean 수박 = Boolean.parseBoolean("right");
-//		System.out.println(수박);
-//		
-//		String right = String.valueOf("수박");
-//		System.out.println("right : "+right);
+		String left= "수박";
+		String right= "멜론";
 		
-		String left1 = "수박";
-		String right= "수박";
-		System.out.println(right);
-		String right1="멜론";
-		String left="멜론";
-		System.out.println(left);
-		//boolean 수박 = Boolean.parseBoolean("left");
-//		String left = String.valueOf("수박");
-		//System.out.println(!left);
-//		String right = String.valueOf("수박");
-//		System.out.println("right = "+right);
+		String table = left;
+		left = right;
+		right = table;
 		
-//		String left = "수박";
-//		String right= "멜론";
-//		boolean 수박 = true;
-//		System.out.println(수박);
-//		boolean 멜론 = Boolean.parseBoolean(left);
-//		System.out.println(right);
-//		
-//		String left ;
-//		String right;
-//		
-//		String left = "멜론";
-//		String right = "수박";
-//		System.out.println(left);
-	
-		//교재 140p
-		System.out.println(3 > 5);
-		boolean bool = 3 > 5;
-		System.out.println(bool);
+		System.out.println(left); //결과: 멜론
+		System.out.println(right); //결과: 수박
+		//swap 바꾸다
 		
 		System.out.println(0.1== 0.1f); //결과: false
 		//같은 타입으로 변경해서 비교하자
