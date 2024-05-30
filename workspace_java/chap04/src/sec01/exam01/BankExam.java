@@ -23,6 +23,9 @@ public class BankExam {
 //		System.out.println("원하는 서비스를 선택하세요");
 //		System.out.println("1.입금 2.출금 3.조회 4.종료");
 		//int service = scan.nextInt();
+	
+		int deposit=0;
+		int withdraw=0;
 		int service= 1;
 		//1~3 true
 		//1일때 while 들어옴
@@ -33,18 +36,24 @@ public class BankExam {
 			//1~3이 나오면 true 4가 나오면 false니까 종료되도록
 			if(service ==1) {
 				System.out.println("얼마를 입금하시겠습니까?");
+				deposit=scan.nextInt();
+				System.out.println(deposit+"원이 입금되었습니다"); 
 			}
 			if(service ==2) {
 				System.out.println("얼마를 출금하시겠습니까?");
+				withdraw=scan.nextInt();
+				System.out.println(withdraw+"원이 출금되었습니다");
 			}
 			if(service ==3) {
-				System.out.println("잔액은"+"변수"+"원 입니다.");
+				System.out.println("잔액은"+(deposit-withdraw)+"원 입니다.");
 			}
 		}
 		System.out.println("서비스가 종료되었습니다.");
-			
-			
-			
+				
+		/*완성은 했는데 고쳐야할 부분
+		 * 1~4를 제외한 숫자를 눌렀을 때 나오는 문구: 서비스를 다시 선택하세요
+		 * 출금할 경우 -가 나왔을 때 실행되지 않고 "잔액이 부족합니다"라는 문구가 나오도록
+		 */
 	}
 
 }
