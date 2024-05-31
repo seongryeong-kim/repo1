@@ -186,6 +186,59 @@ public class ArrayExam {
 		//배열의 length에 해당
 		System.out.println( list.size() );
 		System.out.println( list);
+		
+		//0531 스터디장 뽑기
+		System.out.println("------------------스터디장뽑기");
+		String[] study = {
+				"박규태", 
+				"이제섭", 
+				"김아영",
+				"박경민",
+				"정근승",
+				"현준수",
+				"남현우",
+				"김승환",
+				"조민정",
+				"이정은"
+				};
+		System.out.println("총 "+study.length+"명");
+		
+		//배열에서 random으로 뽑기
+	//	double rand = Math.random()* study.length;
+		// 0 ~ 9.9999 
+	//	int index =(int)rand; //0~9 강제 형변환해주기
+	//	System.out.println("실험 :"+study[index]);
+		
+		/*
+		 * 랜덤으로 뽑는걸 100번해서 가장 많이 나온 사람을 선택 
+		 */
+		int[] vote = new int[study.length];
+		for(int i=0;i<1000;i++) {
+			double rand= Math.random() *study.length;
+			int index= (int)rand;
+			
+			vote[index] += 1;
+		}
+		
+		for(int i=0;i<vote.length;i++) {
+			System.out.println("index :"+i+", 득표수: "+vote[i]);
+		}
+		for(int i=0;i<study.length;i++) {
+			System.out.println("index :"+i+", 이름: "+study[i]);
+		}
+		
+		//6개의 lotto 번호를 저장하고 싶다 
+		int[] lotto = new int[6];
+		for(int i=0;i<lotto.length;i++) {
+			
+			lotto[i] = (int)(Math.random()*45)+1;
+			//이 상태로 한다면 중복될 수 있다는 문제가 있음-나중에 중복안되게 해볼것	
+		}
+		
+		for(int i=0;i<lotto.length;i++) {
+			System.out.println(i+"번호 : "+lotto[i]);
+		}
+		
 	}
 
 }
