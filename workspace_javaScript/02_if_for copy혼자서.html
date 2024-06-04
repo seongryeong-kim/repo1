@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 15와 20이 주어졌을 때
+        // 세번째 값 17이 그 사이에 있는지 확인
+        let x1 = 15;
+        let x2 = 20;
+        let x3 = 17; //하드코딩?
+        //let x3 = prompt("값 입력"); 이렇게 작성하면 내가 작성하는 값에 대한 참/거짓을 판단
+
+
+        if(x3 > x1 && x3 <= x2){
+            console.log(`${x3}는 ${x1}과 ${x2}사이에 있습니다`) //이렇게 쓰면 변수가 나옴
+        } else {
+            console.log(`${x3}는 ${x1}과 ${x2}사이에 없습니다`)
+        }    //17는 15과 20사이에 있습니다
+
+        //사각형 x,y
+        //좌상단 모서리 좌표
+        let x41 = 10;
+        let y41 = 20;
+        //우하단 모서리 좌표
+        let x42 = 90;
+        let y42 = 100;
+
+        let x43 = 0,
+            y43 = 0;
+
+        // 1번 문제    
+        // 온도를 입력 받는다. 
+        // 받은 값은 String이라서 Number()를 사용해 숫자로 바꿔주세요 ---------?
+        // for example. let d = prompt("온도 입력"); // d가 string
+        // d = Number(d);
+        // 입력받은 온도에 따라서 
+        // 1.영하입니다. / 영상입니다. 를 표시 
+        // 2. -3을 입력한 경우 "영하 3도 입니다"를 출력
+        // 3. 아까 입력받은 걸 어제 기온이라고 치고 (-3)
+        //    이번에 입력받은 온도를 이용해서       (2)
+        //    "어제보다 5도 높습니다"
+
+        let temp = prompt("온도를 입력하세요")
+        temp = Number(temp);
+        if(temp>0){
+            console.log("영상입니다")
+        } else if(temp<=0) {
+            console.log(`영하 ${temp}입니다`) //음수를 정수로 출력되게 하는걸 모르겠음
+        } 
+
+        let temp0 = prompt("어제의 온도를 입력하세요")
+        temp0 = Number(temp0);
+        let temptoday = prompt("오늘의 온도를 입력하세요")
+        temptoday = Number(temptoday);
+        if(temptoday>temp0){
+            console.log("어제보다",(temp0-temptoday),"도 높습니다")
+        } else (temptoday<temp0) 
+            console.log("어제보다",(temp0-temptoday),"도 낮습니다")
+
+        // 2번 문제
+        //두 수를 입력받고 (또는 하드코딩 하고)
+        // a와 b에 저장해놓고
+        // 둘 중에 큰 값을 출력 
+        let a = prompt("숫자를 입력하세요");
+        let b = prompt("두번째 숫자를 입력하세요");
+        if(a>b) {
+            console.log(a)
+        } else if(a<b){console.log(b)};
+
+        // 3번 문제
+        // 조금 어려운 문제 
+        // 입력받은 숫자가 (또는 하드코딩한 값)이 
+        //  10의 자리와 1의 자리가 같은지 판단
+        // 22: 같음     23: 다름
+        let num = prompt("문제-숫자를 입력하세요");
+
+        
+        // 4번 문제
+            //조금이따 쌤이랑 같이풀것 **********************************************
+        if(x41 > x43 && x42 >x43 && y41 > y43 && y42 >y43){
+            console.log("점이 밖에 있습니다")
+        } else {
+            console.log("점이 안에 있습니다")
+        }
+
+        // 5번 문제
+        // 125라는 값이 주어졌을 때
+        // "입력한 수는 100보다 큰 수, 양수, 홀수"
+        // 98이 주어졌을 때 
+        // "입력한 수는 100보다 작은 수, 양수, 짝수"
+        /* 
+        사용할 조건 
+        1. 100>n, 0>n, n%2==0
+        */
+       let five = prompt("원하는 숫자를 입력하세요")
+       if(100>five){
+            console.log("입력한 수는 100보다 작은수")
+       } else if(100<five){
+        console.log("입력한 수는 100보다 큰 수")
+       };
+
+       let fifth = 55;
+      //이따 해보기 if(100>fifth && 0<fifth &&){}
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

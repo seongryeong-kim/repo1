@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //let i=0;
+        //let j=0;
+        let i=0, j=0; 
+        //,컴마 헷갈리면 쓰지마삼
+        for(let i= 0,j=10; i<3; i++,j-=2){
+            console.log(i);
+        }
+
+        let arr=[10,20,30];
+        console.log('옛날 for문')
+        for(let i=0; i<arr.length; i++){
+            console.log(arr[i]);
+        }
+
+        console.log('for in');
+        //in 앞의 변수에 현재의 index가 저장됨
+        for(let i in arr){
+            console.log('i :',i, arr[i]); //arr의 i번째 인덱스
+        } // i:0 10   i:1 20   i:2 30
+
+        console.log('for of');
+        //java에서 향상된 for문
+        for(let i of arr){
+            console.log('i:',i);
+        }
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
