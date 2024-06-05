@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //배열은 변수들의 집합이다. java에서 배워서 넘어감
+
+        // 배열 변수로 만드는 가장 쉬운 방법
+        let arr = [];
+        let arr2 = new Array (); //두번쨰 방법
+
+        //값을 알고 있을 떄 배열 만들기
+        arr = [1,2,3];
+        arr = new Array(1,2,3);
+
+        console.log(arr.length); //이 때는 출력결과가 3
+        console.log('arr[0]',arr[0]);
+        arr[1] = 20;
+        console.log('arr[0]',arr[1]);
+        console.log('arr[0]',arr[10]); //arr[0] undefined
+        arr[10]=5
+        console.log('arr[0]',arr[10]); 
+        console.log('arr[0]',arr[9]); 
+        console.log(arr); //(11) [1, 20, 3, empty × 7, 5] -> 배열의 길이, [배열]
+        console.log('arr :'+arr); //arr :1,20,3,,,,,,,,5 문자로 바꿔서 보여준다
+        console.log('arr :',arr); //arr : (11) [1, 20, 3, empty × 7, 5] 더 자세한 정보를 알 수 있다
+
+          // index가 있는 것만 출력
+          for(let i in arr) {
+            console.log(i);
+        } //결과: 0, 1, 2, 10, 11
+    
+        //key value
+        // index에 아무거나 넣을 수 있는데 숫자가 아닌 경우
+        // 배열의 길이에 영향을 주지 않음  (숫자는 영향o!!!)
+        // '참'이라는 글씨에 인덱스를 준다
+        arr['참']=true;
+        console.log(arr); //(13) [-1, 1, 20, 3, empty × 7, 5, 100, 참: true]
+
+        // index인덱스가 있는 것만 출력됨
+        // "참"도 출력됨
+        for(let i in arr){
+            console.log(i);
+        } //0, 1, 2, 3, 11, 12, 참
+
+        // 문자열도 *접근만*배열처럼 사용가능
+        // 언어마다 한글의 사이즈를 다르게 표시할 수 있다
+        let str = "휴먼교육센터";
+        console.log('str.length',str.length); //6
+        console.log(str[0]) //휴
+
+        // 배열Array의 메소드 (함수)
+
+        arr = [0,1,2,3,4,5];
+        
+        console.log(arr.length); 
+        // push 마지막에 하나 추가
+        // 자동으로 배열의 사이즈도 늘어남
+        arr.push(100); //push 밀어넣는다
+        console.log(arr); //(7) [0, 1, 2, 3, 4, 5, 100]
+
+        // unshift 맨처음에 하나 추가
+        // 사이즈 늘어남
+        arr.unshift(-1);
+        console.log(arr); //(8) [-1, 0, 1, 2, 3, 4, 5, 100]
+
+        // 마지막 값이 100이었는데 
+        // pop(): 마지막 값을 지우고 그 값을 돌려주는 역할을 수행
+        // 원본 배열에서 마지막 값은 사라짐
+        // arr.pop() pop라는 함수는 배열의 맨 마지막것을 지우고 돌려줌(return)
+        let pop = arr.pop();
+        console.log(arr); // (7) [-1, 0, 1, 2, 3, 4, 5]
+        console.log(pop); // 100
+
+        // 지금 현재 첫번째 값은 -1
+        let shift = arr.shift();
+        console.log(arr);   // (6) [0, 1, 2, 3, 4, 5]
+        console.log(shift); // -1
+
+        //  [-1, 0, 1, 2, 3, 4, 5, 100]
+        // arr.pop() 배열 마지막 값 지우기
+        // arr: [-1, 0, 1, 2, 3, 4, 5]
+        // arr.shift() 배열 맨 처음값 지우기
+        // arr: [0, 1, 2, 3, 4, 5]
+
+        //배열 순서 거꾸로 뒤집기
+        console.log(arr.reverse()); //(6) [5, 4, 3, 2, 1, 0]
+        console.log(arr);           //(6) [5, 4, 3, 2, 1, 0]
+
+        //sort 오름차순 정렬  
+        // 내림차순 하고 싶다면 sort 한 뒤 reverse 를 사용
+        arr.sort();
+        console.log(arr)
+
+        arr = [1, 2, 3, 4, 5, 5]; 
+        //시작 index, count
+        let arr3=arr.splice(2, 3);
+        console.log('arr3',arr3);   //(3) [3, 4, 5]
+        console.log('arr',arr);     //(3) [1, 2, 5]
+
+        // arr: 1,2,3
+        arr3 = arr.splice(1); //지운만큼 돌려줌
+        //어디부터 시작, 어디까지 삭제 (2, 3)
+        // 괄호안에 - 마이너스 값이 들어간다면 뒤에서 부터
+        console.log('arr3',arr3);   //(2) [2, 5]
+        console.log('arr',arr);     //1
+
+        arr = [10,30,20,50,40,50]; 
+
+        // arr.splice(-4) //마이너스가 붙었으니 뒤에서부터 4개
+        // console.log(arr.splice(-4) ) //10, 30
+        arr3 = arr.splice(-4,2); //마이너스가 붙었으니 뒤에서부터 네번째 2개
+        console.log('arr3',arr3); //20,50
+        console.log('arr',arr); // arr 10,30,40,50
+
+         // arr 10,30,40,50
+        arr3 = arr.splice(1,2,'3','4','5') //arr에서 2개를 째고 '3''4''5'를 넣어라
+        console.log('arr3',arr3);   //30, 40
+        console.log('arr',arr);     //[10, '3', '4', '5', 50]
+        
+        // arr : [10, '3', '4', '5', 50]
+        arr3 = arr.splice(1,0,'일') //그 인덱스에 '일'을 삽입
+        console.log('arr3',arr3);
+        console.log('arr',arr);  //arr : [10,'일','3', '4', '5', 50]    
+        
+        // fill: 채우고 싶은 값, 시작index, 종료index 바로 앞까지 채워줌
+        let arr4 = [0,1,2,3,4];
+        //arr4.fill(8);   // 모두 다 8로 다 채우고싶어 
+        //arr4.fill(8,1); // 시작인덱스 1번부터 끝까지 전부다  8로
+        arr4.fill(8,1,3); // 1번 index부터 3번 index까지 
+        console.log(arr4); //[0, 8, 8, 3, 4]
+
+        //원본은 그냥 두는 함수들
+        // join: 배열 모두를 글씨로 바꿔주는데 사이사이에 특정한 문자를 넣어줄 수 있다
+        //      특정문자의 기본값은 ','
+
+        // arr: [10, '일', '3', '4','5', 50]
+        let str2 = arr.join();
+        console.log('arr3',arr3);   //10,일,3,4,5,50
+        console.log('arr',arr);     // [10, '일', '3', '4', '5', 50]
+
+        str2 = arr.join("-");
+        console.log('arr3', str2);   //10-일-3-4-5-50
+
+        // str2: 10-일-3-4-5-50
+        // split : 특수문자로 구분되는 문자열을 잘라서 배열로 만들어줌
+        //         특수문자는 사라짐
+        arr3 = str2.split("-");
+        console.log('arr3',arr3); 
+        //arr3: ['10', '일', '3', '4', '5', '50']
+
+        console.log(new Date().toISOString())
+        // 2024-06-05T03:44:14.692Z
+
+        console.log(arr); //10, '일', '3', '4', '5', 50]
+        //slice: 시작 index ~  종료 index 바로 앞까지를 복사해옴
+        arr3=arr.slice(2,5);
+        console.log('arr3',arr3);  
+        console.log('arr',arr);
+
+        // concat : 배열을 합쳐준다
+        let arr5 = ['a','b','c'];
+        arr3 = arr.concat(arr5); //arr에 arr5를 합치겠다
+        console.log('arr3',arr3);   //[10, '일', '3', '4', '5', 50, 'a', 'b', 'c']
+        console.log('arr',arr);     //[10, '일', '3', '4', '5', 50]
+
+        str= arr.toString();
+        console.log(str);           //10,일,3,4,5,50
+        console.log(""+arr);        //10,일,3,4,5,50  //""+문자 를 하면 모든게 문자가 된다?
+        
+        //arr: [10,'일','3','4','5',50]
+        //indexOf:  해당되는 값이 어느 index에 있는지
+        //          값이 없으면 -1
+        //          맨 앞에서 처음 같은 값이 나온 index 출력
+        console.log(arr.indexOf('3')) //2  -2번 index라고 알려줌
+        console.log(arr.indexOf('100')) //값이 없으면 -1
+        arr.push('3')
+        console.log(arr.indexOf('3')) //2 indexOf는 맨 앞에서부터 첫번째 만날 때까지
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
