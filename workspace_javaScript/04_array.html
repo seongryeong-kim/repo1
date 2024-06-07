@@ -100,11 +100,11 @@
         console.log('arr3',arr3);   //(3) [3, 4, 5]
         console.log('arr',arr);     //(3) [1, 2, 5]
 
-        // arr: 1,2,3
+        // arr: 1,2,5
         arr3 = arr.splice(1); //지운만큼 돌려줌
         //어디부터 시작, 어디까지 삭제 (2, 3)
         // 괄호안에 - 마이너스 값이 들어간다면 뒤에서 부터
-        console.log('arr3',arr3);   //(2) [2, 5]
+        console.log('splice arr3',arr3);   //(2) [2, 5]
         console.log('arr',arr);     //1
 
         arr = [10,30,20,50,40,50]; 
@@ -179,6 +179,62 @@
         arr.push('3')
         console.log(arr.indexOf('3')) //2 indexOf는 맨 앞에서부터 첫번째 만날 때까지
         
+        console.log("----------6월 7일----------")
+        arr = ['a0','a1','a2','a3','a4'];
+
+        //forEach: 모든 요소를 순회하면서
+        //전달인자로 받은 함수를 실행 줌
+        arr.forEach(function(a,b,c,d){
+            console.log('--------------');
+            console.log('a',a); //첫번째 전달인자: 배열 중 이번내용
+            console.log('b',b); //두번째: index
+            console.log('c',c); //세번째: 원본배열
+            console.log('d',d); //이후 전달 없음
+        }); //배열에서만 사용가능 
+
+        arr.forEach(function(value,index,array){
+            console.log('************');
+            console.log('value',value); 
+            console.log('index',index); 
+            console.log('array',array);
+        });  
+        let result = arr.forEach(function(value){
+            console.log('+++++++++');
+            console.log('value',value);
+        })
+        console.log(result)
+
+        arr =['a0', 'a1', 'a2', 'a3', 'a4'];
+        //forEach처럼 동작하는데
+        // return을 통해서 새로운 배열을 만들어줌
+        result = arr.map(function(a,b,c,d){
+            console.log('--------------');
+            console.log('a',a); //첫번째 전달인자: 배열 중 이번내용
+            console.log('b',b); //두번째: index
+            console.log('c',c); //세번째: 원본배열
+            console.log('d',d); //이후 전달 없음
+
+            return a+"!";
+        }); 
+        console.log(result) //(5) ['a0!', 'a1!', 'a2!', 'a3!', 'a4!]
+
+        result = arr.map(function(data){
+            return data+"!";
+        }).slice(2);
+        console.log(result) //(3) ['a2!', 'a3!', 'a4!']
+
+        arr=[8,4,2,8,4,7,8,5,2,3,6];
+        result = arr.filter(data => {
+            let is5 = false;
+            if(data > 5){
+                is5 = true;
+            } else{
+                is5 = false;
+            }
+            return is5;
+        })
+        console.log(result)
+        //true인 것들만 남은 배열이 됨 
     </script>
 </head>
 <body>
