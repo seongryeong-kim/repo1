@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="captain">
+        <span>당선을  </span>           <span>    축하드립니다</span>
+    </div>
+    <script>
+        let cap = document.querySelector('#captain');
+        //textContent : html 소스에 있는 text만 그대로
+        let tc = cap.textContent;
+        console.log(tc);
+
+        //innerText : 화면에 보이는대로 
+        //            브라우저가 계산을 끝내고 실제로 표시한대로
+        let innerText = cap.innerText;
+        console.log('innerText',innerText);
+
+        //innerHTML : html 내용의 소스 전부 다
+        let innerHTML = cap.innerHTML;
+        console.log('innerHTML',innerHTML);
+
+        //둘 다 글씨를 바꿔주는데 tag도 그냥 글씨로 인식한다
+        cap.textContent = "<h1>a</h1> b  c"; //h1 효과가 적용되지 않고 <h1>태그가 그대로나옴
+        cap.innerText = "<h1>a1</h1> b1  c1";
+
+        cap.innerHTML = "<h1>a1</h1> b1  c1";
+        // cap.innerHTML = "&lt; a &gt;"; //<a> 
+            // < > 를 쓰면 태그로 인식하고 닫는 태그가 저절로 생김 그래서 &lt; &gt;사용
+    </script>
+</body>
+</html>
