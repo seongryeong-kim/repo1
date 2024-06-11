@@ -94,12 +94,12 @@
             console.log('b: ',b);
           
             let c;
-            //false란? false, undefined, null, 0 ...
-            //true란? !false
-            if(b != undefined){ //b가 undefined가 아니라면 
-                c = a + b;
-            } else {
+            if(b){  // false란? false, undefined, null, 0, ''
+                    // true란? !false
+            // if(b == undefined){
                 c = a + a;
+            } else {
+                c = a + b;
             }
 
             console.log('c: ',c);
@@ -118,23 +118,27 @@
         //많이 줘봤자 두개만 씀
         sum(1,2,5);
 
-        //값을 안주면 무조건 0으로 계산하게 하는 sum2를 만들예정
+        //값을 안주면 무조건 0으로 계산하게 하는 sum2
+        // function sum2 (a,b){
+        //     if(a == undefined) a=0;
+        //     if(b == undefined) b=0;
+
+        //     return a+b; 
+        // }
+
         function sum2 (a,b){
-            if(a==undefined) a=0;
-            if(a==undefined) b=0;
+            if(a == undefined) a = 10;
+            if(b == undefined) b = 20;
 
             return a+b; 
         }
 
-        //a를 전달받지 못한다면 0으로 초기화한다
-        //function sum3 (a=0, b=0){}
-
-                //전달인자가 없는 경우 초기값(기본값) 지정
-                //아래처럼 쓰는건 아무것도 안줬을 경우를 대비해서
-        // function sum3 (a=10, b=20){
-        //     return a+b;
-        // }
-        // let result2 = sum3();
+        //전달인자가 없는 경우 초기값(기본값) 지정
+        //아래처럼 쓰는건 아무것도 안줬을 경우를 대비해서
+         function sum3 (a=10, b=20){
+             return a+b;
+         }
+         let result2 = sum3();
         // console.log('sum3() 호출결과 :', result2);  //30
         // console.log('sum3() 호출결과 :', sum3(50)); //70
         // // 50은 첫번째 전달인자니까 a가 50이 됨 a가 없을 때만 10인데 a값을 넣어줬으니까
@@ -238,7 +242,7 @@
     //n초 있다가 실행해라 
     // setTimeout: 첫번째 전달인자로 실행할 함수
     //             두번째 번달인자로 1/1000초 단위의 시간을 전달
-    //정해진 시간 이후 딱 한번만 실행됨
+    // 정해진 시간 이후 딱 한번만 실행됨
     // 두번째 전달인자 시간 이후에 callback 실행
     // 실행하면 예약번호를 return
 

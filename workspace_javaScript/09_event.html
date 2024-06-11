@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function btn2click() {
+            document.querySelector("#console").innerHTML = "버튼2 클릭<br>";
+        }
+        // let btn1 = document.querySelector("#btn1");
+        // console.log('btn1 :',btn1);                 //null
+
+        window.onload = function () {
+            let btn1 = document.querySelector("#btn1");
+            console.log("btn1 :", btn1);
+
+            //onclick은 click이벤트가 발행했을 때 실행할 함수를 가지고 있는 
+            //"변수"라서 딱 하나의 함수만 지정할 수 있다.
+            btn1.onclick = function () {
+                console.log('버튼1 클릭');
+                document.querySelector("#console").innerHTML += "버튼1 클릭<br>";
+            }
+            btn1.onclick = function () {
+                console.log('버튼1 클릭');
+                document.querySelector("#console").innerHTML += "버튼1 클릭 클릭<br>";
+            }
+
+            let btn3 = document.querySelector("#btn3");
+            //addEventListener
+            //첫번째 전달인자: 이벤트 종류
+            //두번째 전달인자: 실행할 함수
+            btn3.addEventListener('click', function () {
+                document.querySelector("#console").innerHTML = '버튼3 클릭<br>'
+            });
+
+            function btn3click() {
+                document.querySelector("#console").innerHTML += '버튼3 클릭클릭클릭<br>'
+            }
+            //여러번 add추가할 수 있음, 모두 동작함
+            btn3.addEventListener('click', btn3click);
+            //해당 이벤트 제거
+            //단, 익명함수였다면 제거 불가능
+            //btn3.removeEventListener('click',btn3click);
+
+            window.addEventListener('scroll', function () {
+                console.log('스크롤 변경');
+                console.log(document.documentElement.scrollTop);
+            })
+
+            //로그인 창 만들어보기
+            let id = document.querySelector("#id");
+            // id.addEventListener('keydown', function(){
+            //     console.log('keydown')
+            // })
+            id.addEventListener('keyup', function(event){
+                console.log('keyup',event.keyCode);
+                //엔터키
+                if(event.keyCode == 13){
+                    document.querySelector("#pw").focus();
+                }
+            })
+
+            document.querySelector("#pw")
+                    .addEventListener('keyup',function(event){
+                        console.log('keyup',event.keyCode);
+                        
+                        if(event.keyCode==13){
+                            document.querySelector("#login").click()
+                        }
+                    })
+
+
+            document.querySelector("#login").addEventListener('click',function(){
+                console.log("로그인 버튼 클릭");
+                let text = document.querySelector("#id").value;
+                let pw = document.querySelector("#pw").value;
+                if(text=="admin" && pw=="1234"){
+                    console.log("로그인 되었습니다.")
+                } else{
+                    console.log("아이디 또는 비밀번호를 확인하세요")
+                }
+                
+                console.log("아이디 :", text);
+                console.log("비밀번호 :", pw);
+                // document.querySelector("#id").value="admin";
+
+                if(text!="admin" || pw!="1234"){
+                    console.log("아이디.")
+                } 
+                
+            })
+
+            /*
+            로그인 버튼을 눌렀을 때 
+            id는 admin 
+            passsword는 1234 인 경우
+            "로그인 되었습니다"
+            그 외에는 "아이디 또는 비밀번호를 확인하세요" 출력
+
+            id와 password가 아무것도 안 적힌 경우"..는 필수입니다"출력
+            */
+        }
+
+    </script>
+</head>
+
+<body style="height:2000px">
+    <button type="button" id="btn1">버튼1</button>
+    <button type="button" id="btn2" onclick="btn2click();alert(123);">버튼2</button>
+    <!-- 이렇게 html안에 javascript 넣는 것은 비추천 -->
+    <button type="button" id="btn3">버튼3</button>
+
+    <div id="console"></div>
+
+    <div>
+        아이디:<input type="text" id="id"> <br>
+        비밀번호:<input type="text" id="pw">
+        <br>
+        <input type="button" id="login" value="로그인">
+    </div>
+
+</body>
+
+</html>
