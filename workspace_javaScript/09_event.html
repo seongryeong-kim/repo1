@@ -5,12 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #cursor {
+            width: 30px;
+            height: 33px;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            display: none;
+        }
+
+        #catTower {
+            border: 1px solid red;
+            width: 500px;
+            height: 500px;
+            margin: 50px;
+        }
+    </style>
     <script>
         function btn2click() {
             document.querySelector("#console").innerHTML = "버튼2 클릭<br>";
         }
         // let btn1 = document.querySelector("#btn1");
         // console.log('btn1 :',btn1);                 //null
+
+        //window: 브라우저를 뜻함
+        // window.addEventListener("load", function(){
+        //     let btn1 = document.querySelector("#btn1");
+        //     console.log("",btn1)
+        // })
 
         window.onload = function () {
             let btn1 = document.querySelector("#btn1");
@@ -54,42 +79,42 @@
             // id.addEventListener('keydown', function(){
             //     console.log('keydown')
             // })
-            id.addEventListener('keyup', function(event){
-                console.log('keyup',event.keyCode);
+            id.addEventListener('keyup', function (event) {
+                console.log('keyup', event.keyCode);
                 //엔터키
-                if(event.keyCode == 13){
+                if (event.keyCode == 13) {
                     document.querySelector("#pw").focus();
                 }
             })
 
             document.querySelector("#pw")
-                    .addEventListener('keyup',function(event){
-                        console.log('keyup',event.keyCode);
-                        
-                        if(event.keyCode==13){
-                            document.querySelector("#login").click()
-                        }
-                    })
+                .addEventListener('keyup', function (event) {
+                    console.log('keyup', event.keyCode);
+
+                    if (event.keyCode == 13) {
+                        document.querySelector("#login").click()
+                    }
+                })
 
 
-            document.querySelector("#login").addEventListener('click',function(){
+            document.querySelector("#login").addEventListener('click', function () {
                 console.log("로그인 버튼 클릭");
                 let text = document.querySelector("#id").value;
                 let pw = document.querySelector("#pw").value;
-                if(text=="admin" && pw=="1234"){
+                if (text == "admin" && pw == "1234") {
                     console.log("로그인 되었습니다.")
-                } else{
+                } else {
                     console.log("아이디 또는 비밀번호를 확인하세요")
                 }
-                
+
                 console.log("아이디 :", text);
                 console.log("비밀번호 :", pw);
                 // document.querySelector("#id").value="admin";
 
-                if(text!="admin" || pw!="1234"){
+                if (text != "admin" || pw != "1234") {
                     console.log("아이디.")
-                } 
-                
+                }
+
             })
 
             /*
@@ -101,7 +126,121 @@
 
             id와 password가 아무것도 안 적힌 경우"..는 필수입니다"출력
             */
+
+
+
+            console.log("-----------------6월 12일-----------------")
+            /* 버튼3에 마우스가 들어갔을 때 (hover)
+                font-size를 20px로 
+                마우스가 나갔을 때 14px로 변경
+            */
+
+            let newBtn3 = document.querySelector('#btn3') //id가 btn3인 dom(html태그)를 가져와서 변수에 담기
+            newBtn3.addEventListener('mouseover', function () {
+                console.log('마우스 들어옴')
+                newBtn3.style.fontSize = '20px';
+            });
+            newBtn3.addEventListener('mouseout', function () {
+                console.log('마우스 나감')
+                newBtn3.style.fontSize = '14px';
+            });
+
+            //고양이가 마우스커서를 따라다니도록 만들기
+            //앞에 아무것도 안쓰면 브라우저 전체에 적용되는 이벤트
+            addEventListener('mousemove', function (evt) {
+                //console.log('마우스 움직임');
+            })
+
+            let catTower = document.querySelector("#catTower");
+            catTower.addEventListener('mousemove', function (evt) {
+                //화면에 보이는 영역기준 x, y
+
+                //스크롤이 내려 왔더라도 그냥 지금 보이는 왼쪽 위 기준  
+                //console.log(evt.x, evt.clientX);
+
+                //스크롤에 관계 없이 문서 좌상단 기준(전체 브라우저)
+                // console.log(evt.pageX) 
+
+                //이벤트가 적용된 대상의 좌상단 기준
+                //console.log(evt.offsetX)
+
+                /*
+                    event.pageX를 left로 
+                    event.pageY를 top으로 설정 
+                    display를 none에서 보이게 해주기
+                */
+
+                let cursor = document.querySelector("#cursor");
+                cursor.style.left = evt.pageX + 'px';
+                cursor.style.top = evt.pageY + 'px';
+                cursor.style.display = "block";
+            })
+            //이벤트가 빨간박스에 적용되어서 그 밖을 나가면 적용이 되지않음
+
+            // 이벤트 명: focus, blur
+            // #id에 적용해서 
+            // focus: "아이디에 포커스 맞춰짐"
+            // blur: "아이디에 포커스 잃음"
+            let newId = document.querySelector("#id");
+            newId.addEventListener("focus", function () {
+                console.log("아이디에 focus맞춰짐")
+            })
+            newId.addEventListener("blur", function () {
+                console.log("아이디에 focus잃음")
+            })
+
+            //이건 내가 한 코드..어디까지 알고 어디까지 모르나..
+            // let idfb = document.querySelector("#id");
+            // idfb.addEventSelector('focus',function(fo){
+            //     let mouse = document.querySelector
+            //     console.log(idfb);
+            // })
+
+            //this: 그냥 쓰일 때는 window객체를 가지고 있다
+            console.log(this);
+
+            document.querySelector("#parent")
+                .addEventListener("click", function (event) {
+
+                    //event.target: 이벤트가 발생된 DOM
+                    console.log('event.target:', event.target);
+
+                    //event.currentTarget: 이벤트가 적용된 DOM
+                    console.log('event.currentTarget :', event.currentTarget);
+
+                    //this: 더이상 window가 아님
+                    //this === event.currentTarget
+                    console.log('this :', this);
+                },)
+
+            document.querySelector("#child1")
+                .addEventListener("click", function (event) {
+
+                    //부모로 전달되는 이벤트를 중지한다
+                    event.stopPropagation();
+                    console.log('자식1클릭')
+                });
+
+            document.querySelector("#form")
+                .addEventListener("submit", function (event) {
+
+                    //원래 html 고유 기능을 없애줌
+                    event.preventDefault();
+
+                    let value = document.querySelector("#keyword").value; //input에 쓴 글씨를 가져옴
+                    console.log(value, value.length);
+                    if (value.length < 2) {
+                        console.log("두 글자 이상 입력")
+                    } else {
+                        console.log("naver검색")
+
+                        document.querySelector("#form").submit();
+                    }
+                });
+
+
         }
+
 
     </script>
 </head>
@@ -121,6 +260,23 @@
         <input type="button" id="login" value="로그인">
     </div>
 
+    <img id="cursor"
+        src="https://cdn.discordapp.com/attachments/1237222207395205138/1250271715414773780/image.png?ex=666a55c5&is=66690445&hm=db0a7d03382cf6c77bf7b73d4ebf377622d4bdcb293fa8f51512be88965cb450&">
+    <div id="catTower">
+
+    </div>
+
+    <div id="parent">
+        부모
+        <div id="child1">자식1</div>
+        <div id="child2">자식2</div>
+    </div>
+
+    <!-- <a href="http://naver.com" id="naver">네이버</a> -->
+    <form id="form" action="http://search.naver.com/search.naver">
+        <input id="keyword" type="text" name="query">
+        <input type="submit" value="네이버검색">
+    </form>
 </body>
 
 </html>
