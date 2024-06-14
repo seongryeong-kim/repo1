@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let _count = 0;
+        //페이지 로딩이 끝나면 
+        window.addEventListener("load", function () {
+
+            //추가버튼을 클릭하면 input의 글씨를 목록에 표시한다
+            let add = document.querySelector("#add");
+            // console.log(add);// 나는 add버튼을 알지만 브라우저는 모르기때문에 null아직 밑에 로딩안됨
+            //그래서 맨 위에 윈도우.에드이벤트리스너
+            add.addEventListener('click', function () {
+                // console.log("클릭")
+                let todo = document.querySelector('#todo');
+                // console.log(todo)
+                console.log(todo.value); //todo에 작성하는 텍스트가 출력되게
+
+                let list = document.querySelector("#list");
+                //innerHTML은 생각도 못했음 ㅠ
+                // console.log(list.innerHTML)
+                // <input type="checkbox"> 할일 <input type="button" value="삭제"><br>
+
+                //innerHTML 방식
+                // let html = '<input type="checkbox">'+todo.value+'<input type="button" value="삭제"><br>'
+                let html= '';
+                html += '<div>';
+                html += '<input type="checkbox" class="chk">';
+                html += todo.value;
+                html += '<input type="button" class="del_"' +_count +'+value="삭제"><br>';
+                html += '</div>';
+
+                list.innerHTML += html;
+
+                //innerHTML이 갱신되면 싹 지워졌다 다시 써지면서
+                // 기존의 이벤트가 다 사라져 버렸음 
+                // 그래서 마지막 추가된 버튼만 이벤트가 있음
+                // document.querySelector("del_"+_count)
+                //     .addEventListener('click',function(event){
+                //     console.log(event.target.parentNode,innerText);
+                // })
+
+                _count++;
+
+                /*
+                // append 방식
+                let div = document.createElement('div');
+
+                let html = '';
+                //html += '<div>';
+                html += '<input type="checkbox">';
+                html += todo.value;
+                html += '<input type="button" class="del_"' +_count +'+value="삭제"><br>';
+                //html += '</div>';
+                div.innerHTML = html;
+
+                div.querySelector(".del").addEventListener('click',function(event){
+                       console.log(event.target.parentNode.innerText);
+                    })
+
+                //append에는 dom요소만 들어갈 수 있고 div는 dom요소기 때문에
+                //글씨로 존재하던 것을 list에 
+                //삭제 버튼 등이 생기는 순간
+                list.append(div);
+                */
+
+                /*
+                //그렇게 추가된 삭제버튼들을 선택해온다
+                let dels = document.querySelectorAll(".del");
+                //console.log(dels, dels.length);
+                //맨 위에 위치할 경우 이 상태에서는 추가되지 않아서 뜨는 게 없다
+                //삭제버튼이 생긴 다음에 넣어줘야함 
+                //그래서 위에 있던코드를 삭제버튼이 생긴 이후로 옮겨옴
+                for (let i = 0; i < dels.length; i++) {
+                    // addEventListener: 이벤트가 계속 추가됨 
+                    // dels[i].addEventListener('click',function(event){
+                    //     console.log(event.target.parentNode.innerText);
+
+                    // })
+
+                    // onclick: 이벤트 하나만 저장 
+                    dels[i].onclick = function (event) {
+                        console.log(event.target.parentNode.innerText);
+                    }
+                }*/
+
+            })
+
+            document.querySelector("#all").addEventListener("click", function(){
+
+                let all= document.querySelector("#all").checked;
+                
+                let list_chk = document.querySelectorAll('.chk');
+                for(let i=0;i<list_chk.length;i++){
+                    // list_chk[i].checked = !list_chk[i].checked;
+
+                }
+            });
+
+        })
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1>할 일 목록 관리 시스템</h1>
+        <div>
+            <input type="text" id="todo">
+            <input type="button" id="add" value="추가"> <br>
+        </div>
+
+        <div>
+            <input type="checkbox" id="all">전체선택
+            <input type="button" id="delete" value="선택삭제">
+
+            <div id="list"> <!--쓸 곳을 만들어둬야함-->
+                <!-- <input type="checkbox"> 할일 <input type="button" value="삭제"><br>
+            <input type="checkbox"> 할일 <input type="button" value="삭제"><br>
+            <input type="checkbox"> 할일 <input type="button" value="삭제"><br> -->
+            </div>
+        </div>
+
+        <!-- <input type="button" value="선택삭제"> <br>
+
+    <input type="checkbox">점심 정하기 <br>
+    <input type="checkbox">실습하기 <br>
+    <input type="checkbox">쉬기 <br> -->
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            // 1. input text창에 해야할 일을 적고 추가버튼 누르면 
+            //      아래리스트에 체크박스와 할 일이 함께 추가되도록 
+
+            //1. todo 할 일 작성 
+            let todo = document.querySelector('#todo');
+            todo.addEventListener("input", function () {
+                //내가 입력하는 텍스트를 콘솔에서 출력하고 싶음
+                console.log(todo.value);
+            })
+            //2. add 추가버튼 클릭
+            //add 추가 버튼을 click하면 작동하는 이벤트 
+            document.querySelector("#add").addEventListener('click', function () {
+                console.log("click: 할일추가");
+            })
+            //3. 클릭되면서 todo 텍스트가 아래에 뜨도록
+            //   내가 입력하는 값을 밑에 오도록 출력하고 싶음
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <h1>TO DO LIST</h1>
+    <div id="top">
+        <input type="text" id="todo">
+        <input type="button" id="add" value="추가"> <br>
+    </div>
+
+    <div id="list">
+        <!-- 할 일이 추가될 곳 -->
+    </div>
+
+    <!-- <input type="button" value="선택삭제"> <br>
+
+    <input type="checkbox">점심 정하기 <br>
+    <input type="checkbox">실습하기 <br>
+    <input type="checkbox">쉬기 <br> -->
+
+</body>
+
+</html>

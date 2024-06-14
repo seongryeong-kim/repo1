@@ -239,9 +239,61 @@
                 });
 
 
+                console.log("-------6월 14일---------")
+                //토핑 추가하고 삭제
+                document.querySelector("#btn4").addEventListener("click",function(){
+                    // class가 chk인 모든 것에 value를 출력?
+                    // querySelectorAll 로 배열을 받을 생각 
+                    let chks = document.querySelectorAll('.chk');
+
+                    // for(let i=0;i<배열.length;i++) 익숙한 기본 for문
+                    // for(let item index in ...) 배열일 때 사용가능
+                    // for(let item of ...)       배열일 때 사용가능
+                    // 배열.forEach(function(item){})배열일 때 사용가능
+
+                    // chk.value 이렇게는 chk는 배열요소라서 안된다 ..그래서 아래처럼
+                   // chk[0].value 
+                    // for문 이용해서 전체 출력해보기 
+                    // chks에는 chk요소가 배열로 들어가있음 
+                    // 거기서 첫번째 요소를 dom에 담는다 
+                    // 우동사리가 첫번째 떡이 두번째로 들어가있는 배열
+                    for(let dom of chks) {
+                      //  dom = chks [0] //이건 우동사리 
+                      // 모든 요소의 (프로퍼티 중에서) 체크 상태 점검
+                      if(dom.checked){  //check하면 true
+                        console.log(dom.value, dom.checekd);
+                      }
+                    }
+
+                    //css 선택자를 이용해서 체크된 것만 가져오기
+                    let chks2 = document.querySelectorAll('.chk:checked'); //이렇게 하면 css에서 체크된걸 모아옴
+                    console.log(chks2.length);
+                }) 
+
+                //삭제가 눌리면 체크된 게 있는 div 없애기 
+                //remove 를 사용 
+                //클릭된 녀석의 부모를 지울 것 
+                // 클릭된 이벤트를 잡아오는 것 event.target 
+                // del 클래스를 갖는 모든 것에 click event 
+
+                //선생님 주석 
+                //모든 삭제 버튼에 클릭 이벤트 적용
+                //삭제버튼에는 모두 class del이 있음 - 모두니까 byclassname 또는 querySelectorAll 사용
+                let dels = document.querySelectorAll(".del"); //배열에다 이벤트리스너 줄 수 없음 반복문사용예정
+                // dels[0].addEventListener
+
+                //삭제버튼 그 자체에 이벤트를 줌 
+                for(let i=0;i<dels.length;i++){
+                    dels[i].addEventListener('click',function(event){
+                        console.log(event.target);
+
+                        event.target.parentNode.remove();
+                    })
+                }
+
         }
 
-
+       
     </script>
 </head>
 
@@ -277,6 +329,28 @@
         <input id="keyword" type="text" name="query">
         <input type="submit" value="네이버검색">
     </form>
+
+    <!-- <input type="checkbox">우동사리 //체크박스옆에 우동사리가 써있지만 연관없는상태 -->
+   
+    <input type="button" id="btn4" value="토핑확인"> <br>
+    <!-- 체크된 애들만 자바스크립트로 value값 찾기 -->
+    <input type="checkbox" class="chk" value="udon">우동사리  <br>
+    <input type="checkbox" class="chk" value="cake">떡  <br>
+<!-- label태그를 사용하면 check box옆에 있는 텍스트를 클릭해도 체크박스가 체크된다  -->
+   <label> <input type="checkbox" class="chk" value="china">중국당면</label><br>  
+
+    <input type="checkbox" id="bun" class="chk" value="china">
+    <label for="bun">분모자</label>  
+
+<div>
+    <span>우동사리</span><button type="button" class="del">삭제1</button>
+</div>
+<div>
+    <span>떡</span><button type="button" class="del">삭제2</button>
+</div>
+<div>
+    <span>중국당면</span><button type="button" class="del">삭제3</button>
+</div>
 </body>
 
 </html>
