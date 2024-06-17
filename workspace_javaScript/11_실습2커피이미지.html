@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {width:300px;
+        height:400px;}
+
+
+    </style>
+    <script>
+        window.addEventListener ("load", function(){
+           
+            let cap = document.querySelector("#cappuccino");
+            let ame = document.querySelector("#americano");
+            let moc = document.querySelector("#mocha");
+
+                  // 클릭 이벤트 리스너 추가
+            cap.addEventListener('click', function(){
+                // 이미지의 'data-clicked' 속성을 가져와서 값에 따라 처리
+                let clicked = this.getAttribute('data-clicked');
+                if (clicked === 'true') {
+                    // 이미지가 이미 클릭된 상태일 때 다시 원래 크기로 돌리기
+                    this.style.transform = 'scale(1)';
+                    this.setAttribute('data-clicked', 'false');
+                } else {
+                    // 이미지가 클릭되지 않은 상태일 때 크기 키우기
+                    this.style.transform = 'scale(1.2)';
+                    this.setAttribute('data-clicked', 'true');
+                }
+            });
+
+            americano.addEventListener('click', function(){
+                var clicked = this.getAttribute('data-clicked');
+                if (clicked === 'true') {
+                    this.style.transform = 'scale(1)';
+                    this.setAttribute('data-clicked', 'false');
+                } else {
+                    this.style.transform = 'scale(1.2)';
+                    this.setAttribute('data-clicked', 'true');
+                }
+            });
+
+            moc.addEventListener('click', function(){
+                var clicked = this.getAttribute('data-clicked');
+                if (clicked === 'true') {
+                    this.style.transform = 'scale(1)';
+                    this.setAttribute('data-clicked', 'false');
+                } else {
+                    this.style.transform = 'scale(1.2)';
+                    this.setAttribute('data-clicked', 'true');
+                }
+            });
+
+            })
+        
+    </script>
+</head>
+<body>
+    <img id="cappuccino" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Cappuccino_at_Sightglass_Coffee.jpg/640px-Cappuccino_at_Sightglass_Coffee.jpg">
+    <img id="americano" src="https://www.starbucksathome.com/kr/sites/default/files/styles/nutrition_instruction_image/public/2021-04/BlackCoffee_LongShadow_0_1_0%20%281%29.png?itok=wkv8XBvk">
+    <img id="mocha" src="https://www.thespruceeats.com/thmb/Hz677yfVdPECquUOekjv0b9yXTE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SES-mocha-4797918-step-04-599987714aec41aba02f1f870e900dd8.jpg">
+</body>
+</html>

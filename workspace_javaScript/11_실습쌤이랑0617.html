@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #img_main {
+            width: 300px;
+        }
+
+        #thumbnail {
+            display: flex;
+            width: 300px;
+        }
+
+        #thumbnail img {
+            width: 100%;
+        }
+
+        #color {
+            width: 300px;
+            height: 100px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .pink {
+            background-color: pink;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", function () {
+            same();
+            thumb();
+            //실습3
+            picker();
+            //실습4
+            time();
+            pizza();
+
+            // parseInt(Math.random()*45)+(45-0+1)
+            let lotto = [];
+
+            //첫번째 뽑기
+            let tmp = parseInt(Math.random() * 45) + 1 //로또 랜덤값
+            console.log('tmp0', tmp)
+            lotto.push(tmp);
+
+            //두번째 뽑기
+            //tmp = parseInt(Math.random()*45)+1;
+            do {
+                tmp = parseInt(Math.random() * 45) + 1;
+                console.log('tmp1', tmp)
+            } while (lotto[0] != tmp);
+            lotto.push(tmp);
+
+            //세번째 뽑기
+            //tmp = parseInt(Math.random()*45)+1;
+            do {
+                tmp = parseInt(Math.random() * 45) + 1;
+                console.log('tmp2', tmp)
+            } while (lotto[0] == tmp && lotto[1] == tmp);
+            lotto.push(tmp);
+            console.log(lotto);
+
+            //여기서부터 따라하시면 돼여
+            lotto = [];
+            while (lotto.length != 6) {
+
+                let isDup;
+                do {
+                    let tmp = parseInt(Math.random() * 45) + 1;
+                    console.log('tmp',tmp);
+
+                    // 이거 대신 배열의 indexOf 사용해도 됨
+                    for (let i = 0; i < lotto.length; i++) {
+                        if (lotto[i] == tmp) {
+                            isDup = true;
+                            break;
+                        }
+                    } 
+
+                    if(!isDup){
+                        lotto.push(tmp);
+                    }
+                } while (isDup)
+                console.log(lotto);
+            }
+            //문제> 지정한 자리를 제외하고 자동뽑기
+            // 예를 들어 첫번째 6, 두번째 8 고정하고 나머지 자동선택 
+            // 예를 들어 두번째 5, 네번째 30, 다섯번째 35 고정하고 나머지 자동선택 
+
+            // if(lotto[0]==tmp){
+            //     tmp = parseInt(Math.random()*45)+1;
+            // }
+        })
+
+        function same() { //실습1 주문배송정보관리
+            document.querySelector("#same").addEventListener('click', function () {
+
+                //event.target, event.currentTarget, this, document.querySelector("#same")
+                //모두 같은 DOM 
+
+                if (event.target.checked) {
+
+                    // let name = document.getElementById("name").value; 해도 됨
+                    let name = document.getElementById("name");
+                    let tel = document.getElementById("tel");
+                    let addr = document.getElementById("addr");
+
+                    console.log(name.value); //이름에 쓴 값이 나옴
+                    console.log(tel.value);
+                    console.log(addr.value);
+
+                    document.getElementById("name2").value = name.value;
+                    document.getElementById("tel2").value = tel.value;
+                    document.getElementById("addr2").value = addr.value;
+                } else {
+                    document.getElementById("name2").value = "";
+                    document.getElementById("tel2").value = "";
+                    document.getElementById("addr2").value = "";
+                }
+            })
+        }
+
+        function thumb() {
+            //부모한테 클릭이벤트 줄 예정
+            document.querySelector("#thumbnail").addEventListener("click", function (event) {
+                //src의 속성값을 main의 속성값으로 바꿔 버리기 
+                //console.log(event.target.getAttribute("src"));
+
+                let img_main = document.querySelector("#img_main");
+                img_main.setAttribute('src', event.target.getAttribute("src"));
+            })
+        }
+
+        function picker() {
+            document.querySelector("#빨강").addEventListener('click', function () {
+                let color = document.querySelector("#color");
+                //클래스 추가
+                color.classList.add("red");
+
+            })
+
+            //클래스 삭제
+            color.classList.remove("red");
+            color.classList.remove("green");
+            color.classList.remove("blue");
+            color.classList.remove("pink");
+            //클래스 추가
+            color.classList.add("pink");
+        }
+
+        function time() {
+            let time = document.querySelector("#time");
+            //글씨 넣는 첫번째 방법 
+            //time은 div이고 그 안에 컨텐츠 영역에 글씨 쓰기 
+            time.textContent = 'textContent';
+            time.innerText = 'innerText';
+            time.innerHTML = 'innerHTML'; //html코드까지
+
+            time.innerText = '시: 분: 초';
+
+            let now = new Date();
+            let h = now.getHours();
+            let m = now.getMinutes();
+            let s = now.getSeconds();
+
+            let hms = h + "시" + m + "분" + s + "초";
+            time.innerText = hms;
+
+            //now.toISOString().split("T")[1]
+
+            //실시간(1초에 4번) 갱신 
+            //     setInterval(function () {
+            //         let now = new Date();
+            //         let h = now.getHours();
+            //         let m = now.getMinutes();
+            //         let s = now.getSeconds();
+            //         //03초, 09초 이런식으로 출력되게 
+            //         if(s<10){
+            //             s = "0"+s;
+            //         }
+
+            //         let hms = h + "시" + m + "분" + s + "초";
+            //         time.innerText = hms;
+            //     }, 1000 / 4)
+        }
+
+        function time_refresh() {
+
+            setTimeout(function () {
+                let now = new Date();
+                let h = now.getHours();
+                let m = now.getMinutes();
+                let s = now.getSeconds();
+
+                if (s < 10) {
+                    s = "0" + s;
+                }
+
+                let hms = h + "시" + m + "분" + s + "초";
+                let time = document.querySelector("#time");
+
+                hms += now.getFullYear() + "년"
+
+                time.innerText = hms;
+
+                time_refresh();
+            }, 1000 / 4);
+        }
+
+        function pizza() {
+            document.querySelector("#order").addEventListener("click", function () {
+                //주문 총 금액
+                let total_price = 0;
+                let total_text = " ";
+
+                //select (피자종류)
+                let type = document.querySelector("#type");
+                //선택된 option의 value 구하기
+                let type_value = type.value;
+                total_price += Number(type_value);
+
+                //select의 선택된 option 가져오기
+                let type_text = document.querySelector("#type option:checked").innerText
+                total_text += "피자종류: " + type_text + ","
+                //console.log(type_text);
+
+                //사이즈 선택
+                let size = document.querySelector("[name=size]:checked");
+                total_price += Number(size.value);
+
+                //css선택자로 글씨 span 가져오기
+                //console.log(document.querySelector("[name=size]:checked+span").textContent);
+
+                //부모로 올라갔다가 span으로 내려오기 선생님이 자주쓰시는 방법
+                //console.log(size.parentNode.querySelector("span").innerText);
+
+                // 같은 속성 값을 가진다는 아이디어로 가져오기
+                //console.log(   document.querySelector("label[for="+ size.getAttribute("id")+"]"))
+
+                // console.log(size.getAttribute("data-name"));
+                total_text += "사이즈 :" + size.getAttribute("data-name") + ",";
+
+                console.log(total_text);
+
+                total_text += "토핑 : "
+                let list_topping = document.querySelectorAll('.topping:checked');
+                for (let i = 0; i < list_topping.length; i++) {
+                    total_price += Number(list_topping[i].value);
+                    total_text += list_topping[i].getAttribute("data-topping") + ", ";
+                }
+                total_text += "요청사항 :" + document.querySelector("#request").value;
+
+                console.log("주문내역" + total_text);
+                console.log("총 가격:" + total_price);
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <h1>실습1</h1>
+    <div>
+        <h2>실습1</h2>
+        <div>
+            주문정보 <br>
+            이름: <input type="text" id="name"> <br>
+            연락처: <input type="text" id="tel"> <br>
+            주소: <input type="text" id="addr"> <br>
+
+            <hr>
+            배송정보 <br>
+            <input type="checkbox" id="same"> 주문 정보와 배송 정보가 같습니다 <br>
+            이름: <input type="text" id="name2"> <br>
+            연락처: <input type="text" id="tel2"> <br>
+            주소: <input type="text" id="addr2"> <br>
+        </div>
+    </div>
+
+    <div>
+        <h2>실습2</h2>
+        <div>
+            <div><img id="img_main" src=""></div>
+            <div id="thumbnail">
+                <div>
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Cappuccino_at_Sightglass_Coffee.jpg/640px-Cappuccino_at_Sightglass_Coffee.jpg">
+                </div>
+                <div>
+                    <img
+                        src="https://www.starbucksathome.com/kr/sites/default/files/styles/nutrition_instruction_image/public/2021-04/BlackCoffee_LongShadow_0_1_0%20%281%29.png?itok=wkv8XBvk">
+                </div>
+                <div>
+                    <img
+                        src="https://www.thespruceeats.com/thmb/Hz677yfVdPECquUOekjv0b9yXTE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SES-mocha-4797918-step-04-599987714aec41aba02f1f870e900dd8.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2>실습3</h2>
+        <div id="color">
+        </div>
+        <div class="color">
+            <input type="button">빨강
+            <input type="button">빨강
+            <input type="button">빨강
+            <input type="button">빨강
+        </div>
+    </div>
+
+    <div>
+        <h2>실습4 시간출력</h2>
+        <div id="time"></div>
+    </div>
+
+    <div>
+        <h2>실습5 나이출력</h2>
+        <div>
+            출생년도(예: 2001) : <input type="text" id="year">
+            <input type="text" id="year">
+        </div>
+        <div></div>
+    </div>
+
+
+    <div>
+        <h2>실습6 피자주문시스템</h2>
+        <div>
+            피자종류:
+            <select id="type">
+                <option value="15000">시크릿가든(15000)</option>
+                <option value="20000">더히든시크릿(20000)</option>
+                <option value="25000">햄벅한새우(25000)</option>
+            </select>
+            <br>
+            사이즈선택:
+            <input type="radio" name="size" value="0" data-name="미디엄"><span>미디엄</span>
+            <label>
+                <input type="radio" name="size" chekced="checked" value="3000" data-name="라지"><span>라지(+3000)</span>
+            </label>
+
+            <input type="radio" name="size" id="fam" value="6000" data-name="패밀리">
+            <label for="fam">패밀리(+6000)</label>
+            <br>
+            추가토핑:
+            <input type="checkbox" class="topping" value="1000" data-topping="미트토핑">미트토핑 (1000)
+            <input type="checkbox" class="topping" value="2000" data-topping="베이컨">베이컨 (2000)
+            <input type="checkbox" class="topping" value="3000" data-topping="치즈">치즈 (3000)
+            <input type="checkbox" class="topping" value="3500" data-topping="페퍼로니">페퍼로니 (3500)
+            <input type="checkbox" class="topping" value="4000" data-topping="카나디안햄">카나디안햄 (4000)
+            <br>
+            요청사항<input type="text" id="request">
+            <br>
+            <input type="button" value="주문하기" id="order">
+        </div>
+    </div>
+</body>
+
+</html>

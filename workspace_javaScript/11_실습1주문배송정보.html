@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .info {
+            border: 1px solid black;
+            width:50%;
+        }
+    </style>
+    <script>
+        //1. 첫번째 주문정보칸에 이름, 연락처, 주소 를 작성 
+        //2. 두번째 배송정보에서 체크박스를 선택하면 
+        //      주문정보에 적힌 텍스트를 그대로 가져오도록 
+        window.onload = function() {
+
+            document.getElementById
+            name
+            number
+            address
+            //뭔가 작성하고 그 작성한 값 출력되게 
+
+            let chk = document.querySelector("#check");
+            //console.log(chk) 
+            
+            chk.addEventListener('click',function(){
+                if(chk.checked){
+                    console.log();
+                    name.value
+                    number.value
+                    address.value
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="order" class="info">
+        <legend><strong>주문정보</strong></legend><br>
+        이름: <input type="text" id="name"> <br>
+        연락처: <input type="text" id="number"> <br>
+        주소: <input type="text" id="address">
+    </div>
+
+    <div id="deliver"  class="info">
+        <strong>배송정보</strong> <br>
+        <input type="checkbox" id="check">주문 정보와 배송 정보가 같습니다 <br>
+        이름: <input type="text" id="name2"> <br>
+        연락처: <input type="text" id="number2"> <br>
+        주소: <input type="text" id="address2"> <br>
+    </div>
+</body>
+</html>
