@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //배열 선언만 하는 방법 
+        //배열: 값을 순서에 따라 관리하는 방법
+        let array = [];
+
+        //JSON 선언만 하는 방법 
+        //JSON: 값을 key로 관리하는 방법
+        let json = {};
+
+        //값을 미리 알고 있는 경우 json 사용법
+        json = {
+            "key": "value",  //value라는 값이 key 라는 곳에 들어감 (지정)
+            "k": "v",        //변수명이라 아무거나 써도 됨
+            k1: "v1",      //key칸에는 쌍따옴표 안써도 됨
+            "num": 123,
+            "child": {      //json안에 json 넣을 수도 있다
+                "child_1": "value-1"
+            },
+            "a1": array,
+            "fn": function () {
+                console.log('익명함수 실행');
+            }
+        };
+
+        //넣은 값 통으로 출력 (꺼내는 방법)
+        console.log(json);
+        console.log("" + json);
+
+        console.log('json.k', json.k); //v 방법1:프로퍼티처럼 접근
+        console.log('json["k"]', json["k"]); //v 방법2:배열처럼 접근
+        console.log('json[\'k\']', json["k"]); //v 작은따옴표 써도 된다
+        let 숫자 = "num";
+        console.log(json[숫자]) //대괄호에 문자가 들어간다는 것에 착안해서
+        //변수에 담아 사용할 수도 있다
+
+        //제이슨이 갖고 있는 차일드라는 키 값 
+        //let a = json.child 
+        //a.child_1
+        console.log(json.child.child_1); //이러면 value-1이 나온다
+        console.log(json['child']['child_1']);
+        //a1은 배열이고 배열에 push 사용 가능하니까 
+        json.a1.push(123);
+        json.a1.push(123);
+        console.log(json.a1);
+
+        //let a = function(){
+        //     console.log('익명함수 실행');
+        // }
+        // a();
+        json.fn(); //json이 갖고있는 fn을 실행해라
+        console.log(json.fn()); //undefined, 실행할 것(return)을 정해주지 않았기 때문에
+        
+        //추가하는 방법 
+        json.a = "b" //b라는 값을 가진 a변수가 json 안에 생기게 됨
+        json.a = "b1" //없으면 생성하고 있으면 덮어쓴다 
+        //c에 d를 넣을 예정 
+        json["c"] = "d";
+        console.log(json);
+
+        //key 삭제 방법 (잘 사용 안함)
+        delete json.key;
+        console.log(json);
+
+        //위에 없는 human 출력해보기 
+        console.log(json.human); //undefined
+
+        //모든 key를 가져오는 방법 
+        let keys = Object.keys(json) //key값을 배열로 돌려줌 
+        console.log(keys);
+        // json[keys[0]]   //k에 해당하는 변수 안의 value값이 나옴 
+        // json[keys[1]]   //반복문 사용할 수 있겠다
+        for(let i=0; i<keys.length;i++){
+            console.log("key: ", keys[i], ", value: ", json[keys[i]]);
+        }
+
+        //인터넷으로 보낼 땐 모든 게 글씨여야 함 
+        // json을 문자열로 변환
+        let strJson = JSON.stringify(json)
+        console.log(strJson);
+
+        //JSON 문법으로 적힌 문자열을 JSON 객체로 변환
+        //JSON으로 이루어진 배열도 변환가능
+        let json2 = JSON.parse(strJson);
+        console.log(json2);
+
+        //제이슨 배열 
+        let aJson = [];
+        let json3 = { "k1":"v1" };
+        let json4 = { "k2":"v2" };
+        aJson.push(json3);
+        aJson.push(json4);
+        //배열인데 배열안에 aJson으로 이루어져 있다 
+        console.log(aJson);
+
+        strJson = JSON.stringify(aJson);
+        console.log(strJson);
+
+        json2 = JSON.parse(strJson);
+        console.log(json2);
+
+        //json이나 json으로만 이루어진 배열이 아닌 경우 
+        // {}이거나 [{}]의 형식이 아닌 경우
+        //아래처럼 작성하면 parse에서 오류남
+        // JSON.parse("abc"); 
+        
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
