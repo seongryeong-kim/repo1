@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
         window.addEventListener("load", function () {
 
@@ -17,7 +18,61 @@
                 doAjaxDaum();
                 //btn2가 클릭되면 doAjax다음 함수 실행 
             });
+
+            //제이쿼리방법 이벤트
+            //제이슨으로  하는 방법 1 
+            $("#btn3").off("click").on("click", function () {
+                //전달인자를 제이슨 형태로 써줘야함 
+                let option = {
+                    "url": 'https://jsonplaceholder.typicode.com/users',
+                    "type": "get",
+                    "success": function (data) {
+                        //다녀오는 걸 성공했을 때 실행, success는 정해진 key, value는함수
+                        console.log("성공")
+                        console.log(data);
+                    },
+                    "error": function (data2) {
+                        //다녀오는 걸 실패했을 때 실행
+                        console.log("실패")
+                        console.log(data2);
+                    },
+                    "complete": function(data){
+                        //성공여부에 관계없이 무조건 마지막에 실행 
+                        console.log('complete');
+                        console.log(data);
+                    }
+
+                };
+                $.ajax(option); //함수이름이 ajax 
+
         });
+
+        //두번째 방법
+        //이건 success error complete 이 조금 다름
+        $("btn4").off("click").on("click",function(){
+            let option = {
+                    "url": 'https://jsonplaceholder.typicode.com/users',
+                    "type": "get"
+                }
+            $.ajax(option)
+            .done(function (data) {
+                //json에 success 키에 지정하는 것과 같음 
+                //다녀오는 걸 성공했을 때 실행
+                //success대신 done이라는 함수 
+                console.log("성공");
+                console.log(data);
+            }). fail(function (data2) {
+                //다녀오는 걸 실패했을 때 실행
+                console.log("실패")
+                console.log(data2);
+            }). always(function(data){
+                //성공여부에 관계없이 무조건 마지막에 실행 
+                console.log('complete');
+                console.log(data);
+            })
+            
+        });
+    });
 
         function doAjax() {
             //ajax 객체 생성 
@@ -65,18 +120,22 @@
 
                 //html로된 글씨를 받아온 경우 
                 // dom으로 바꿔서 필요한 정보를 얻어보자 
-               let doc = new DOMParser().parseFromString(text, 'text/html');
-               let html = doc.getElementById("32-ajax-response").innerHTML;
-               console.log(html);
-               
+                let doc = new DOMParser().parseFromString(text, 'text/html');
+                let html = doc.getElementById("32-ajax-response").innerHTML;
+                console.log(html);
+
             }
         }
+
+
     </script>
 </head>
 
 <body>
     <button type="button" id="btn">ajax 실행</button><br>
-    <button type="button" id="btn2">daum.net</button>
+    <button type="button" id="btn2">daum.net</button><br>
+    <button type="button" id="btn3">jQuery ajax 방법1</button>
+    <button type="button" id="btn4">jQuery ajax 방법2</button>
 </body>
 
 </html>

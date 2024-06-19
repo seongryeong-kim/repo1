@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        window.addEventListener("load", function(){
-            document.querySelector("#btn").addEventListener("click", function(){
+        window.addEventListener("load", function () {
+            document.querySelector("#btn").addEventListener("click", function () {
                 forecast();
             });
         })
 
-        function forecast(){
-            let url="http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst"
+        function forecast() {
+            let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst"
             url += "?";
             url += "serviceKey=%2B8au4Arx1TwJhfwnsQ60r%2Bmer9rQlQwwKSMtFtWe47GLV73Joe1I3t19uQb2odyXx6O9AttN438mHP6LW71tlw%3D%3D";
             url += "&";
@@ -22,9 +23,9 @@
             url += "&";
             url += "dataType=JSON";
             url += "&";
-            url += "base_date=20240618";
+            url += "base_date=20240619";
             url += "&";
-            url += "base_time=0630"
+            url += "base_time=0830"
             url += "&";
             url += "nx=63"
             url += "&";
@@ -32,20 +33,93 @@
             console.log(url)
 
             let xhr = new XMLHttpRequest();
-            xhr.open("get",url);
+            xhr.open("get", url);
             xhr.send();
-            xhr.onload = function(){
+            xhr.onload = function () {
                 let data = xhr.responseText;
                 // console.log(data);
 
                 //글씨를 제이슨으로 바꿔서 
-                let json=JSON.parse(data);
+                let json = JSON.parse(data);
                 console.log(json);
+
+                //필요한 데이터만 출력해보기 6월 19일 
+                let info_view = document.querySelector("#info_view"); //tbody의 id
+
+                let item = json.response.body.items.item; //60개짜리 배열 
+                for (let i = 0; i < item.length; i++) {
+       /*
+                     <tr>
+                <td>RN1</td>
+                <td>20240619</td>
+                <td>1400</td>
+                <td>강수없음</td>
+            </tr>
+     */
+
+                    if (item[i].category == "T1H") {
+                        console.log(item[i])
+
+                        let html = `<tr>
+                                        <td>${item[i].category}</td>
+                                        <td>${item[i].fcstDate}</td>
+                                        <td>${item[i].fcstTime}</td>
+                                        <td>${item[i].fcstValue}</td>
+                                    </tr>`;
+                        info_view.innerHTML += html;
+
+                    } else if (item[i].category == "REH") {
+                        console.log(item[i])
+
+                        let html = `<tr>
+                                        <td>${item[i].category}</td>
+                                        <td>${item[i].fcstDate}</td>
+                                        <td>${item[i].fcstTime}</td>
+                                        <td>${item[i].fcstValue}</td>
+                                    </tr>`;
+                        info_view.innerHTML += html;
+                    }
+
+                }
+
+                /* let filtered = item.filter(function(info){
+                    // return info.category == "RN1" || info.category == "REH"
+
+                    let result = false;
+                    if(info.category == "RN1"){
+                        result = true;
+                    } else if(info.category == "REH"){
+                        result = true;
+                    }
+
+                    return result;
+                })
+                 console.log(filtered);
+                 */
             }
         }
     </script>
 </head>
+
 <body>
     <button type="button" id="btn">초단기예보조회</button>
+
+    <table>
+        <tbody id="info_view">
+            <!-- <tr>
+                <td>RN1</td>
+                <td>20240619</td>
+                <td>1400</td>
+                <td>강수없음</td>
+            </tr>
+            <tr>
+                <td>RN1</td>
+                <td>20240619</td>
+                <td>1400</td>
+                <td>강수없음</td>
+            </tr> -->
+        </tbody>
+    </table>
 </body>
+
 </html>
