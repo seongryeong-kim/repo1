@@ -106,3 +106,280 @@ where job in ('MANAGER','SALESMAN','CLERK');
 --위와 반대되는 코드, not을 붙이려면 in 앞에 사용해야 함 
 select * from emp 
 where job not in ('MANAGER','SALESMAN','CLERK');
+
+--6월 21일 
+select * from emp
+where sal between 2000 and 3000;
+
+select * from emp 
+where sal not between 2000 and 3000;
+
+--s또는 s로 시작하는 모든 것
+-- %는 어떤것이든 상관없음 
+select * from emp
+where ename like 'S%';
+-- A로 시작하는 것 
+select * from emp
+where ename like 'A%';
+--사원이름의 두 번째 글자가 L인 사원
+-- _는 딱 한글자인데 어떤 글자든지 상관 없음 
+--세 번째 글자가 L인걸 찾으려면 '__L%';
+select * from emp 
+where ename like '_L%';
+
+--글자가 4글자인 이름 
+select * from emp
+where ename like '____';
+
+select * from emp 
+where ename like '%AM%';
+--커미션이 400이하 
+--null이 빠져있다 비교가 되지 않기때문에
+select * from emp 
+where comm <= 400;
+-- null 만 뽑고 싶어 
+select * from emp
+where comm = null;
+--null 판단해주는 것이 is null;
+select * from emp
+where comm is null;
+--null 이 아닌 것을 출력하려면 is not null 
+select * from emp
+where comm is not null;
+-- emp에서 deptno 가 10 또는 20인 사원의 
+-- empno, ename, sal, deptno를 출력 
+select empno, ename, sal, deptno from emp
+--where deptno= 10 or deptno=20; 이렇게 써도 되고 아래처럼 써도 되고
+where deptno in (10,20);
+
+--서로 다른 조회 결과물을 합쳐준다
+--단, 조회한 컬럼의 개수와 타입이 같아야 한다.
+select empno, ename, sal, deptno from emp
+where deptno = 10
+union --중간에 union을 쓰면 합쳐진다
+select empno, ename, sal, deptno from emp
+where deptno = 20;
+
+--이렇게 쓰면 중복되는 것이 제거되고 3줄만 나옴
+-- union은 합쳐주는 건데 중복되는 것은 삭제되니까 혼란이 와서 union all 
+select empno, ename, sal, deptno from emp
+where deptno = 10
+union 
+select empno, ename, sal, deptno from emp
+where deptno = 10;
+
+-- union all: 중복에 관계없이 합쳐준다
+-- union을 사용했을 때 세 줄만 나오던게 union all쓰니까 여섯줄이 나옴
+select empno, ename, sal, deptno from emp
+where deptno = 10
+union all 
+select empno, ename, sal, deptno from emp
+where deptno = 10;
+
+--125p 문제 풀어보기 
+--Q1
+select * from emp
+where ename like '%S'; 
+--Q2
+select empno, ename, job, sal, deptno from emp
+where deptno = 30 and job = 'SALESMAN';
+
+--Q3 
+--집합연산자 사용하지 않은 방식
+select empno, ename, job, sal, deptno from emp
+--where deptno in (20,30) and sal > 2000; 이렇게해도되고 or써도됨
+where (deptno = 20 or deptno = 30) and sal > 2000;
+--집합연산자 사용방식(union)
+select empno, ename, job, sal, deptno from emp
+where deptno = 20 and sal > 2000
+union all
+select empno, ename, job, sal, deptno from emp
+where deptno = 30 and sal > 2000;
+
+--Q4
+--급여sal 값이 2000이상 3000이하 이외의 값만 출력
+select * from emp
+where not (sal >= 2000 and sal <= 3000);
+
+--Q5 
+select ename, empno, sal, deptno from emp
+--조건1 사원이름에 E가 포함
+--where ename like '%E%';
+--조건2 30번 부서의 사원
+--where deptno = 30;
+--조건3 급여정보가 1000에서 2000이 아닌
+--where sal not between 1000 and 2000;
+where ename like '%E%' 
+and deptno = 30 
+and sal not between 1000 and 2000; 
+
+--Q6 
+select * from emp
+--select empno, ename, job, mgr, hiredate, sal, comm, deptno from emp
+--조건1 추가 수당이 존재하지 않음
+--where comm is null
+--조건2 상급자가 있고
+--empno사원번호와 mgr직속상관사원번호가 같지 않은 사람을 찾으면 되겠다
+--where empno <> mgr;
+--조건3 직책이 MANAGER, CLERK인 사원 
+--where job = 'MANAGER' or job = 'CLERK'
+--조건4 이름의 두 번째 글자가 L이 아닌 사원의 정보 
+--where ename not like '_L%'
+where comm is null 
+and empno <> mgr 
+and (job = 'MANAGER' or job = 'CLERK' )
+and ename not like '_L%';
+
+select ename, upper(ename), lower(ename), initcap(ename)
+from emp;
+
+-- upper, lower는 대소문자 구분 없이 like할 때 딱 좋다
+select * from emp 
+where lower(ename) like lower('%Mi%');
+
+-- length는 길이
+select ename, length(ename)
+from emp;
+
+--이름의 길이가 5글자 이상인 사람찾기
+select * from emp
+where length(ename) >= 5  ;
+
+select length('한'), lengthb ('한') from dual;
+
+--substr : 대상이 되는 문자, 시작위치, 가져올 개수
+--   가져올 개수를 안쓰거나 너무 크면 끝까지 가져온다
+select job from emp;
+--job을 첫번째부터 2개만 잘라라
+--job을 세번째부터 두 개만 잘라라
+-- 마이너스 붙이면 뒤에서부터 셀 수 있다
+select job, substr(job,1,2), substr(job,3,2), substr(job,5),
+ename, substr(job, -3,2),
+length(lower(substr(job,5,100)))
+from emp;
+
+--마스킹 처리
+select job, replace (job, 'A', '*') from emp;
+
+select job, 
+length(job), 
+(length(job)+1)/2,
+-- 2.5부터 한 개만 가지고 올거야 내림 또는 버림
+substr (job, (length(job)+1) /2,1),
+    replace(
+        job, 
+        substr(job,(length(job)+1)/ 2,1),
+        '*'
+        )
+from emp;
+
+-- LPAD: 대상이 되는 문자, 전체 자릿수, 채울 문자 
+-- 채울문자 생략시 공백문자
+select 
+    job,
+    --job을 10글자로 만들고 빈 공간을 #으로 만들예정
+    lpad(job,10,'#'),
+    lpad(job,4,'#')
+from emp;
+
+--가운데 정렬처럼 보이게 해보기
+select 
+    job, length(job), 15-length(job)
+from emp;
+
+select 
+    rpad(
+        lpad(
+            job,
+            (16-(length(job)))/2+length(job),
+    '*'
+    ),
+    (16-(length(job)))/2+length(lpad(
+    job,
+    (16-(length(job)))/2+ length(job),
+    '*')
+    ),
+    '*')
+
+from emp;
+
+select empno || ename || '님'
+from emp;
+
+select 
+    '  a b c    ',
+    trim('  a b c    ')
+from dual;
+
+--실습문제1 (주민번호)
+select 
+    '210621-3123456',
+    '210621-3******'
+from dual;
+--풀이1
+select
+    '210621-3' || '******',
+    substr( '210621-3123456',1,8)||'******'
+from dual;
+--풀이2 rpad 사용하기
+select
+    '210621-3' || '******',
+    substr( '210621-3123456',1,8)||'******',
+    rpad('210621-3',14,'*')
+from dual;
+
+/*실습문제2 
+사원의 이름을 앞에 두자리만 보이게 하고 나머지는 *로 표시
+정답의 예: WARD -> WA**, MARTIN -> MA****
+쉬운버전: 앞 두글자 + '***'
+*/
+--앞에 두자리만 나오게 substr 이용해서 자르고 
+select 
+
+--나머지는 rpad더해서 *표시하자 
+--전체이름길이에서 첫번째 두글자 제외한 나머지가 *로 보이게
+rpad(substr(ename,0,2),length(ename),'*')
+--rpad(substr(ename,0,2),(length(ename)),'*')
+from emp;
+
+--실습문제3
+--앞글자 하나만
+--WARD -> *ARD, MARTIN -> *ARTIN
+select replace(ename,substr(ename,1,1),'*')
+from emp;
+--앞글자 하나만 빼놓기
+--substr(ename,1,1)
+--앞글자를 뺀 나머지를 찾아보기
+select '*'||substr(ename,2,100)
+from emp;
+
+select 
+lpad(
+substr(ename,2),length(ename),'*')
+from emp;
+
+--실습문제4
+--두번째 글씨만 *
+--WARD -> W*RD, MARTIN -> M*RTIN
+select substr(ename,1,1)||'*'||substr(ename,3)
+from emp;
+
+select 
+substr(ename,1,1)||
+lpad(substr(ename,3),length(ename)-1,'*')
+from emp;
+
+--실습문제5
+--가운데글씨만 *
+--MARTIN -> MA*TIN, SCOTT -> SC*TT
+select substr(ename,1,2)||'*'||substr(ename,4,100)
+from emp;
+
+
+
+--이거 아래 이상함
+select 
+substr(ename,1,2)||
+lpad(
+substr(ename,-2),length(ename),'*')
+from emp;
