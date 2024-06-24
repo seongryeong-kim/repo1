@@ -335,7 +335,6 @@ from dual;
 */
 --앞에 두자리만 나오게 substr 이용해서 자르고 
 select 
-
 --나머지는 rpad더해서 *표시하자 
 --전체이름길이에서 첫번째 두글자 제외한 나머지가 *로 보이게
 rpad(substr(ename,0,2),length(ename),'*')
