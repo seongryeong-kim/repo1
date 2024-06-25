@@ -382,3 +382,181 @@ substr(ename,1,2)||
 lpad(
 substr(ename,-2),length(ename),'*')
 from emp;
+--6월 24일 
+select trunc(1234.5678),
+    trunc(1234.5678, 2),
+    trunc(1234.5678,-2),
+    trunc(-12.34)
+from dual;
+
+select 
+    ceil(3.14),
+    floor(3.14),
+    ceil(-3.14),
+    floor(-3.14)
+from dual;
+
+-- sysdate : 지금 오라클 PC의 시간이 나옵니다. 
+--강사 pc는 9시간 차이 난다 (영국 0시 기준 한국 +9시)
+-- 날짜 정보 중 일부만 select로 표시 됨
+select sysdate, sysdate+1, sysdate-1 from dual;
+
+--컬럼에  +를 적으면 모두 숫자로 변경해서 적용함 
+--sysdate+'1' 해도 숫자로 적용 
+--|| 숫자도 문자로 적용 
+
+select to_char(sysdate, 'yyyy"년" mm"월" dd"일" HH24"시"MI"분"SS"초"') as 현재날짜시간
+--9시간 더하기 sysdate+(9/24)
+from dual;
+--5월 7일부터 지금까지 몇일이 지났는지 
+select 
+    sysdate-to_date('2024-05-07','yyyy-mm-dd')
+from dual;
+
+--null일 때는 -1
+select 
+    comm, 
+    nvl(comm,-1),
+    sal,
+    -- null에 어떤 것을 더하면 null 이 나옴
+    sal + comm,
+    -- null인 애들은 0 처리해라 
+    sal + nvl(comm,0)
+from emp; 
+--null이거나 0인 애들만 출력
+select * from emp 
+where nvl(comm,0) =0;
+
+--comm이 null일 때 N/A를 표시하고 null이 아닐 땐 comm을 보여주는데 
+--n/a는 문자 comm은 숫자라서 형변환 했음
+select 
+    case 
+        when 
+            comm is null 
+            then 
+                'N/A'
+        else    
+            to_char(comm)
+--        '' || comm
+    end new_comm
+from emp; 
+
+--nvl 같이 해보기
+select 
+    case 
+        when 
+            comm is null 
+            then 
+                0
+        else    
+            (comm)
+    end new_comm
+from emp; 
+--174p 문제 풀어보기 
+-- Q2 하루급여와 시급을 계산 
+select empno, ename, sal,
+trunc((sal/21.5),2) as "day_pay", 
+round(((sal/21.5)/8),1) as "time_pay"
+from emp;
+-- Q3
+select empno, ename, 
+to_char(hiredate, 'yyyy/mm/dd') hiredate,
+ to_char((next_day((add_months(hiredate,3)),'월요일')),'yyyy-mm-dd')as "R_JOB",
+ case
+ when comm is null then 'N/A' 
+ else to_char (comm)
+ end as comm
+ --nvl (to_char(comm), 'N/A') 
+from emp;
+-- case
+--    when comm is null then 'N/A'
+-- end
+
+-- Q4
+select empno, ename, 
+nvl(mgr,0),
+ case 
+ when mgr is null then '0000'
+ when mgr like '75__' then '5555'
+ when mgr like '76__' then '6666'
+ when mgr like '77__' then '7777'
+ when mgr like '78__' then '8888'
+ else to_char(mgr)
+ end 
+from emp;
+
+--count처럼 null은 제외됨 
+--count는 *를 많이 씀 
+select sum(sal), count(sal), count(*), count(comm) from emp;
+
+select count(*) from emp where ename like '%A%';
+
+select max(sal), max(ename), min(hiredate), min(comm), avg(sal) from emp;
+
+--부서별 급여 총 합 표시
+select sum(sal), avg(sal) from emp
+where deptno=10
+union all 
+select sum(sal), avg(sal) from emp
+where deptno=20
+union all 
+select sum(sal), avg(sal) from emp
+where deptno=30;
+
+-- distinct 처럼 중복을 제거, 분류해줌
+-- select에는 group by한 것이나 다중행 함수(집계 함수)
+select deptno, avg(sal), sum(sal), count(*) from emp
+group by deptno;
+
+select deptno, empno,sum(sal), count(*) from emp
+group by deptno, empno;
+
+select deptno, job, count(*) 
+from emp
+group by deptno, job
+--order by는 group by에 있는 것들만 적을 수 있다
+--select에 있는 걸로 order by 해야한다
+order by deptno, job;
+
+--HAVING: group by를 통한 where절 느낌(group by 조건절)
+--      : group by에서만 사용된다
+-- 집계함수를 조건으로 걸고 싶은 경우에 사용 
+--group by없이 having은 존재할 수 없다
+select deptno, job, avg(sal)
+from emp
+group by deptno, job
+--    having avg(sal) >= 2000;
+--    having count(*) >=2;
+    having deptno = 20;
+    
+--212p 문제 Q1
+select 
+deptno,
+trunc(avg(sal),0),
+max(sal),
+min(sal),
+count(deptno) cnt
+from emp
+group by deptno;
+--Q2. 인원수 구하기
+select job,
+count(ename)
+from emp
+-- where count(*) >= 3
+group by job
+    having count(ename)>=3;
+
+select * from dept;
+
+--6월 25일 화요일 
+--조인배우기 전에 셀렉트부터 오더바이 순서
+/*5*/select job, count(*) cnt
+/*1*/from emp 
+/*2*/where sal> 1000
+/*3*/group by job
+/*4*/having count(*) >= 3
+/*6*/order by cnt desc;
+--215p 조인 : 두 개 이상의 테이블을 연결하여 하나의 테이블처럼 출력 
+select * from emp, dept
+order by empno;
+--총 목록이 56, 조합할 수 있는 모든 조합을 보여줌 
