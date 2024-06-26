@@ -546,9 +546,8 @@ from emp
 group by job
     having count(ename)>=3;
 
-select * from dept;
-
 --6월 25일 화요일 
+select * from dept;
 --조인배우기 전에 셀렉트부터 오더바이 순서
 /*5*/select job, count(*) cnt
 /*1*/from emp 
@@ -560,3 +559,418 @@ select * from dept;
 select * from emp, dept
 order by empno;
 --총 목록이 56, 조합할 수 있는 모든 조합을 보여줌 
+
+select emp.ename, dept.loc from emp, dept
+where emp.deptno = dept.deptno
+-- .은 소유격 a.b: a(테이블)가 가지고 있는 b(컬럼)
+--(emp가 가지고 있는 deptno)와 (dept가 가지고 있는 deptno)가 같은 것을 가져와라
+--but deptno는 우연히 이번만 같은 것 
+--얘랑 얘랑의 관계를 알려주고 그래서 관계형 
+order by empno;
+--테이블 두 개 이상 조회할 때 관계를 꼭 알려줘야 원하는 정보만 출력된다
+--전체 테이블 수 - 1개의 조건이 적당하다 
+--전체 테이블 두개(emp, dept)에 최소 한개의 조건(emp.deptno = dept.deptno) 
+--x + y = 10 이걸 풀려면 x나 y값 둘 중 하나를 알아야 정확한 것처럼
+
+--테이블의 별칭설정
+select *
+from emp e, dept d
+--emp를 e로, dept를 d로 이름을 바꿈
+--이렇게 별칭을 설정한 경우에는 원래이름을 쓸 수 없다.
+where e.deptno = d.deptno;
+
+--별표*와 컬럼을 같이 쓰는 경우 *표 앞에 어떤 테이블의 모든 것인지 써줘야한다
+--FYI 실무에서는 *를 잘 사용하지 않는다
+select ename, e.*, d.* 
+from emp e, dept d
+where e.deptno = d.deptno;
+
+select ename, emp.* from emp;
+--등가조인과 비등가조인 
+select * from salgrade;
+--스미스의 등급을 알아보기 
+select *
+from emp e, salgrade s
+where e.sal >= s.losal and e.sal <=s.hisal;
+
+select * from emp;
+
+--자체조인
+select e1.empno, e1.ename, e1.mgr, e2.empno, e2.ename
+from emp e1, emp e2
+--smith와 smith의 상사
+where e1.mgr = e2.empno;
+--king은 상사가 null이라서 안나옴
+--내 상사가 누군지 내 부모글이 누군지 이런식으로 하면 무한 댓글을 만들 수 있다 
+--e1과 e2는 내용은 같지만 전혀다른거라고 생각하면 쉽다 
+
+--외부조인 
+--null도 나오게 할 수 있다 
+--뒤에 다른거 배운 후 에 배울예정 
+
+-- 232p 어느 db든 통하는 것 
+-- natural join: 실무에서 안쓰임, 머리에서 지워도 됨 
+
+--join using- using에는 둘 다 같은 컬럼명이 있는 경우만 쓸 수 있다
+select * 
+from emp join dept using (deptno);
+
+--234p join on: on뒤에 where 조건
+select * 
+from emp join dept on(emp.deptno = dept.deptno);
+
+select *
+from emp e1 join emp e2 on (e1.mgr = e2. empno);
+--여전히 king이 빠진다
+
+--left outer join을 사용하니 king이 나옴
+--null값이 출력된다
+--left outer join이란? 왼쪽 테이블을 모두 출력하는 걸 보장해준다
+select *
+from emp e1 left outer join emp e2 on (e1.mgr = e2. empno);
+--아래에 이렇게 right outere join쓰면 e2가 다 나오는 걸 보장해준다
+--from emp e1 right outer join emp e2 on (e1.mgr = e2. empno);
+
+--Quiz 1
+-- empno, ename, dname, loc 출력: 결과 14줄 
+select e.empno, e.ename, d.dname, d.loc from emp e, dept d
+where e.deptno = d.deptno;
+
+--Quiz 2
+--사번, 이름, 부서명, 급여등급을 출력: 결과 14줄
+--empno, ename, dname, salgrade
+select 
+e.empno,
+e.ename,
+d.dname,
+s.grade
+from emp e,dept d,salgrade s
+where e.deptno = d.deptno
+and e.sal >= s.losal and e.sal<=s.hisal;
+--한줄한줄 의미있는 게 좋다, 가독성에 신경쓸 것 
+--두 번째 방법 
+select 
+e.empno,
+e.ename,
+d.dname,
+s.grade
+from salgrade s, emp e join dept d using(deptno)
+where (e.sal >= s.losal and e.sal<=s.hisal);
+--세번째 방법
+select 
+e.empno,e.ename,d.dname,s.grade
+from emp e 
+left outer join dept d on (e.deptno = d.deptno)
+left outer join salgrade s on (e.sal >= s.losal and e.sal<=s.hisal);
+
+--Quiz 3
+--상사보다 월급이 높은 사원의 이름, 급여, 상사 이름, 매니저 급여
+--ename, sal, mgr ename, mgr sal 
+select * from emp;
+
+select e1.ename, e1.sal, e2.ename, e2.sal
+from emp e1, emp e2
+where e1.mgr = e2.empno and e1.sal >= e2.sal 
+order by e1.ename desc;
+--선생님 풀이 
+select e1.ename, e1.sal, e1.mgr, e2.empno, e2.sal
+from emp e1, emp e2
+where e1.mgr = e2.empno
+and e1.sal >= e2.sal;
+
+--and 239p 문제 
+--Q1. 급여 2000초과 부서정보, 사원정보 
+select d.deptno, d.dname, e.empno, e.ename, e.sal from emp e, dept d
+where e.deptno = d.deptno and sal > 2000
+order by deptno;
+--Q2. 각 부서별 평균급여, 최대급여, 최소급여, 사원수 
+select d.deptno, d.dname, trunc(avg(e.sal)), max(e.sal), min(e.sal), count(d.deptno)
+from emp e, dept d
+where e.deptno = d.deptno
+group by d.deptno, d.dname
+order by deptno;
+--Q3. 부서정보, 사원정보를 부서번호, 사원이름 순으로 정렬 
+select d.deptno, d.dname, e.empno, e.job, e.sal
+from emp e
+right outer join dept d on(d.deptno = e.deptno)
+order by d.deptno ,e.ename;
+--선생님이랑 풀어보기
+--q1
+select emp.deptno, dept.dname, emp.empno, emp.ename, emp.sal from emp, dept
+where  emp.deptno = dept.deptno
+and sal > 2000
+order by deptno;
+--q2
+select d.deptno , d.dname, floor(avg(sal)), max(sal),min(sal),count(*)
+from emp e left outer join dept d on(e.deptno = d.deptno)
+group by d.deptno, d.dname;
+--q3
+select *
+from dept d left outer join  emp e on (e.deptno=d.deptno)
+order by d.deptno;
+
+--242p 서브쿼리
+--jones의 샐러리만 
+select sal from emp where ename = 'JONES';
+--서브쿼리로 jones의 급여보다 높은 급여를받는 사원정보 출력
+select * from emp 
+where sal > (select sal from emp where ename = 'JONES');
+
+--평균급여보다 많은 돈을 받는 사람
+select avg(sal) from emp; --평균급여
+select * from emp
+where sal > (select avg(sal) from emp);
+
+-- BLAKE씨보다 높은 연봉을 받는 사람들
+select ename, sal from emp
+where ename='BLAKE'; --blake연봉 2850
+
+select ename, sal from emp
+where sal > (select sal from emp
+where ename='BLAKE');
+-- JONES씨와 같은 job을 가지고 있는 사원들
+select * from emp
+where job = (select job from emp where ename='JONES');
+
+select ename, job from emp
+where ename='JONES';
+
+select * from emp
+where sal in (
+select max(sal) from emp group by deptno);
+
+select 
+d.deptno, 
+d.dname, 
+e.empno,
+e.ename,
+e.mgr,
+e.sal,
+e.deptno,
+s.losal,
+s.hisal,
+s.grade,
+e1.mgr,
+e1.ename
+from dept d,emp e,emp e1,salgrade s
+where d.deptno = e.deptno and (e.sal >=s.losal and e.sal<=s.hisal) 
+and e.mgr=e1.empno
+order by d.deptno, e.empno;
+
+select * from salgrade;
+--SQL-99방식으로 해보기 --
+select 
+d.deptno, d.dname, e.empno, e.ename, e.mgr, e.sal, e.deptno, s.losal, 
+s.hisal,s.grade, e1.mgr, e1.ename
+from dept d,emp e1,salgrade s left outer join  emp e on (e.deptno=d.deptno)
+order by d.deptno;
+
+--6월 26일  259p
+select * from 
+(select * from emp where deptno = 10);
+--rownum: 줄번호, sysdate처럼 키워드임 
+select rownum, emp.* from emp
+--4번째 줄만 뽑아볼게 but 이렇게하면 원하는 결과가 안나옴
+--where rownum = 4;
+--order by는 항상 마지막에 실행됨 
+--그래서 rownum이 생긴 후에 이름순으로 정렬됨
+order by ename;
+--from 안에도 select 가 들어갈 수 있다 
+select rownum, e.* 
+from
+    (select * from emp order by ename
+) e;
+
+select job,count(*) from emp
+group by job
+having count(*) >=3;
+--from 안에 테이블을 넣어놓고 where 절로 바꾸기
+--아래처럼 쓸 수 있어서 실무에서 having은 잘 안씀 
+select * 
+from (select job, count(*)cnt from emp 
+        group by job)
+where cnt >=3;
+
+with e10 as (
+--e10이라는 별칭으로 저장됨, 재활용할 수 있다
+select * from emp where deptno = 10
+)
+select * from e10;
+
+--262p 문제풀어보기 
+--Q1
+--allen과 같은 job 
+select job
+from emp
+where ename='ALLEN';
+--sql
+select job, e.empno, e.ename, e.sal, e.deptno, d.dname 
+from emp e, dept d
+where (e.deptno = d.deptno)
+    and job=(select job from emp where ename='ALLEN')
+order by sal desc, ename;
+
+--Q2
+--평균급여
+select avg(sal) from emp;
+--급여등급 
+select e.sal,s.grade from emp e,salgrade s
+where e.sal>=s.losal and e.sal<=hisal;
+--평균보다 높은급여를 받는 사원들
+select e.empno, e.ename, d.dname, e.hiredate,d.loc, e.sal, s.grade
+from emp e, dept d, salgrade s
+where e.deptno=d.deptno 
+and sal>=(select avg(sal) from emp) 
+and (e.sal>=s.losal and e.sal<=hisal)
+order by sal desc, empno;
+--선생님 코드 
+select * from emp e, dept d, salgrade s
+where 
+    e.deptno = d.deptno
+    and e.sal>= s.losal and e.sal>=s.hisal
+    and sal> (select avg(sal)from emp)
+order by sal desc, empno;
+
+--Q3
+--10번 부서에 근무하는 사원
+select ename, deptno from emp
+where deptno=10;
+--30번 부서 직책
+select job, deptno from emp
+where deptno=30;
+--10번 부서에 근무하는 사원 중 30번 부서에는 존재하지 않는 직책을 가진 사원
+select ename, deptno, job from emp
+where deptno in (select ename from emp where deptno=10)
+--and
+--job in(select deptno from emp where deptno=30);
+--in을 쓸 줄 몰라서 완성 못함..
+;
+--선생님코드
+select * from emp
+where deptno = 10
+--30번 부서에 있는 게 아닌 것들 
+and job not in (select job 
+                from emp 
+                where deptno=30);
+              
+select * from emp e
+left outer join dept d on (e.deptno = d.deptno)
+and job not in (select job 
+                from emp 
+                where deptno=30)
+
+--Q4
+--다 풀었는데 grade빼고 풀었음 
+--직책 salesman 최고급여
+select job, max(sal) from emp
+where job='SALESMAN'
+group by job;
+--grade 
+select e.sal, s.grade from emp e, salgrade s
+where e.sal>=s.losal and e.sal<=s.hisal;
+--salesman 최고급여보다 높은 급여를 받는 사원
+select e.empno, e.ename, e.sal, s.grade
+from emp e, salgrade s
+where sal>(select max(sal) from emp
+where job='SALESMAN'
+group by job)and (select e.sal, s.grade from emp e, salgrade s
+where e.sal>=s.losal and e.sal<=s.hisal)
+order by e.empno;
+--선생님 코드 
+select empno, ename, sal, grade
+from emp e
+left outer join salgrade s
+on(e.sal >= s.losal and e.sal<=s.hisal)
+where sal >(select max(sal)from emp where job='SALESMAN');
+
+-- 12장 311p
+create table emp_ddl(
+--empno 숫자로만 관리하게 할거야 네 자릿수 제약. 5자리 못들어감
+    empno number(4),
+    --10 byte,한글 3 영문이나 숫자 10자리가능 
+    --varchar2 제한보다 적은 글씨가 적히면 글씨 만큼의 공간만 차지
+    ename varchar2(10),
+    job varchar2(9),
+    --empno가 숫자4자릿수인데 mgr자리에 empno가 같으니까 똑같이 써준다
+    mgr number(4),
+    hiredate date,
+    sal number (7,2),--2는 소수점 둘째자리까지 기록할 수 있다(double)
+    comm number(7,2),
+    deptno number(2)
+); 
+select * from emp_ddl;
+
+create table dept_ddl
+as select * from dept;
+--조회한 내용을 바탕으로 테이블을 만들어라
+
+select * from dept_ddl;
+
+create table emp_ddl_30
+as select empno, ename, sal from emp where deptno=30;
+
+select * from emp_ddl_30;
+
+create table emp_alter
+as select * from emp;
+    
+select * from emp_alter;
+
+alter table emp_alter
+add hp varchar2(20);
+--컬럼의 이름을 변경 rename 
+alter table emp_alter
+rename column hp to tel;
+--컬럼의 타입을 변경하는 Modify
+alter table emp_alter
+modify empno number(5);
+--empno number(4)였는데 number(5)로 변경
+--크기가 커지는건 가능(줄어드는건 불가능)
+--다시 4로 바꿀 수는 없다, 4로 바꾸고싶으면 지웠다가 다시 만들기
+desc emp_alter;
+--컬럼 지우기 drop
+alter table emp_alter
+drop column tel;
+--tel이라는 컬럼이 지워진 상태로 조회됨
+select * from emp_alter;
+--comm 컬럼지우기
+alter table emp_alter
+drop column comm;
+--comm컬럼 지워졌나 조회해보기
+select * from emp_alter;
+--이름변경
+rename emp_alter to emp_rename;
+
+select * from emp_rename;
+--내용물이 빠르게 지워진다 truncate
+truncate table emp_rename;
+--테이블 삭제 drop
+drop table emp_rename;
+
+--266p 10장 
+create table dept_temp
+as select * from dept;
+
+select * from dept_temp;
+--테이블에 데이터 추가 insert
+insert into dept_temp (deptno, dname, loc)
+--values에 내용 쓸 때는 위에 (deptno, dname, loc) 순서대로 써주기
+values (50, 'DATABASE','SEOUL');
+
+insert into dept_temp
+values (60, 'network', 'Busan');
+--테이블명 뒤에 ()를 생략하면 모든 컬럼
+--아래처럼 작성하면 오류남 (deptno, dname, loc)순서대로 작성안해서 
+insert into dept_temp
+values ('network', 60, 'Busan');
+--270p 테이블에 null을 넣고싶다 
+insert into dept_temp
+values(70,'웹',null);
+--''도 null로 보이는데 그래도 null이라고 쓰자
+--java에서 읽을 때 ''는 null로 인식하지 않기 때문에
+insert into dept_temp
+values(80,'웹',null);
+--271p
+insert into dept_temp(deptno,loc)
+values (90,'Incheon');
+select * from dept_temp;
