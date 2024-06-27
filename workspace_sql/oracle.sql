@@ -974,3 +974,170 @@ values(80,'웹',null);
 insert into dept_temp(deptno,loc)
 values (90,'Incheon');
 select * from dept_temp;
+
+select * from dept_temp where loc is null;
+--6월 27일 
+--새로운 테이블 만들기
+create table emp_temp
+as select * from emp;
+
+select * from emp_temp;
+--한줄 추가(데이터에 날짜데이터 입력하기)
+insert into emp_temp (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+        values(9999,'홍길동', 'PRESIDENT', null,'2001/01/01',5000,1000,10);
+    
+insert into emp_temp (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+        values(1111,'성춘향', 'MANAGER', 9999,'2001/01/05',4000,null,20);
+        
+--274p to_date 함수를 사용하여 날짜데이터 입력하기   
+insert into emp_temp (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+        values(2111,'이순신', 'MANAGER', 9999,to_date('2001/01/05','yyyy-mm-dd')
+        ,4000,null,20);
+--sysdate를 사용하여 날짜데이터 입력하기
+insert into emp_temp(empno, ename, job, mgr, hiredate, sal, comm, deptno)
+        values(3111,'심청이', 'MANAGER', 9999,sysdate,4000,null,30);
+select * from emp_temp;
+--서브쿼리로 데이터 추가 
+--deptno가 10인 애들 조회하고 그걸 emp_temp테이블에 중복되게 추가
+insert into emp_temp
+select * from emp where deptno=10; --3개의 행이 추가됨
+--dept 테이블 복사해서 dept_temp2로 만들기 
+create table dept_temp2
+as select * from dept;
+
+select * from dept_temp2;
+--모든 location을 seoul로 바꾼다
+update dept_temp2
+set loc = 'seoul'; --4개의 행이 업데이트되었습니다
+
+--롤백하면 수정 전으로 돌아갈 수 있다
+rollback; --롤백완료 
+--데이터 일부만 where조건을 써서 바꿔보자
+--40번 데이터가 dname은 database, loc은 seoul로 바뀜
+update dept_temp2
+set loc='SEOUL',dname='DATAbase'
+where deptno=40;
+--업데이트하는 순서 (실수하지 않는)
+--1.update하기 전에 select로 where조건이 정확한지 확인 
+select * from dept_temp2
+where deptno = 40;
+--2.그 다음에 where를 그대로 복사해서 update에 붙여넣도록 하자 
+
+--테이블에 있는 데이터 삭제하기 delete
+create table emp_temp2
+as select * from emp;
+
+select * from emp_temp2
+where job='MANAGER';
+ --job이 manager인 3개의 행이 삭제됨
+delete emp_temp2
+where job='MANAGER';
+--깜짝퀴즈 emp_temp2에서 급여가 1000이하인 사원의 급여를 3% 인상
+--급여가 1000이하인 사원
+--선생님코드 
+select ename,sal, sal*1.03 from emp_temp2
+where sal <= 1000;
+
+update emp_temp2
+set sal= sal*1.03
+where sal <= 1000;
+
+select * from emp_temp2;
+--where가 없으니 for문처럼 한줄한줄 지운다 
+delete emp_temp2;
+select * from emp_temp2;
+
+rollback;
+select * from emp_temp2;
+
+--291p 11장 트랜잭션 transaction 
+-- all or nothing 모두 다 실행하거나 모두 다 실행하지 않거나 
+--insert, update, delete 후 commit 하고 roll back하면 commit한 지점으로 돌아감
+
+--문항1
+select rpad(substr(empno,1,2),4,'*') as empno, ename from emp
+order by empno desc;
+
+--문항2
+select e.empno, e.ename, d.dname, d.loc
+from emp e, dept d
+where e.deptno=d.deptno
+order by d.dname desc;
+
+--327p 13장
+select * from dict;
+--내가 만든 테이블들의 정보
+select * from user_tables;
+--index 인덱스 색인
+--오름차순, 내림차순 따로 관리
+--인덱스 조회를 빠르게 해준다
+create index idx_emp_sal
+on emp(sal);
+select * from user_indexes;
+--index 삭제 
+drop index idx_emp_sal; 
+--강제 hint 인덱스를 꼭 만들게하는
+select /*+ index(idx_emp_sal)*/ -- <-오라클에서 인덱스힌트주석 
+* from emp e
+order by sal desc;
+--plan 고급기법
+--sql developer에서는 상단 세번째 아이콘 "계획설명"
+
+create index idx_emp_empno_desc
+on emp (empno desc);
+--338p view : select 문 저장, 
+--셀렉트문이 복잡해서 매번쓰기 귀찮아서 컴퓨터에 테이블처럼 저장함 (편리성)
+--테이블을 직접 못보게 하고 (조회권한 안주고) 아예 뷰로 박제시켜두고 뷰 조회조건만 줘서 
+--뷰를 통해 셀렉트로 한정된 정보를 볼 수 있게 view는 read only 조회만 가능 (보안성)
+--create과 drop을 통해 view 뷰 생성, 삭제 가능 
+
+--348p 시퀀스 번호표를 발행해준다 
+--단순하게 숫자를 증가시키는 역할 for문 증감식 
+
+--시퀀스의 원리 설명 
+--emp 부서에서 제일 높은 empno 를 출력해보고 거기에 1더하기(다음신입에게 줄 번호)
+select max(empno)+1 from emp_temp2;
+
+insert into emp_temp2 (
+empno,
+ename
+)
+--7935가 나오는 select문
+values (
+    (select max(empno)+1 from emp_temp2),
+    '신입이'
+);
+select * from emp_temp2;
+--여기서 가장 큰 문제는 가장 큰 숫자를 찾기 위해 select를 돌려야 하는 것
+--네이버 같이 회원이 큰 사이트면 엄청 오래 걸림
+--이 방식의 아이디어는 최고치를 찾아서 더하기 1하는 거 틀리지는 않음 
+--만약 7936만 저장하고 있고 +1+1 하는 애들이 있다면 어떨까 
+--그게 시퀀스 
+--시퀀스 부를 때마다 증가하는 변수 느낌 
+
+--시퀀스 생성해보기
+--시퀀스 연습하려고 새로운 테이블 생성
+create table tb_user (
+    user_id number, 
+    user_name varchar2(30)
+);
+select * from tb_user;
+
+create sequence seq_user;
+
+--dual 테이블에서 sequence만 외워보기 
+select seq_user.nextval from dual;
+--조회할 때마다 숫자가 올라갈 것 
+--지금 가지고 있는 숫자를 주고 증가를 시켜서 주고 
+--크리에잇시퀀스랑 넥스트발만 기억해도됨
+--증가없이 조회시키는 방법 currval 
+select seq_user.currval from dual;
+
+--유저아이디 시퀀스를 쓸 것 
+insert into tb_user (user_id, user_name)
+values (seq_user.nextval, '유저명1'); --유저명1을 따로 변수에 담아서 가져왔다 치자
+insert into tb_user (user_id, user_name)
+values (seq_user.nextval, '유저명2');  --아이디가 4
+insert into tb_user (user_id, user_name)
+values (seq_user.nextval, '유저명3'); --nextval 여러번 누르고 insert하니까 아이디가 7
+select * from tb_user;
