@@ -1141,3 +1141,113 @@ values (seq_user.nextval, '유저명2');  --아이디가 4
 insert into tb_user (user_id, user_name)
 values (seq_user.nextval, '유저명3'); --nextval 여러번 누르고 insert하니까 아이디가 7
 select * from tb_user;
+
+--6월 28일 
+--index 검색 또는 조회를 빠르게 하기 위해 
+--where조건을 잘 쓰고 order by를 빠르게 잘 쓰기 위해
+--349p
+--10000으로 시작해서 100씩 증가
+create sequence seq_test 
+start with 10000  --시작숫자 10000(기본값: 1)
+increment by 100; --증감숫자 100(기본값: 1)
+
+--nextval을 한번도 사용하지 않은 경우 
+--currval 사용못함
+select seq_test.currval from dual;
+select seq_test.nextval from dual;
+
+--377p 
+--primary key, PK, 주요키, 중요키, 기본키
+--not null + unique 조건 (null이 아니면서 유일해야 함)
+--생성과 동시에 index도 생성해줌 
+--create table에서는 primary key를 딱 하나만 지정가능
+--두 개 이상의 컬럼을 primary key로 지정하려면 alter 사용  
+create table table_pk(
+    login_id varchar2(20) primary key,
+    login_pwd varchar2(20) not null,
+    tel varchar2(20)
+    );
+    
+desc table_pk;
+
+select * from user_constraints --오라클이 제공해주는 사전테이블 내가만든 것의 조건
+where table_name = 'TABLE_PK';
+--pk는 index도 자동으로 생성해줌
+select * from user_indexes;
+
+--아래처럼 하면 오류가 난다 (위에서 제약해뒀기 때문에)
+insert into table_pk (login_id,login_pwd, tel)
+values(null, null, null);
+insert into table_pk (login_id,login_pwd, tel)
+values('id', 'pw', null); 
+insert into table_pk (login_pwd, tel)
+values('pw', null); 
+--381p
+create table table_pk3(
+    login_id varchar2(20),
+    login_pwd varchar2(20),
+    tel varchar2(20),
+    
+    primary key(login_id, login_pwd)
+    );
+insert into table_pk3
+values ('id1','pw1', null);
+insert into table_pk3
+values ('id1','pw2', null);
+select * from table_pk3;
+--컬럼 2개인데 하나의 제약조건으로 잡힙 , 인덱스 as well 
+
+--384p foreign key 
+create table  dept_fk(
+    deptno1 number primary key,
+    dname varchar2(14)
+);
+--foreign key, FK, 외래키, 참조키 
+--대상이 되는 테이블의 컬럼과 같은 타입으로 지정해야 한다 
+--deptno1를 number로 해뒀으니 아래 emp에서도 deptno를 number로 지정해줘야 함 
+--컬럼명은 서로 달라도 관계 없다(보통 같게 한다)
+--대상이 되는 컬럼은 pk여야 한다
+create table emp_fk (
+    empno number primary key,
+    ename varchar2(10),
+    deptno number references dept_fk(deptno1)
+    --만약 컬럼 명이 같다면 컬럼명 생략가능
+    --deptno number references dept_fk
+    );
+--아래는 foreign key 를 직접써서 하는     
+create table emp_fk (
+    empno number primary key,
+    ename varchar2(10),
+    deptno number,
+    
+    foreign key(deptno) references dept_fk(deptno1)
+);
+--emp에 자료를 삽입하면 > 삽입할 수 없다 
+--왜? dept 테이블을 먼저 채워줘야 가능
+insert into dept_fk
+values(100,'1강의실');
+
+insert into emp_fk values(1, '이름', 101); --저쪽에 없으니까 에러
+insert into emp_fk values(1, '이름', 100);
+
+update emp_fk set deptno = 101; --오류 
+--emp_fk에서 100을 참조하고 있어서 수정, 삭제 불가
+update dept_fk set deptno1 = 101; 
+--이것도 오류남 emp_fk에서 100을 참조하고 있어서 수정, 삭제 불가
+delete dept_fk;
+
+delete emp_fk; --이렇게 삭제하고 update 해보면 
+update dept_fk set deptno1 = 101;
+--지우려면 emp 테이블부터 지워야함 
+
+--392p default
+create table table_default(
+    login_id varchar2(20),
+    login_pwd varchar2(20),
+    tel varchar2(20) default'000-0000'
+    );
+insert into table_default
+values ('id','pw','010-1233-4567');
+insert into table_default (login_id, login_pwd)
+values ('id2','pw2');
+select * from table_default;
