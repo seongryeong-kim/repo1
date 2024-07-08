@@ -1,0 +1,25 @@
+package sec06.exam06_get_set;
+
+public class Car {
+//326p
+//7월 8일 월요일 
+	
+	private int speed;
+	boolean stop;
+	
+	//getter는 필드 값을 읽어서 리턴하는 기능
+	//메소드명: get + 필드명(첫글자만 대문자)
+	//전달인자없음
+	//리턴타입: 필드의 타입
+	public int getSpeed() {
+		return this.speed;
+	}
+	
+	//setter는 필드값을 수정할 수 있는 기능
+	//메소드명: set+필드명(첫글자만 대문자)
+	//전달인자: 필드의 타입으로 된 변수
+	//리턴타입: 없음
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+}
