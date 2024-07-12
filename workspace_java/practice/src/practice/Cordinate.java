@@ -141,6 +141,24 @@ public class Cordinate {
 			System.out.println(a);
 		}
 		
+		System.out.println("정사각형 꽉 채우기 ");
+		for(int a=1;a<=5;a++) {
+			for(int b=1;b<=5;b++) {
+				System.out.print("*");
+			}System.out.println("");
+		}
+		
+		System.out.println("별 하나씩 지워보기");
+		for(int a=1;a<=5;a++) {
+			for(int b=1;b<=5;b++) {
+				if(a==2&&b==2) {
+					System.out.print("1");
+				} else{
+					System.out.print("*");
+				}	
+			}System.out.println("");
+		}
+		
 		
 	}
 }

@@ -93,10 +93,10 @@
             document.querySelector("#all").addEventListener("click", function(){
 
                 let all= document.querySelector("#all").checked;
-                
+
                 let list_chk = document.querySelectorAll('.chk');
                 for(let i=0;i<list_chk.length;i++){
-                    // list_chk[i].checked = !list_chk[i].checked;
+                    list_chk[i].checked = isChecked;
 
                 }
             });

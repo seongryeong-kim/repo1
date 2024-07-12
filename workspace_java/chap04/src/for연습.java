@@ -137,6 +137,20 @@ public class for연습 {
 	}
 	System.out.println("몇주?"+week);
 	
+//	System.out.println("+++++++++++++++++++++++++++++++");
+//	int yo = 1;
+//	int result = yo++ + 10;
+//	System.out.println(yo);
+//	System.out.println(result);
+//	yo++;
+//	System.out.println(yo);
+//	System.out.println(yo++ +10 );
+//	System.out.println(yo++);
+//	
+//	int v = 1;
+//	v++;
+//	System.out.println(v);
+	
 	}
 	 
 	}

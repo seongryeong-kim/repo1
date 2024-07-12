@@ -5,7 +5,6 @@ import sec03.exam01.Car;
 public class MelonMusicExam {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		MelonMusic melon = new MelonMusic();
 		MelonMusic melon1 = new MelonMusic();
 		MelonMusic melon2 = new MelonMusic();

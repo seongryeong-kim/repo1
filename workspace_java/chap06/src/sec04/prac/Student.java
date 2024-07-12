@@ -4,22 +4,27 @@ public class Student {
 	//7월 5일 금요일 
 	//값
 	//이름, 나이, 주소, 성별, 전공, 안경착용여부
-	String name;
-	int age;
+	public String name;
+	public int age;
 	String addr;
 	int gender;
 	String major;
 	boolean hasGlasses;
 
-	//생성자 
-	Student(String n, int a){
+	//생성자(내가 만든) 
+	public Student(String n, int a){
 		name = n;
 		age = a;
 	}
 	
+	//기본 생성자
+	//내가 위에 생성자를 만들어서 기본생성자가 자동으로 생성되지 않음 
+	//기본생성자 필요하다면 아래처럼 만들면 됨
+//	Student(){} 
+	
 	//생성자 오버로딩
 	//this(n, 20); 전달인자 이름 하나만 작성해도 나머지는 초기화된 값으로 나오도록 
-	Student(String n){
+	public Student(String n){
 		//이름 필수 작성, 나이 중요x 있어도 되고 없어도 됨 
 		this(n, 20); //this 가 다른 생성자를 불러오는 것 
 //		name = n;

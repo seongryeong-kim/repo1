@@ -7,6 +7,6 @@ public class CafeExam {
 	CafeMega mega = new CafeMega();
 	
 //	paik.menu();
-	mega.menu(); //왜 에러가 나냐고
+	mega.menu();
 	}
 }

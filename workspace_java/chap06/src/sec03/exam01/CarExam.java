@@ -14,6 +14,9 @@ public class CarExam {
 		//전달인자를 입력하지 않았을 때 결과는 자동으로 생성되는 회색, 1000이 출력됨 
 		Car myCar2 = new Car();
 		myCar2.print();
+		
+		System.out.println("-----------------");
+		new Car();
 	}
 
 }

@@ -5,7 +5,7 @@ public class Car {
 //7월 8일 월요일 
 	
 	private int speed;
-	boolean stop;
+	private boolean stop;
 	
 	//getter는 필드 값을 읽어서 리턴하는 기능
 	//메소드명: get + 필드명(첫글자만 대문자)
@@ -19,7 +19,14 @@ public class Car {
 	//메소드명: set+필드명(첫글자만 대문자)
 	//전달인자: 필드의 타입으로 된 변수
 	//리턴타입: 없음
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
+//	public void setSpeed(int speed) {
+//		this.speed = speed;
+//	}
+	
+	//getter 중에서 boolean 타입일 경우
+	//get + 필드명 대신에 is + 필드명도 가능하나 
+	//오류가 발생하는 라이브러리도 있으니 가능하면 get을 쓰자
+//	public boolean isStop() {
+//		return this.stop;
+//	}
 }
