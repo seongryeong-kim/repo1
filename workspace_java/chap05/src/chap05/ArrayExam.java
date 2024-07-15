@@ -95,6 +95,11 @@ public class ArrayExam {
 		
 		// 내이름 +1 내이름+2 이런식으로 출력되게 해보기
 		String[] strArray = new String[5];
+//		내가 한거
+//		그냥 반복문
+//		for(int s=0;s<strArray.length;s++) {
+//			System.out.println("내이름"+s);
+//		}
 		for(int i=0;i<strArray.length;i++) {
 			strArray[i]="내이름"+(i+1);
 		}	
