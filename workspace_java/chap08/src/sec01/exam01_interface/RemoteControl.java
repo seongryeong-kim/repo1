@@ -16,4 +16,13 @@ public interface RemoteControl {
 	void turnOff(); //이건 public abstract 를 생략한 경우
 	void setVolume(int volume);
 	
+//	void search(String word); //사람들이 쓰던 인터페이스 수정-얘를 구현한 클래스에서 implement 해줘야함
+	//메소드를 구현까지 해놓기 위해서는 
+	//default 키워드를 적어준다
+	//추상메소드인 경우 기존에 사용하던 클래스에서
+	//무조건 구현해야하는 번거로움이 생기는데
+	//실행블럭을 구현해 놓으면 사용하고 싶은 클래스만 사용할 수 있다
+	default void search(String word) {
+		System.out.println(word);
+	} 
 }
