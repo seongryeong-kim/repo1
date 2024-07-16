@@ -119,6 +119,45 @@ public class Main {
 		} 
 		System.out.println("짝수 몇개?: "+e);
 		
+		System.out.println("7월 16일");
+		// 피보나치 수열 {결과: 1, 1, 2, 3, 5, 8, 13, 21}
+		// 변수 하나 선언해놓고
+		// 시작 초기화값, 더할 값, 결과값 변수가 필요할 예정
+		int first = 0;
+		int second = 1;
+//		int r = p+o;
+		
+		// 조건:1부터 21까지
+		// 증감: 
+		// 1 + 1 = 2 
+		// p + o = r 
+		
+		// 1 + 2 = 3
+		
+		// 2 + 3 = 5
+		// 3 + 5 = 8
+		// 5 + 8 = 13
+		// 8 + 13 = 21
+		for(int p=1;p<=6;p++) {
+//			o++;
+			if(p<=1) { //1번째 돌 때 1을 출력하기 위해서 
+				System.out.println(1);
+			}
+			int next = first+second; //0 + 1 = 1
+									//1 = 1+ 1
+									//3 = 1 + 2
+			System.out.println(next+" "); //2가 되어 출력됨 -- 3 
+			first = second; // 0 = 1; first가 1이 되는 것
+							// 1 = 1;
+							// 2 = 2;
+			second = next; // 1 = 1; next값이 second로 들어감
+							// 1=2 ;
+							// 2=3;
+			
+		}
+		
+		
+		
 		
 	}
 
