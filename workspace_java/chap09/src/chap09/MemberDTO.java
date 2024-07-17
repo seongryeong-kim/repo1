@@ -22,6 +22,8 @@ public class MemberDTO {
 		return "MemberDTO [name=" + name + ", age=" + age + "]";
 	}
 	
+//	@Override
+//	public boolean equals()
 	
 	
 }
