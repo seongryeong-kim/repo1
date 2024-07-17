@@ -101,7 +101,7 @@ public class Array심화 {
 		int[] q5 = new int[] { 1, 2, 2, 3, 2 };
 
 		boolean same = false;
-		
+
 		for (int f = 0; f < 5; f++) {
 			same = false;
 //			System.out.println(f);
@@ -111,11 +111,11 @@ public class Array심화 {
 //					System.out.print("");
 					same = true;
 //					break;
-				} 
+				}
 			}
-			
+
 //			same = false;
-			if(same!=true) {
+			if (same != true) {
 				System.out.println(q5[f]);
 			}
 		}
@@ -130,7 +130,7 @@ public class Array심화 {
 //			System.out.println();
 //		}
 
-		//boolean 말고 int 타입 변수 만들어서 해보기
+		// boolean 말고 int 타입 변수 만들어서 해보기
 //	      int arr[] = new int[] { 1, 2, 2, 3, 2 };
 //
 //	      for (int i = 0; i < arr.length; i++) {
@@ -148,7 +148,6 @@ public class Array심화 {
 //	   }
 //	}
 
-		
 		System.out.println("-------문제6-------");
 //		Q6. 10개의 정수를 입력받고, 서로 다르게 입력된 수는 총 몇 개인지 출력하는 프로그램을 작성하세요.
 //		이때 입력될 수 있는 값은 0 ~ 9입니다.
@@ -156,62 +155,61 @@ public class Array심화 {
 //		ex2) 입력 : 0 0 1 2 3 4 5 6 7 8 -> 출력 : 9
 //		ex3) 입력 : 1 2 1 2 1 2 1 2 1 2 -> 출력 : 2
 //		ex4) 입력 : 3 3 3 3 3 3 3 3 3 3 -> 출력 : 1
-		
-		//변수 하나 저장해두고 앞에 있는 것과 비교해서 같으면 카운트하기 
-		int count=0;
-		
-		//숫자 10개를 입력받으니까 입력받는 숫자를 배열에 저장해두기
-		//숫자 입력받는 건 나중에 해보고
-		//배열 안에 들어가는 숫자 안다고 생각하고 해보기
+
+		// 변수 하나 저장해두고 앞에 있는 것과 비교해서 같으면 카운트하기
+		int count = 0;
+
+		// 숫자 10개를 입력받으니까 입력받는 숫자를 배열에 저장해두기
+		// 숫자 입력받는 건 나중에 해보고
+		// 배열 안에 들어가는 숫자 안다고 생각하고 해보기
 //		int q6[]=new int[10];
-		int q6[]=new int[] {1, 2, 1, 2, 1, 2, 1, 2, 1, 2};
-		
-		//반복문
-		//0번 인덱스부터 9번까지 10번 돌고 
-		//1씩 증가
-		for(int s=0;s<q6.length;s++) {
-			//비교대상 돌리는 반복문2
-			//q6[0]과 q6[1]를 비교 
-			//q6[0] == q6[1] 라면 count++;
-			System.out.println("s: "+s);
-			for(int c=1;c<q6.length;c++) {
-				if(q6[s]==q6[c]) {
-					
-					System.out.println("c: "+c);
+
+		// 반복문
+		// 0번 인덱스부터 9번까지 10번 돌고
+		// 1씩 증가
+//		for(int s=0;s<q6.length;s++) {
+//			//비교대상 돌리는 반복문2
+//			//q6[0]과 q6[1]를 비교 
+//			//q6[0] == q6[1] 라면 count++;
+//			System.out.println("s: "+s);
+//			for(int c=1;c<q6.length;c++) {
+//				if(q6[s]==q6[c]) {
+//					
+//					System.out.println("c: "+c);
+//				}
+//			}
+//		}
+//		System.out.println(count);
+		// 0~9만 입력받는 조건
+
+		// 다시!!!
+		// 수 저장할 변수
+
+		// 먼저 배열 s번 돌기
+
+		int q6[] = new int[] { 1, 2, 1 };
+
+		for (int s = 0; s < q6.length; s++) { // 배열 0번 인덱스부터 2번 인덱스까지 3번 반복
+			int c = 0; // 중복이 발생하면 저장할 변수
+
+			// q6[4]라면 앞에 있는 값들이랑 4번 비교
+			int save = q6[s];
+			for (int d = 0; d < q6.length; d++) {
+//				System.out.println("d: "+d); d가 0,1,2일 때 돌고있음
+				if (q6[s] == q6[d]) {
+					c++;
+					// 중복발생
+					// c가 1씩 커짐
+					// 중복없이 첫번째 나온 수는 1
+					// 중복이 있다면 c는 2 이상이 됨 
 				}
+			}
+			
+			if (c >= 2) { //c가 2이상이라면 중복되는 수 
+				System.out.println(save + "은(는) 중복");
 			}
 		}
-		System.out.println(count);
-		//0~9만 입력받는 조건
 
-	
-//		int q6[]=new int[] {1, 2, 1, 2, 1, 2, 1, 2, 1, 2};
-		//다시!!!
-		//수 저장할 변수
-		int c=0;
-		
-		boolean b=true;
-		//먼저 배열 s번 돌기
-		for(int s=0;s<q6.length;s++) {
-			//q6[4]라면 앞에 있는 값들이랑 4번 비교
-//			System.out.println(s);
-			int save=q6[s+1];
-//			for(int d=0;d<q6.length;d++) {
-//				System.out.println(d);
-				if(save==q6[s]) {
-					//중복발생
-					//중복이 발생하면 하나만 나오게 해야함 
-					System.out.println(save+"는 중복");
-				} else {
-					System.out.println(save+"는 중복되지않음");
-				}
-			}
-//		}
-//		System.out.println(c);
-		//q[0]값을 변수에 저장해두고 
-		//만약 q[0]에서 q[9]사이에 같은 게 있으면 중복이 있음 
-		//q[0]과
-		
 	}
 
 }
