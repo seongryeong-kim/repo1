@@ -38,7 +38,9 @@ def login():
     else : 
         print("다른 메소드")
 
-    return f'당신의 아이디는 your id is{id} 입니다'
+    # return f'당신의 아이디는 your id is{id} 입니다'
+    # id2라는 이름으로 전달받은 아이디를 보내고 있다
+    return render_template('main.html', id2=id, d={'k':'v'})
 
 @app.route("/join")
 def join():
