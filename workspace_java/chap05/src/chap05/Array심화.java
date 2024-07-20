@@ -209,6 +209,42 @@ public class Array심화 {
 				System.out.println(save + "은(는) 중복");
 			}
 		}
+		
+		
+		//현우오빠가 알려준 방법 6번풀기
+//		Scanner scan = new Scanner(System.in);
+		int qq[] = new int[] { 1, 2, 1 };
+	      int[] array1 = new int[10];
+	      int[] array2 = new int[10];
+	      for (int i = 0; i < array1.length; i++) {
+//	         int num = scan.nextInt();
+
+	         array1[i] = num;
+	         array2[num]++;
+	      }
+
+//	      for (int i = 0; i < array1.length; i++) {
+//	         for (int j = 0; j < i; j++) {
+//	            if (array1[i] == array1[j]) {
+//	               same = true;
+//	            }
+//	         }
+//	         if (same == false) {
+//	            System.out.println(array1[i]);
+//	         
+//	         }
+//	         same=false;
+	      int cnt = 0;
+	      for (int i = 0; i < array2.length; i++) {
+	         if(array2[i]>0)
+	            cnt++;
+
+	      }
+	      System.out.println(count);
+	   }
+
+	}
+
 
 	}
 

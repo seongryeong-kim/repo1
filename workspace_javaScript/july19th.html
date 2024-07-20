@@ -1,0 +1,51 @@
+<!-- 7월 19일 금요일  -->
+<!-- 26번 문제부터 30번까지 풀기  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div class="output">에러</div>
+</body>
+<script>
+    //문제26. 행성-수금지화목토천해
+    //Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+    //행성의 한글이름을 입력하면 영어이름을 반환하는 프로그램 
+    //자바에서 사전 실습했던 것처럼 
+
+    let arr = ['수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성'];
+    let solar = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+    let out=document.querySelector('.output');
+    //만약 arr[0]의 값을 입력한다면 solar[0] 값을 return 해줌 
+    let value = prompt("행성");
+    console.log(value); //내가 입력한 값이 잘 들어갔나 확인겸..
+
+    //입력한 값이 arr[]안에 있는지 확인 후 있다면 solar[]값을 출력 
+    for(let s=0;s<arr.length;s++){
+        if(value==arr[s]){
+            out.innerHTML = solar[s];
+        }
+    }
+    let a = {'aa':100,'bb':200}
+    out.innerHTML  = a;
+
+    // out.innerHTML="gkdl";
+    // out.innerHTML += arr[0];
+    // out.innerHTML += arr[1];
+    // out.innerHTML += arr[2];
+    // out.innerHTML += arr[3];
+
+    // for(let e=0;e<arr.length;e++){
+    //     out.innerHTML += arr[e];
+    // }
+    // alert(out.value);
+ 
+
+</script>
+
+</html>
