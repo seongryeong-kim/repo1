@@ -1,6 +1,6 @@
 package chap05;
 
-//import java.util.Scanner;
+import java.util.Scanner;
 
 public class Array심화 {
 
@@ -210,19 +210,29 @@ public class Array심화 {
 			}
 		}
 		
-		
+		//서로 다르게 입력된 수가 몇개인지 구하기 
+		System.out.println("배열 2개 이용");
 		//현우오빠가 알려준 방법 6번풀기
-//		Scanner scan = new Scanner(System.in);
-		int qq[] = new int[] { 1, 2, 1 };
-	      int[] array1 = new int[10];
-	      int[] array2 = new int[10];
+		//아니 이거 이상한디..
+		Scanner scan = new Scanner(System.in);
+//		int qq[] = new int[] { 1, 2, 1 };
+	      int[] array1 = new int[3];
+	      int[] array2 = new int[3];
 	      for (int i = 0; i < array1.length; i++) {
-//	         int num = scan.nextInt();
-
-	         array1[i] = num;
-	         array2[num]++;
+	         int num = scan.nextInt(); //숫자 3번 입력받기 
+	         array1[i] = num; //내가 입력한 변수로 배열 만들기
+	         array2[num]++;  
+	         System.out.println("array2["+num+"] : "+array2[num]);
 	      }
 
+	      int cnt = 0;
+	      for (int i = 0; i < array2.length; i++) {
+	    	  if(array2[i]>0)
+	    		  cnt++;
+	    	  
+	      }
+	      System.out.println(cnt);
+	      
 //	      for (int i = 0; i < array1.length; i++) {
 //	         for (int j = 0; j < i; j++) {
 //	            if (array1[i] == array1[j]) {
@@ -234,16 +244,6 @@ public class Array심화 {
 //	         
 //	         }
 //	         same=false;
-	      int cnt = 0;
-	      for (int i = 0; i < array2.length; i++) {
-	         if(array2[i]>0)
-	            cnt++;
-
-	      }
-	      System.out.println(count);
-	   }
-
-	}
 
 
 	}
