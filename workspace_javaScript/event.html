@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="hi">하이</div>
+    <button class="btn">버튼</button>
+
+</body>
+<script>
+    // 삭제기능 
+    // 버튼을 클릭하면 내용이 삭제됨 
+    let btn=document.querySelector(".btn");
+    // 쿼리셀렉터로 잡고
+    // 내가 원하는 기능을 추가 
+    let hi=document.querySelector(".hi");
+    btn.addEventListener('click',function(){
+        hi.innerHTML=" ";
+    })
+</script>
+</html>

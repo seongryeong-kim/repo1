@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블에 내용 추가하기</title>
+</head>
+<body>
+    <h2>테이블에 내용 추가하기</h2>
+    
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>직업</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>30</td>
+                <td>Developer</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>25</td>
+                <td>Designer</td>
+            </tr>
+            <!-- 기존에 있는 행들 -->
+        </tbody>
+    </table>
+    
+    <form id="myForm">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name">
+        
+        <label for="age">나이:</label>
+        <input type="number" id="age" name="age">
+        
+        <label for="job">직업:</label>
+        <input type="text" id="job" name="job">
+        
+        <button type="button" id="addBtn">추가하기</button>
+    </form>
+
+    <script>
+        document.getElementById('addBtn').addEventListener('click', function() {
+    // 입력 폼에서 값 가져오기
+    let name = document.getElementById('name').value;
+    let age = document.getElementById('age').value;
+    let job = document.getElementById('job').value;
+
+    // 테이블의 tbody 요소 가져오기
+    let table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
+    // 새로운 행(tr) 생성
+    let newRow = table.insertRow();
+
+    // 각 셀(td)에 데이터 추가
+    let cell1 = newRow.insertCell(0);
+    let cell2 = newRow.insertCell(1);
+    let cell3 = newRow.insertCell(2);
+
+    cell1.textContent = name;
+    cell2.textContent = age;
+    cell3.textContent = job;
+
+    // 입력 폼 초기화
+    document.getElementById('myForm').reset();
+});
+
+    </script>
+</body>
+</html>
