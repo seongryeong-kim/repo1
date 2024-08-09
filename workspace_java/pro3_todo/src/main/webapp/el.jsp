@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	8월 8일 
 	\${ 10 + 1}: ${ 10 + 1} <br>
 	\${ "10" + 1}: ${ "10" + 1} : el은 계산할 때 문자를 숫자로 바꿔서 계산한다
 	<br>
@@ -53,5 +54,12 @@
 	\${empty "글씨" } :${empty "글씨" }<br>
 	\${empty null } :${empty null }<br>
 	\${empty "" } :${empty "" }<br>
+<hr>
+	8월 9일 
+	\${ param.a } : ${ param.a }<br>
+	\${ paramValues.a } : ${ paramValues.a }<br>
+	\${ paramValues.a[0] } : ${ paramValues.a[0] }<br>
+	\${ paramValues.a[1] } : ${ paramValues.a[1] }<br>
+	\${ paramValues.a[100] } : ${ paramValues.a[100] }<br>
 </body>
 </html>
