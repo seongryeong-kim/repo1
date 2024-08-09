@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,29 @@
 	${ list1[0]["title"] }
 	<hr>
 	123${null }456
+	<hr>
+	<style>
+		<!--div{
+			border: 1px solid red;
+			padding: 10px;
+			margin: 10px; 
+		}-->
+	</style>
+	<div>
+		제목: ${ list1[0].title },시간 : ${ list1[0].dueDate }
+	</div>
+	<div>
+		제목: ${ list1[1].title },시간 : ${ list1[1].dueDate }
+	</div>
+	<hr>
+	
+	<c:forEach var="todo" items="${list1}">
+	<div>
+	<input type="checkbox">
+		${todo.tno} ${todo.title } ${todo.dueDate } 
+	</div>
+	
+	</c:forEach>
 	
 </body>
 </html>
