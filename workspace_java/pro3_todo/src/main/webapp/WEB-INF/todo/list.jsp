@@ -26,6 +26,12 @@
 			padding: 10px;
 			margin: 10px; 
 		}-->
+		
+		<!--#teacher{
+		border: 1px solid blue;
+			padding: 10px;
+			margin: 10px; 
+		}-->
 	</style>
 	<div>
 		제목: ${ list1[0].title },시간 : ${ list1[0].dueDate }
@@ -40,8 +46,14 @@
 	<input type="checkbox">
 		${todo.tno} ${todo.title } ${todo.dueDate } 
 	</div>
-	
 	</c:forEach>
+
+	<c:forEach var="todoDTO" items="${list1 }">
+		<div id="teacher">
+	선생님이랑<br> 
+	 	제목: <a href="/pro3_todo/todo/read?tno=${todoDTO.tno }" >${todoDTO.title }</a>, 시간: ${todoDTO.dueDate }
+		</div>
+	</c:forEach>	
 	
 </body>
 </html>

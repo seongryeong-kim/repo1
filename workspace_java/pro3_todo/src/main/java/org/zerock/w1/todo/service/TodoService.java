@@ -17,6 +17,7 @@ public class TodoService {
 		//DB에서 select 
 		List<TodoDTO> list = new ArrayList<TodoDTO>();
 		
+		//10개의 DTO를 만들어서 리스트에 넣고 있다
 		for(int i=0; i<10; i++) {
 			TodoDTO dto = new TodoDTO();
 			dto.setTno(i);
@@ -27,5 +28,16 @@ public class TodoService {
 		}
 		
 		return list;
+	}
+	
+	public TodoDTO get(int tno) {
+		
+		TodoDTO dto = new TodoDTO();
+		dto.setTno(tno);
+		dto.setTitle("Sample Todo");
+		dto.setDueDate(LocalDate.now());
+		dto.setFinished(true);
+		
+		return dto;
 	}
 }

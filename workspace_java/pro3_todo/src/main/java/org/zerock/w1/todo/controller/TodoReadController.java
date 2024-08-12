@@ -1,7 +1,6 @@
 package org.zerock.w1.todo.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 import org.zerock.w1.todo.dto.TodoDTO;
 import org.zerock.w1.todo.service.TodoService;
 
-@WebServlet("/todo/list")
-public class TodoListController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebServlet(name="todoReadController", urlPatterns= "/todo/read")
+public class TodoReadController extends HttpServlet {
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("/todo/list doGet 실행");
+		System.out.println("/todo/read");
 		
-		TodoService todoService = new TodoService();
-		List<TodoDTO> todoList = todoService.getList();
+		int tno = Integer.parseInt(request.getParameter("tno"));
 		
-		//todoList라는 변수를 request에 담아서 보냄
-		request.setAttribute("list1", todoList);
+		TodoService todoservice = new TodoService();
+		TodoDTO dto= todoservice.get(tno);
 		
-		request.getRequestDispatcher("/WEB-INF/todo/list.jsp").forward(request, response);
+		request.setAttribute("dto",dto);
+		
+		request.getRequestDispatcher("/WEB-INF/todo/read.jsp").forward(request, response);
+		
+		
 	}
 
 }
