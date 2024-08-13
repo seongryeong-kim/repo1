@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>dto.tno: ${dto.tno }</div>
-	<div>dto.title: ${dto.title }</div>
-	<div>dto.dueDate: ${dto.dueDate }</div>
-	<div>dto.finished: ${dto.finished }</div>
+	dto.tno: ${dto.tno }<br>
+	dto.title: ${dto.title }<br>
+	dto.dueDate: ${dto.dueDate }<br>
+	dto.finished: ${dto.finished }<br>
 </body>
 </html>

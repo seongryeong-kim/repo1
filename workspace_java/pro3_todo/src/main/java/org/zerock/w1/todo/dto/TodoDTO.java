@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class TodoDTO {
 
-	private int tno;
-	private String title;
-	private LocalDate dueDate;
-	private boolean finished;
+	private int tno;				// 고유번호 todo number
+	private String title;			// 할 일
+	private LocalDate dueDate;		// 마감 시간 
+	private boolean finished;		// 마감 여부
 	
 	public int getTno() {
 		return tno;
