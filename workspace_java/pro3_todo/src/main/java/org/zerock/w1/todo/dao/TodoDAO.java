@@ -1,12 +1,17 @@
 package org.zerock.w1.todo.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import org.zerock.w1.todo.dto.TodoDTO;
 
@@ -19,7 +24,7 @@ public class TodoDAO {
 		
 		String driver = "oracle.jdbc.driver.OracleDriver";
 	    String url = "jdbc:oracle:thin:@125.181.132.133:51521:xe";
-	    String user = "scott2_11";
+	    String user = "scott2_10";
 	    String password = "tiger";
 	       	       
 	      try {
@@ -42,7 +47,7 @@ public class TodoDAO {
 		  
 		  String driver = "oracle.jdbc.driver.OracleDriver";
 	      String url = "jdbc:oracle:thin:@125.181.132.133:51521:xe";
-	      String user = "scott2_11";
+	      String user = "scott2_10";
 	      String password = "tiger";
 	       	       
 	      try {
@@ -116,12 +121,14 @@ public class TodoDAO {
 			// 첫번째 전달인자는 ?의 순서
 			// 만약에 글씨라면 setString, 알아서 '로 감싸준다
 			ps.setInt(1, tno);
+			System.out.println(tno);
 			
 			// sql 실행 및 결과 확보
 			ResultSet rs = ps.executeQuery();
 			
 			// 결과 활용
 			if( rs.next() ) {
+				todoDTO = new TodoDTO();
 				todoDTO.setTno( rs.getInt("tno") );
 				todoDTO.setTitle( rs.getString("title") );
 				todoDTO.setDueDate( rs.getDate("duedate").toLocalDate() );
@@ -135,5 +142,107 @@ public class TodoDAO {
 		}
 		
 		return todoDTO;
+	}
+	
+	public int insert(TodoDTO dto) {
+		int result = -1;
+		
+		try {
+			
+			// Servers 폴더의 context.xml에서 
+			// name이 jdbc/oracle인 resource를 가져와서 DataSource로 저장하기
+			Context ctx = new InitialContext();
+            DataSource dataFactory = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+            // DB접속: 커넥션풀을 사용해서 
+            Connection con = dataFactory.getConnection();
+            
+            // SQL 준비
+            String query = "INSERT INTO tbl_todo (tno, title, duedate, finished)";
+            	   query+= "VALUES (seq_todo.NEXTVAL, ?, ?, ?)";
+            	   
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, dto.getTitle()); //첫번째 물음표
+            
+            java.sql.Date date = Date.valueOf( dto.getDueDate() );
+            ps.setDate(2, date); //두번째 물음표
+            
+            String finished = dto.isFinished() ? "Y" : "N";
+            ps.setString(3, finished);
+            
+            // SQL 실행
+            ps.executeUpdate();
+            
+            ps.close();
+            con.close();
+            
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;	
+	}
+	
+	//삭제
+	public int deleteOne(int tno) {
+		int result=-1;
+		
+		try {
+			// DB접속
+			Context ctx = new InitialContext();
+			DataSource dataFactory = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			Connection con = dataFactory.getConnection();
+			
+			// SQL준비
+			String query="delete from tbl_todo where tno= ?";
+			PreparedStatement ps = con.prepareStatement(query);
+			
+			// SQL실행
+			ps.executeUpdate(); //이러면 얘가 int를 돌려준다
+			// 결과활용
+			
+		}catch (Exception e) {
+			
+		}
+		
+		return result;
+	}
+	
+	//insert 복사?>
+	public int insert(TodoDTO dto) {
+		int result = -1;
+		
+		try {
+			
+			// Servers 폴더의 context.xml에서 
+			// name이 jdbc/oracle인 resource를 가져와서 DataSource로 저장하기
+			Context ctx = new InitialContext();
+            DataSource dataFactory = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+            // DB접속: 커넥션풀을 사용해서 
+            Connection con = dataFactory.getConnection();
+            
+            // SQL 준비 -- 쓰다 말았음
+            String query = " update";
+            	   query+= "VALUES (seq_todo.NEXTVAL, ?, ?, ?)";
+            	   
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, dto.getTitle()); //첫번째 물음표
+            
+            java.sql.Date date = Date.valueOf( dto.getDueDate() );
+            ps.setDate(2, date); //두번째 물음표
+            
+            String finished = dto.isFinished() ? "Y" : "N";
+            ps.setString(3, finished);
+            
+            // SQL 실행
+            ps.executeUpdate();
+            
+            ps.close();
+            con.close();
+            
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;	
 	}
 }

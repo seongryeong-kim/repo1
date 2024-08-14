@@ -10,6 +10,7 @@
 <body>
 <h1>List Page</h1>
 
+	<!-- 
 	${ list1 }
 	<hr>
 	${ list1[0] }
@@ -20,19 +21,16 @@
 	<hr>
 	123${null }456
 	<hr>
+	-->
 	<style>
-		<!--div{
-			border: 1px solid red;
-			padding: 10px;
-			margin: 10px; 
-		}-->
-		
+
 		<!--#teacher{
 		border: 1px solid blue;
 			padding: 10px;
 			margin: 10px; 
 		}-->
 	</style>
+	<!--  
 	<div>
 		제목: ${ list1[0].title },시간 : ${ list1[0].dueDate }
 	</div>
@@ -40,14 +38,20 @@
 		제목: ${ list1[1].title },시간 : ${ list1[1].dueDate }
 	</div>
 	<hr>
+	-->
 	
+	<!-- 
 	<c:forEach var="todo" items="${list1}">
 	<div>
 	<input type="checkbox">
 		${todo.tno} ${todo.title } ${todo.dueDate } 
 	</div>
 	</c:forEach>
+	 -->
 
+<div style="text-align: right;">
+	<a href=""></a>
+</div>
 	<c:forEach var="todoDTO" items="${list1 }">
 		<div id="teacher">
 	선생님이랑<br> 
