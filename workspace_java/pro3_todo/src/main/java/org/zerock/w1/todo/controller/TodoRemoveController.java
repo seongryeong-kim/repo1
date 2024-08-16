@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.zerock.w1.todo.service.TodoService;
 
-@WebServlet("todo//remove")
+@WebServlet("/todo/remove")
 public class TodoRemoveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
