@@ -37,7 +37,7 @@ public class EmpDAO {
 			String query =null; // query라는 String변수에 null을 넣었다  		
 			
 			if(pno == null) { //전달인자 key(pno)의 value가 null 이면 
-				query=" SELECT * FROM emp2";;
+				query=" SELECT * FROM emp2";
 			} else if(pno !=null) {
 				query="SELECT * FROM emp2 WHERE empno=?";				
 			}
@@ -87,5 +87,71 @@ public class EmpDAO {
 		}
 		return list;
 	}
+	
+	// 8월 19일
+	public int insertEmp(EmpDTO dto) {
+		int result = -1;
+		
+		//DB 접속
+		try {
+			Context ctx = new InitialContext();
+			DataSource dataFactory = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			Connection con = dataFactory.getConnection();
+			
+			// SQL 준비
+			String query = "INSERT INTO emp2 (empno, ename, sal, deptno)";  		
+				   query +=" VALUES (?,?,?,?)";  		
+//			PreparedStatement ps = con.prepareStatement(query);
+				   
+			// 원래 실행되는 걸 LoggableStatement가 가로채서
+			PreparedStatement ps = new LoggableStatement(con, query);
+			// 물음표 채워주고 실행
+			ps.setInt(1, dto.getEmpno());
+			ps.setString(2, dto.getEname());
+			ps.setInt(3, dto.getSal());
+			ps.setInt(4, dto.getDeptno());
+			
+			//LoggableStatement를 ps로 형변환
+			// 실제 실행되는 sql을 출력해볼 수 있다
+			System.out.println( ( (LoggableStatement)ps ).getQueryString() );
+			
+			//SQL 실행
+			result=ps.executeUpdate();
+					
+			ps.close();
+			con.close(); // 커넥션풀에 접속정보 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int delete(int empno) {
+	      int result = -1;
+	      
+	      try {
+	         // DB 접속
+	         Context ctx = new InitialContext();
+	         DataSource dataFactory = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+	         Connection con = dataFactory.getConnection();
+	         
+	         // SQL 준비
+	         EmpDTO dto = new EmpDTO();
+	         String query = "delete from emp2 where empno = ?";
+	         PreparedStatement ps = con.prepareStatement(query);
+	         ps.setInt(1, empno);
+	         
+	         // SQL 실행
+	         result = ps.executeUpdate();
+	         ps.close();
+	         con.close();
+	         
+	      }catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      
+	      return result;
+	   }
 }
 

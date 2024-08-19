@@ -11,6 +11,7 @@ public class EmpDTO {
 	private Date hiredate;	//고용일
 	private int sal;		//급여
 	private Integer comm; 	//커미션
+	private int deptno;
 	
 	public Integer getEmpno() {
 		return empno;
@@ -54,9 +55,16 @@ public class EmpDTO {
 	public void setComm(Integer comm) {
 		this.comm = comm;
 	}
+	public int getDeptno() {
+		return deptno;
+	}
+	public void setDeptno(int deptno) {
+		this.deptno = deptno;
+	}
+	
 	@Override
 	public String toString() {
 		return "EmpDTO [empno=" + empno + ", ename=" + ename + ", job=" + job + ", mgr=" + mgr + ", hiredate="
-				+ hiredate + ", sal=" + sal + ", comm=" + comm + "]";
+				+ hiredate + ", sal=" + sal + ", comm=" + comm + ", deptno=" + deptno + "]";
 	}
 }

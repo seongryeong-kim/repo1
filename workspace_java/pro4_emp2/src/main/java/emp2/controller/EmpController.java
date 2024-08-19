@@ -23,6 +23,7 @@ public class EmpController extends HttpServlet {
 	String emname = request.getParameter("emname");
 	System.out.println("emname: "+ emname);
 	
+	
 	EmpService empService = new EmpService();
 	List list = empService.getEmp(pno,emname);
 	
