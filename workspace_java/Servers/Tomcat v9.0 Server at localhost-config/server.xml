@@ -160,7 +160,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="pro1_hello" path="/pro1_hello" reloadable="true" source="org.eclipse.jst.jee.server:pro1_hello"/><Context docBase="pro2_calc_MVC" path="/pro2_calc_MVC" reloadable="true" source="org.eclipse.jst.jee.server:pro2_calc_MVC"/><Context docBase="pro3_todo" path="/pro3_todo" reloadable="true" source="org.eclipse.jst.jee.server:pro3_todo"/><Context docBase="pro4_emp2" path="/pro4_emp2" reloadable="true" source="org.eclipse.jst.jee.server:pro4_emp2"/></Host>
+      <Context docBase="pro1_hello" path="/pro1_hello" reloadable="true" source="org.eclipse.jst.jee.server:pro1_hello"/><Context docBase="pro2_calc_MVC" path="/pro2_calc_MVC" reloadable="true" source="org.eclipse.jst.jee.server:pro2_calc_MVC"/><Context docBase="pro3_todo" path="/pro3_todo" reloadable="true" source="org.eclipse.jst.jee.server:pro3_todo"/><Context docBase="pro4_emp2" path="/pro4_emp2" reloadable="true" source="org.eclipse.jst.jee.server:pro4_emp2"/><Context docBase="pro5_file" path="/pro5_file" reloadable="true" source="org.eclipse.jst.jee.server:pro5_file"/></Host>
     </Engine>
   </Service>
 </Server>
