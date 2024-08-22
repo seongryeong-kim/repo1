@@ -1251,3 +1251,78 @@ values ('id','pw','010-1233-4567');
 insert into table_default (login_id, login_pwd)
 values ('id2','pw2');
 select * from table_default;
+
+-- 8/22 오라클 문법을 사용한 대댓글 조회
+SELECT 
+    LEVEL, empno, LPAD(' ', 2 * LEVEL)|| ename, mgr
+FROM emp
+START WITH mgr IS NULL --시작점
+CONNECT BY 
+    empno != 7788
+    AND PRIOR empno = mgr 
+ORDER SIBLINGS BY empno DESC;
+
+-- 보편적인 문법을 사용한 대댓글 조회 
+-- 댓글 조회 제외하고는 잘 사용하지 않음
+WITH emp_recu (lv, empno, ename, mgr) AS (
+    SELECT 
+        1 AS lv,
+        empno, ename, mgr
+    FROM emp --대상테이블
+    WHERE mgr IS NULL --원글
+    
+    UNION ALL 
+    
+    SELECT
+        er.lv+1 as lv,
+        e.empno, LPAD(' ', 2*er.lv) || e.ename, e.mgr
+    FROM emp_recu er
+    LEFT OUTER JOIN emp e on er.empno = e.mgr --내 empno가 mgr로 써먹은거 
+    WHERE e.mgr IS NOT NULL --원글을 제외하는 조건
+)
+SEARCH DEPTH FIRST BY empno DESC SET sort_empno_desc --정렬에 대한 정의 및 별칭
+SELECT * FROM emp_recu
+ORDER BY sort_empno_desc; --정렬 별칭을 활용
+
+--페이징 
+SELECT 
+    ROWNUM, empno, ename
+FROM emp 
+WHERE ROWNUM < 5
+ORDER BY empno DESC;
+
+-- sql 실행 순서 
+/*5*/ SELECT empno AS NO
+/*1*/ FROM emp
+/*2*/ WHERE eno = 7788
+--위 where 절 emp 에서 eno라는 값이 없어서 쓸 수 없다 실행하면 오류남 
+/*3*/ GROUP BY deptno
+/*4*/ HAVING deptno IN (10,20)
+/*6*/ ORDER BY eno;
+
+SELECT *
+FROM (
+    SELECT deptno AS eno
+    FROM emp)
+WHERE eno = 10;
+
+SELECT 
+    rownum, empno, ename
+FROM emp
+ORDER BY ename;
+
+SELECT empno, ename
+FROM emp
+ORDER BY ename;
+
+SELECT * 
+FROM (
+    SELECT ROWNUM rnum, empno, ename
+    FROM (
+        SELECT empno, ename
+        FROM emp
+        ORDER BY ename
+    )
+)
+-- 한페이지에 3개씩 보여주는데 2페이지
+WHERE rnum >= 4 AND rnum <=6;

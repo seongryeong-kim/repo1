@@ -14,7 +14,10 @@ import emp2.dto.EmpDTO;
 
 public class EmpDAO {
 
-	public List selectEmp(String pno, String emname) {
+	public List selectEmp(String empno2) {
+		return selectEmp(empno2,1,10);
+	}
+	public List selectEmp(String empno2, int start, int end) {
 		List list = new ArrayList();
 		
 		try {
@@ -36,22 +39,43 @@ public class EmpDAO {
 			// SQL 준비
 			String query =null; // query라는 String변수에 null을 넣었다  		
 			
-			if(pno == null) { //전달인자 key(pno)의 value가 null 이면 
-				query=" SELECT * FROM emp2";
-			} else if(pno !=null) {
-				query="SELECT * FROM emp2 WHERE empno=?";				
+			if(empno2 == null) {
+				query =  " select * ";
+                query += " from ( ";
+                query += "    select rownum rnum, empno, ename ";
+                query += "    from ( ";
+                query += "        select empno, ename ";
+                query += "        from emp ";
+                query += "        order by ename ";
+                query += "    ) ";
+                query += " ) ";
+                query += " where rnum >= ? and rnum <= ?";
+			} else if(empno2 != null) {
+				query = "SELECT * FROM emp2 WHERE empno = ?";
 			}
 			
 			// 오라클 문법 컴파일 
 			PreparedStatement ps = con.prepareStatement(query);	
 			
+//			if(pno == null) { //전달인자 key(pno)의 value가 null 이면 
+//				query=" SELECT * FROM emp2";
+//			} else if(pno !=null) {
+//				query="SELECT * FROM emp2 WHERE empno=?";				
+//			}
+			
+			
 			//전달인자 받는거 기다림 
-			if( pno!= null ) {
-				ps.setString(1,pno); //pno ?채워줌
-				//전달인자가 하나, ?뒤에 값 pno 
-			} else if (emname != null) {
-				ps.setString(1,emname); 
-			}
+//			if( empno2!= null ) {
+//				ps.setString(1,empno2); //pno ?채워줌
+//				//전달인자가 하나, ?뒤에 값 pno 
+//			} else if (emname != null) {
+//				ps.setString(1,emname); 
+//			}
+			
+			// 선생님 코드 
+			if( empno2!= null ) {
+				ps.setString(1,empno2); 
+			} 
 			
 			// SQL 실행 및 결과확보
 			//	executeQuery: select문 실행
@@ -79,8 +103,13 @@ public class EmpDAO {
 				empDTO.setJob( rs.getString("job") );
 				empDTO.setHiredate( rs.getDate("hiredate"));
 				
+				empDTO.setRnum( rs.getInt("rnum") );
+				
 				list.add(empDTO);
 			}
+			
+			ps.close();
+			con.close();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -99,12 +128,12 @@ public class EmpDAO {
 			Connection con = dataFactory.getConnection();
 			
 			// SQL 준비
-			String query = "INSERT INTO emp2 (empno, ename, sal, deptno)";  		
-				   query +=" VALUES (?,?,?,?)";  		
-//			PreparedStatement ps = con.prepareStatement(query);
+			String query = "INSERT INTO emp2 (empno, ename, sal, deptno, hiredate)";  		
+				   query +=" VALUES (?,?,?,?, sysdate)";  		
+			PreparedStatement ps = con.prepareStatement(query);
 				   
 			// 원래 실행되는 걸 LoggableStatement가 가로채서
-			PreparedStatement ps = new LoggableStatement(con, query);
+			ps = new LoggableStatement(con, query);
 			// 물음표 채워주고 실행
 			ps.setInt(1, dto.getEmpno());
 			ps.setString(2, dto.getEname());
@@ -120,6 +149,7 @@ public class EmpDAO {
 					
 			ps.close();
 			con.close(); // 커넥션풀에 접속정보 반환
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
