@@ -1326,3 +1326,21 @@ FROM (
 )
 -- 한페이지에 3개씩 보여주는데 2페이지
 WHERE rnum >= 4 AND rnum <=6;
+
+insert into emp2 
+select * from emp;
+
+select count(*) from emp;
+commit;
+
+create table emp3
+as select * from emp;
+
+-- id: ename, pw: empno
+select * from emp3
+where ename= 'SMITH' and empno = 7369; 
+
+create table emp0
+as select * from emp;
+
+select * from emp0;

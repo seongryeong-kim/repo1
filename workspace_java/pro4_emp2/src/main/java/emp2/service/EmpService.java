@@ -22,10 +22,19 @@ public class EmpService {
 		return insertCount;
 	}
 	
-	   public int delete(int num) {
-		      EmpDAO empDAO = new EmpDAO();
-		      int deleteCount = empDAO.delete(num);
-		      return deleteCount;
-		   }
+	// 전달받은 EmpDTO를 
+	// DAO로 보내고 
+	// DAO가 return한 EmpDTO를 반환한다
+	public EmpDTO loginCheck(EmpDTO empDTO) {
+		EmpDAO empDAO = new EmpDAO();
+		EmpDTO resultDTO = empDAO.selectLogin(empDTO);
+		return resultDTO;
+	}
+	
+//	   public int delete(int num) {
+//		      EmpDAO empDAO = new EmpDAO();
+//		      int deleteCount = empDAO.delete(num);
+//		      return deleteCount;
+//		   }
 	
 }

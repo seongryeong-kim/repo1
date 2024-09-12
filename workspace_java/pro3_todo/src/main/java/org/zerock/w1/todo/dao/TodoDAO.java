@@ -170,7 +170,7 @@ public class TodoDAO {
             ps.setString(3, finished);
             
             // SQL 실행
-            ps.executeUpdate();
+           result = ps.executeUpdate();
             
             ps.close();
             con.close();
@@ -195,20 +195,20 @@ public class TodoDAO {
 			// SQL준비
 			String query="delete from tbl_todo where tno= ?";
 			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, tno);
 			
 			// SQL실행
-			ps.executeUpdate(); //이러면 얘가 int를 돌려준다
-			// 결과활용
+			result = ps.executeUpdate(); //이러면 얘가 int를 돌려준다
 			
 		}catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 		return result;
 	}
 	
-	//insert 복사?>
-	public int insert(TodoDTO dto) {
+	//insert 복사해서 update
+	public int updateOne(TodoDTO dto) {
 		int result = -1;
 		
 		try {
@@ -220,9 +220,10 @@ public class TodoDAO {
             // DB접속: 커넥션풀을 사용해서 
             Connection con = dataFactory.getConnection();
             
-            // SQL 준비 -- 쓰다 말았음
-            String query = " update";
-            	   query+= "VALUES (seq_todo.NEXTVAL, ?, ?, ?)";
+            // SQL 준비 
+            String query =  " update tbl_todo";
+			   query += " set title = ?, duedate = ?, finished = ?";
+			   query += " where tno = ?";
             	   
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, dto.getTitle()); //첫번째 물음표
@@ -233,8 +234,10 @@ public class TodoDAO {
             String finished = dto.isFinished() ? "Y" : "N";
             ps.setString(3, finished);
             
+            ps.setInt(4, dto.getTno());
+            
             // SQL 실행
-            ps.executeUpdate();
+            result = ps.executeUpdate();
             
             ps.close();
             con.close();

@@ -16,6 +16,17 @@
 </head>
 <body>
 
+<div style="text-align: right;">
+
+	<c:if test="${not empty loginDTO }">
+	%{loginDTO.ename}님 환영합니다
+	</c:if>
+	<c:if test="${empty loginDTO }">
+		<a href="login.jsp">로그인</a>
+	</c:if>
+	
+</div>
+
 	<table border=1>
 		<tr>
 			<th>rnum</th>
@@ -51,13 +62,21 @@
 	// 전체 나누기 한페이지 당 개수 그리고 올림 처리 하면 페이지 마지막 번호가 나온다 
 	int lastPage = (int)Math.ceil( (double)totalCount / countPerPage) ;
 	
+	//한번에 보여줄 페이지의 개수
+	int countPerSection = 3; 
+	//페이지 섹션 위치
+	int position = (int)Math.floor( (double)pageNo / countPerSection);
+	int sec_first = ((position*1) * countPerSection ) + 1;
+	int sec_last = (position + 1) * countPerSection;
+	
 %>
 
 <c:set var="lastPage2" value="<%= lastPage %>" scope="page"/>
 	
 이전 
 
-<c:forEach var="i" begin="1" end="${ lastPage2}">
+<%-- <c:forEach var="i" begin="1" end="${ lastPage2}"> --%>
+<c:forEach var="i" begin="<%=sec_first %>" end="<%=sec_last %>"> 
 	[<a href="page?page=${i}">1</a>]
 </c:forEach> 
 <!-- [<a href="page?page=2"><strong>2</strong></a>]  -->
