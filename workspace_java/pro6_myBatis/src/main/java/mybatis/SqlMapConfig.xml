@@ -34,6 +34,7 @@
 		<!-- emp 파일 안에 있는 SQL문 가져오기 -->
 		<mapper resource="mybatis/mappers/emp.xml" />
 		<mapper resource="mybatis/mappers/emp_param.xml" />
+		<mapper resource="mybatis/mappers/emp_dynamic.xml" />
 	</mappers>
 
 </configuration>

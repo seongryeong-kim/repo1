@@ -14,6 +14,20 @@ private Integer comm;
 private int deptno;
 
 private int rnum;
+private int lv;
+
+private String keyword;
+private String searchType;
+private String[] checks;
+private String orderType;
+
+public int getLv() {
+	return lv;
+}
+
+public int setLv(int lv) {
+	return lv;
+}
 
 public int getRnum() {
    return rnum;// rnum의 값을 돌려줌
@@ -87,10 +101,35 @@ public void setDeptno(int deptno) {
 this.deptno = deptno;
 }
 
+public String getKeyword() {
+	return keyword;
+}
+
+public void setKeyword(String keyword) {
+	this.keyword = keyword;
+}
+
+public String getSearchType() {
+	return searchType;
+}
+
+public void setSearchType(String searchType) {
+	this.searchType = searchType;
+}
+
+public String[] getChecks() {
+	return checks;
+}
+
+public void setChecks(String[] checks) {
+	this.checks = checks;
+}
+
 @Override
 public String toString() {
-return "EmpDTO [empno=" + empno + ", ename=" + ename + ", job=" + job + ", mgr=" + mgr + ", hireDate="
-+ hireDate + ", sal=" + sal + ", comm=" + comm + ", deptno=" + deptno + "]";
+	return "EmpDTO [empno=" + empno + ", ename=" + ename + ", job=" + job + ", mgr=" + mgr + ", hireDate="
+			+ hireDate + ", sal=" + sal + ", comm=" + comm + ", deptno=" + deptno + ", keyword=" + keyword + "]";
 }
+
 
 }
