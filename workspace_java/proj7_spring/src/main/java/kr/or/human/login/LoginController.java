@@ -111,6 +111,7 @@ public class LoginController {
 //			@ModelAttribute("dto") MemberDTO dto2
 			
 			// request에 앞글자만 소문자로 바꾼 "memberDTO"라는 key로 넣어줌
+//			@ModelAttribute("memeberDTO")
 			MemberDTO dto2
 	) {
 //		String userID = req.getParameter("userID"); //ID 받아서 넣고
@@ -135,6 +136,8 @@ public class LoginController {
 	public String login5(
 			String userID,
 			MemberDTO dto,
+			
+			HttpServletRequest req,
 			Model model
 	) {
 		System.out.println("login5 실행");
@@ -148,7 +151,8 @@ public class LoginController {
 	}
 
 	//이렇게도 생략가능한데 너무 생략하면 유지보수할 때 어려울 수 있음
-	@RequestMapping("result.do")
+	@RequestMapping("result")
+//	@RequestMapping("result.do")
 	public void login6(MemberDTO dto) {
 		// return type 이 void
 		// 또는 return 값이 null 일 때
