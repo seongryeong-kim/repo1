@@ -32,6 +32,15 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("name", "momo" );
+		
+		return "home";
+	}
+	
+	@RequestMapping(value = "/name", method = RequestMethod.GET)
+	public String home0(Locale locale, Model model) {
+		
+		model.addAttribute("name", "momo" );
 		
 		return "home";
 	}
