@@ -23,9 +23,11 @@ public class EmpController extends HttpServlet {
 	String emname = request.getParameter("emname");
 	System.out.println("emname: "+ emname);
 	
-	
+	String empno2 = request.getParameter("empno");
+	System.out.println("empno : " + empno2);
+
 	EmpService empService = new EmpService();
-	List list = empService.getEmp(pno,emname);
+	List list = empService.getEmp(empno2);
 	
 	// request 자체는 브라우저에서 서버로 요청한 모든 정보가 있는 곳 
 	// 거기에 우리 list도 담아두자

@@ -72,6 +72,7 @@ public class EmpPageDAO {
 	}
 	
 	public int totalEmpPage() {
+		int result = -1;
 		try {
 			// DB 접속
 			Context ctx = new InitialContext();
@@ -79,8 +80,34 @@ public class EmpPageDAO {
 			Connection con = dataFactory.getConnection();
 
 			// SQL 준비
-			String  query = " select count(*) cnt from emp2";
-					
+			String 	query =  " select count(*) cnt ";
+            query += " from ( ";
+            query += "    select rownum rnum, empno, ename, job, hiredate ";
+            query += "    from ( ";
+			
+            query += "  	with emp_recu (lv, empno, ename, mgr, job, hiredate) as (";
+	        query += "  	    select ";
+	        query += "  	        1 as lv,";
+	        query += "  	        empno, ename, mgr, job, hiredate ";
+	        query += "  	    from emp           ";
+	        query += "  	    where mgr is null  ";
+	        query += "  	    ";
+	        query += "  	    union all";
+	        query += "  	    ";
+	        query += "  	    select";
+	        query += "  	        er.lv + 1 as lv,";
+	        query += "  	        e.empno, lpad(' ', 2*er.lv)||e.ename, e.mgr, e.job, e.hiredate";
+	        query += "  	    from emp_recu er";
+	        query += "  	    left outer join emp e on er.empno = e.mgr";
+	        query += "  	    where e.mgr is not null";
+	        query += "  	)";
+	        query += "  	search depth first by empno desc set sort_empno_desc";
+	        query += "  	select * from emp_recu";
+	        query += "  	order by sort_empno_desc";
+            
+            query += "    ) ";
+            query += " ) ";
+            
 			PreparedStatement ps = new LoggableStatement(con, query);
 			
 			System.out.println( ((LoggableStatement)ps).getQueryString() );

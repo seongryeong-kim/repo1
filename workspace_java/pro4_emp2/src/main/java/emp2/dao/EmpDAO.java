@@ -192,6 +192,7 @@ public class EmpDAO {
 			DataSource dataFactory = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
 			Connection con = dataFactory.getConnection();
 			
+			// SQL 준비
 			String query = " select * from emp3 ";
 				   query +=" where ename = ? and empno = ?";
 				 
@@ -200,7 +201,7 @@ public class EmpDAO {
 				   ps.setInt(2, empDTO.getEmpno());
 				   
 				   //실제 실행되는 sql을 출력해볼 수 있다
-				  System.out.println( (LoggableStatement)ps ).getQueryString() );
+				   System.out.println( ( (LoggableStatement)ps ).getQueryString() );
 				  
 				  ResultSet rs = ps.executeQuery();
 				  while( rs.next() ) {
@@ -213,6 +214,8 @@ public class EmpDAO {
 		 } catch(Exception e) {
 			 e.printStackTrace();
 		 }
+		 
+		 return resultDTO;
 	 }
 }
 

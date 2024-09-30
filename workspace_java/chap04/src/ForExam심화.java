@@ -37,8 +37,8 @@ public class ForExam심화 {
 		//i가 3이 되어 거짓이므로 탈출했다
 		System.out.println(i); 
 		
-	    for (int a = 1; a < 11; a++) {
-	         System.out.println(a);
+	    for (int aa = 1; aa < 11; aa++) {
+	         System.out.println(aa);
 	      }
 
 	      System.out.println("----------------");
@@ -112,8 +112,8 @@ public class ForExam심화 {
 	      }
 
 	      q = 0;
-	      for (int i = 1; i <= 5; i += 1) {
-	         q = q + i;
+	      for (int is = 1; is <= 5; is += 1) {
+	         q = q + is;
 	      }
 	      System.out.println(q);
 
