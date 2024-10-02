@@ -45,8 +45,9 @@
 						<th>job</th>
 						<th>sal</th>
 						<th>hireDate</th>
-<!-- 						<th>삭제</th> -->
+						<th>삭제</th>
 					</tr>
+					
 				</thead>
 				<tbody id="list">
 					
@@ -60,49 +61,211 @@
 
 <script>
 
-	//페이지가 로딩되자마자 보여지도록  
 	window.addEventListener("load", function(){
-		
-		const url = "listEmp";
-		
-		const xhr = new XMLHttpRequest();
-		xhr.open("get", url);
-		xhr.send();
-		
-		//갔다왔을 때가 onload
-		xhr.onload = function(){
-			console.log(xhr.responseText)
+		getList()
+	})
+	
+	// cb: callback 콜백함수
+	function ajax(url, param, cb, method){
+		// javascript에서 false는 null, undefined, 0
+		// true는 false가 아닌 것 
+		if(!method) method = "get"; //get을 안주면 알아서 get으로 되게 설정해둠
 			
-			try{
-				const empList = JSON.parse(xhr.responseText);
-				
-				let html = "";
-				for(let i=0; i<empList.length; i++){
-					
-				html += `
-				<tr>
-					<td>
-						<input type="checkbox" name="check" value="${dto.empno }">
-					</td>
-					<td>\${dto.empno }</td>
-					<td><a href="emp0?cmd=detail&empno=${dto.empno }">\${empList[i].ename }</a></td>
-					<td>${dto.job }</td>
-					<td>${dto.sal }</td>
-					<td>
-						<fmt:formatDate value="${dto.hireDate }" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초" />
-					</td>
-				</tr>
-				`;
-				
-				}
-				
-				document.querySelector("#list").innerHTML = html;
-				
-			}catch(e){
-				console.log("ERROR : url :", url, e);
+		const xhr = new XMLHttpRequest();
+		xhr.open(method, url);
+		xhr.setRequestHeader("Content-Type","application/json");
+		xhr.send( JSON.stringify(param) );
+		
+		if(typeof cb == "function"){
+			xhr.onload = function(){
+				cb(xhr.responseText)
 			}
 		}
-	})
+	} 
+	
+	function getList(){
+		ajax("listEmp", null, drawList, "get")
+	}
+	
+	function drawList(text){
+		try{
+			const empList = JSON.parse(text);
+			
+			let html = "";
+			
+			if(empList.length == 0){
+				html = "<tr><td colspan='7'>자료가 없습니다</td></tr>"
+			} else {
+				for (let i=0; i<empList.length; i++){
+					
+					const hiredate = new Date(empList[i].hireDate)
+					const y = hiredate.getFullYear()
+					let m = hiredate.getMonth() + 1
+					if(m < 10){
+						m = "0" + m
+					}
+					const d = hiredate.getDate()
+					
+					html += `
+						<tr>
+							<td>
+								<input type="checkbox" name="check" value="\${empList[i].empno }">
+							</td>
+							<td>\${empList[i].empno}</td>
+							<td><a href="emp0?cmd=detail&empno=\${empList[i].empno }">\${empList[i].ename }</a></td>
+							<td>\${empList[i].job}</td>
+							<td>\${empList[i].sal}</td>
+							<td>
+								\${y}년 \${m}월 \${d}일
+							</td>
+							<td>
+								<button type="button" data-empno="\${empList[i].empno }" class="btnDel" id="btn_\${empList[i].empno }">삭제</button>
+							</td>
+						</tr>
+					`;
+				}
+			}
+			document.querySelector("#list").innerHTML = html;
+			
+			bind()
+			
+		}catch(e){
+			console.log("ERROR : drawList", e);
+		}
+	}
+	
+	function bind(){
+		const delBtnList = document.querySelectorAll("[id^=btn_]")
+		//				const delBtnList = document.querySelectorAll(".btnDel")
+		for(let btn of delBtnList){
+			btn.addEventListener("click", function(event){
+			//	console.log(this)
+			// 	console.log(event.target)
+							
+// 				const id = event.target.getAttribute("id")
+// 				// btn_7788 : substring, split...
+				const empno = event.target.getAttribute("data-empno")
+				console.log("empno", empno)
+				
+				const data = {
+						"empno" : empno
+				}
+				ajax("deleteEmp", data, function(result){
+					if(result != 0){
+						getList()
+					} else {
+						alert("삭제에 실패했습니다.")
+					}
+				}, "delete")
+				
+			})
+		}
+	}
+	
+	//페이지가 로딩되자마자 보여지도록  
+// 	window.addEventListener("load", function(){
+		
+// 		let url = "listEmp";
+		
+// 		const xhr = new XMLHttpRequest();
+// 		xhr.open("get", url);
+// 		xhr.send();
+		
+// 		//갔다왔을 때가 onload
+// 		xhr.onload = function(){
+			
+// 			console.log(xhr.responseText)
+// 			let text = xhr.resposneText 
+// 			try{
+// 				const empList = JSON.parse(text);
+				
+// 				let html = "";
+// 				for(let i=0; i<empList.length; i++){
+					
+// // 					html += '<tr>';
+// // 					html += '	<td>';
+// // 					html += '		<input type="checkbox" name="check" value="${dto.empno }">';
+// // 					html += '	</td>';
+// // 					html += '	<td>'+ empList[i].empno +'</td>';
+// // 					html += '	<td><a href="emp0?cmd=detail&empno=${dto.empno }">'+ empList[i].ename +'</a></td>';
+// // 					html += '	<td>${dto.job }</td>';
+// // 					html += '	<td>${dto.sal }</td>';
+// // 					html += '	<td>';
+// // 					html += '		<fmt:formatDate value="${dto.hireDate }" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초" />';
+// // 					html += '	</td>';
+// // 					html += '</tr>';
+
+
+// 				const hiredate = new Date(empList[i].hireDate)
+				
+// 				const y = hiredate.getFullYear()
+// 				let m = hiredate.getMonth() + 1
+// 				if(m < 10) {
+// 					m = "0" + m
+// 				}
+// 				const d = hiredate.getDate()
+					
+// 				html += `
+// 				<tr>
+// 					<td>
+// 						<input type="checkbox" name="check" value="">
+// 					</td>
+// 					<td>\${empList[i].empno }</td>
+// 					<td><a href="emp0?cmd=detail&empno=\${empList[i].empno }">\${empList[i].ename }</a></td>
+// 					<td>\${empList[i].job }</td>
+// 					<td>\${empList[i].sal }</td>
+// 					<td>
+// 						\${y}년 \${m}월 \${d}일
+// 					</td>
+// 					<td>
+// 					<button type="button" data-empno="\${empList[i].empno}" class="btnDel" id="btn_\${empList[i].empno}">삭제</button>
+// 					</td>
+// 				</tr>
+// 				`;
+				
+// 				}
+				
+// 				document.querySelector("#list").innerHTML = html;
+				
+// 				const delBtnList = document.querySelectorAll("[id^=btn_]")
+// 				// ^= 사용하면 속성의 값이 ~로 시작하는 아이디 모두 가져오기 
+// 				// $= 사용하면 속성의 값이 ~로 끝나는 아이디 모두 가져오기
+				
+// 				// const delBtnList = document.querySelectorAll(".btnDel")
+				
+// 				for(let btn of delBtnList){
+// 					btn.addEventListener("click", function(event){
+// 						// console.log(this)
+// 						console.log(event.target)
+						
+// 						const id = event.target.getAttribute("id")
+// 						// btn_7788 : substr, split 등을 이용해 자를 수 있음
+// 						const empno = event.target.getAttribute("data-empno")
+// 						console.log("empno", empno)
+						
+// 						url = "deleteEmp"
+// 						const xhr2 = new XMLHttpRequest();
+// 						const data = {
+// 								"empno" : empno
+// 						}
+// 						xhr2.open("delete", url);
+						
+// 						xhr2.setRequestHeader("Content-Type", "application/json");
+						
+// 						xhr2.send( JSON.stringify(data) );
+						
+// 						xhr2.onload = function(){
+							
+// 							console.log(xhr2.responseText)
+// 						}
+// 					})
+// 				}
+				
+// 			}catch(e){
+// 				console.log("ERROR : url :", url, e);
+// 			}
+// 		}
+// 	})
 	
 	// 버튼 이벤트
 	document.querySelector("#empno").addEventListener("click", function(){
@@ -124,6 +287,5 @@
 	})
 
 </script>
-
 </body>
 </html>

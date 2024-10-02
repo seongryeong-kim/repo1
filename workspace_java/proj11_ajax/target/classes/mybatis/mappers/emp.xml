@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.human.emp.dao.EmpDAO">
+<mapper namespace="mapper.emp">
 
 	<select id="selectEmp" resultType="empDTO">
 		 SELECT * FROM emp0

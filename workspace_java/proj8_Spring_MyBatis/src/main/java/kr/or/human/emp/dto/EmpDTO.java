@@ -3,7 +3,7 @@ package kr.or.human.emp.dto; //emp2.dto 패키지
 import java.sql.Date; //date타입을 사용할수 있게 해줌
 
 public class EmpDTO { // 클래스명
-// 이 페이지는 뭐 하는건지 모르겠음.
+	
 private Integer empno; //private은 보안상 문제로 사용 Integer는 int(숫자)로 호환시켜줌
 private String ename; //String 문자
 private String job;
