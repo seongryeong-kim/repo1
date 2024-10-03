@@ -23,8 +23,10 @@ public class MyServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public MyServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+        super();// MyServlet의 부모 클래스는 HttpServlet
+        		// super()는 HtttpServlet 클래스의 생성자를 호출하는 것
+        		// 따라서 MyServlet의 super()는 HttpServlet의 생성자를 호출하여, 
+        		// 서블릿의 초기화를 위해 필요한 기본적인 설정을 수행
         System.out.println("MyServlet 생성자 실행");
     }
 

@@ -3,11 +3,13 @@ package kr.or.human.member.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository("m")
+@Primary
 public class MemberDAOImpl2 implements MemberDAO {
-	// September 25th
+
 	@Override
 	public List selectMember() {
 		List list = new ArrayList();
